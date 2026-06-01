@@ -1,0 +1,31 @@
+---
+title: "Yield Share Fees Explained"
+---
+
+Dawn's tranching mechanism transfers some yield from Senior to Junior as a Risk Premium, compensating Junior for taking first-loss exposure. The Yield Share Fee applies to that transfer stage: a portion of the Risk Premium flowing from Senior to Junior is captured as the fee, and the remainder reaches Junior. *(The fee is not taken during observation periods, when 100% of yield is already redirecting to Junior to rebuild the coverage buffer.)*
+
+<Frame>
+  <img src="/images/yield-share-fee.svg" alt="The Yield Share Fee applied to the Risk Premium transfer from Senior to Junior" />
+</Frame>
+
+This is different from how a Junior performance fee would work. A Junior performance fee taxes Junior's total yield: both Junior's share of the underlying strategy and the Risk Premium received on top of it. The fee location moves from the transfer stage onto Junior's position itself.
+
+<Frame>
+  <img src="/images/junior-performance-fee.svg" alt="A Junior performance fee applied to Junior's total position" />
+</Frame>
+
+Performance fees are the more familiar instrument, but applying one to Junior creates a specific problem. In some normal market conditions, Junior can end up earning less than the underlying strategy itself, with no drawdown event required. The Yield Share Fee was designed to avoid this state. The Yield Share Fee isn't exposed to it because the fee is only applied to the Risk Premium, not Junior's total position.
+
+<Frame>
+  <img src="/images/yield-share-vs-performance.svg" alt="Comparison of Yield Share Fee versus Junior Performance Fee outcomes" />
+</Frame>
+
+As seen in the above graphic, Junior underlying starts at 15 units but ends with netting 14.40 units. A Junior Performance Fee architecture would be unideal in some normal market conditions. Dawn's Yield Share Fee avoids these cases.
+
+*Where applicable, performance fees are calculated on yield generated, defined as all income received by a vault minus borrowing costs. No fee is charged in periods where the yield is zero or negative. Fees are visible onchain. Prior versions of the protocol included a junior tranche fee that is not applicable with the latest version.*
+
+*For additional information or to discuss the protocol with the team, please contact the Royco Foundation through the official channels listed at royco.org.*
+
+---
+
+*This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions.*

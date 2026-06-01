@@ -1,0 +1,36 @@
+---
+title: "4. Governance and Fees"
+---
+
+#### Roles
+
+**The Royco Foundation** is responsible for the protocol's governance and infrastructure. It deploys smart contracts, configures tranching parameters, and makes yield sources available based on published criteria (audit status, time since deployment, minimum size, risk scoring). Critical protocol changes (smart contract upgrades, authorization structure changes, or parameter changes that affect user positions) are subject to a timelock. The Foundation does not make opinionated or investment decisions.
+
+**The Curator** makes all investment decisions for a given vault: which yield sources to allocate to, coverage levels, position sizes, collateral management, and withdrawal processing. The curator operates on the vault's multisig with scoped permissions. It can allocate and rebalance within approved parameters, but cannot move funds to unauthorized addresses or alter protocol mechanics. The Foundation retains the ability to revoke curator access at any time.
+
+**Depositor/User** selects which vault or tranche to enter based on their own objectives. Identity verification (KYC/KYB) is required before withdrawing. U.S. persons are not eligible to participate.
+
+#### Permission Architecture
+
+Vault assets are held in a Concrete Vault. The curator's operational permissions are scoped per vault and per operation: it can rebalance between approved markets, update NAVs, manage collateral positions, and whitelist depositors; but it has limitations on actions outside this scope. Funds cannot be routed to addresses outside the whitelist.
+
+The Royco Foundation Multisig sits above this structure. It sets the permissions framework and manages protocol-level configurations. Critical changes (as defined above) are subject to a timelock, giving depositors advance notice.
+
+#### Fee Structure
+
+Fees are collected programmatically through an onchain fee mechanism:
+
+| Product | Management Fee | Performance Fee | Fee on Yield Share (Risk Premium) |
+| --- | --- | --- | --- |
+| srRoyUSDC | 0% | 0% | 0% |
+| roywstETH | 0% | 0% | 0% |
+| Junior tranches | 0% | 0% | 0% |
+| Senior tranches | 0% | 0% | 0% |
+
+For swaps, LiFi route fees apply at a rate of 3 bps for stablecoins and 20 bps for assets not classified as stablecoins.
+
+*Where applicable, performance fees are calculated on yield generated, defined as all income received by a vault minus borrowing costs. No fee is charged in periods where the yield is zero or negative. Fees are visible onchain. Prior versions of the protocol included a junior tranche fee that is not applicable with the latest version.*
+
+---
+
+*This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions.*

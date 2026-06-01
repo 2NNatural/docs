@@ -1,0 +1,38 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Royco Dawn",
+  "colors": {
+    "primary": "#346DDB",
+    "light": "#6E9BEC",
+    "dark": "#2556C2"
+  },
+  "appearance": {
+    "default": "light"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Royco Dawn",
+        "pages": [
+          "overview",
+          "how-dawn-works",
+          "vault-products",
+          "governance-and-fees",
+          "deposits-and-withdrawals",
+          "risk-framework",
+          "security-and-audits",
+          "roycoentrypoint",
+          "faq",
+          "key-addresses"
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "website": "https://royco.org"
+    }
+  }
+}

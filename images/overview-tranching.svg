@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440">
+  <style>
+    text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; }
+  </style>
+
+  <!-- Background -->
+  <rect width="960" height="440" fill="#FFFFFF" />
+
+  <!-- Title area -->
+  <text x="480" y="28" text-anchor="middle" fill="#888888" font-size="11" font-weight="600" letter-spacing="1.5">FIGURE 1</text>
+  <text x="480" y="56" text-anchor="middle" fill="#1B2A4A" font-size="18" font-weight="700">How Dawn Tranches a Yield Source</text>
+  <text x="480" y="78" text-anchor="middle" fill="#444444" font-size="13">A single yield source is split into Senior (protected) and Junior (first-loss) tranches</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowBlue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2E75B6" />
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2A9D8F" />
+    </marker>
+  </defs>
+
+  <!-- Yield Source Box -->
+  <rect x="30" y="200" width="170" height="90" rx="6" fill="#F7F9FC" stroke="#CCCCCC" stroke-width="1.5" />
+  <text x="115" y="237" text-anchor="middle" fill="#1B2A4A" font-size="14" font-weight="700">Yield Source</text>
+  <text x="115" y="258" text-anchor="middle" fill="#888888" font-size="11">(e.g., Morpho USDC</text>
+  <text x="115" y="272" text-anchor="middle" fill="#888888" font-size="11">Lending)</text>
+
+  <!-- Arrow: Yield Source → Dawn -->
+  <line x1="200" y1="245" x2="298" y2="245" stroke="#2E75B6" stroke-width="2" marker-end="url(#arrowBlue)" />
+  <text x="249" y="237" text-anchor="middle" fill="#2E75B6" font-size="11" font-weight="600">Total Yield</text>
+
+  <!-- Dawn Protocol Box -->
+  <rect x="308" y="180" width="180" height="130" rx="6" fill="#FFFFFF" stroke="#2E75B6" stroke-width="2" />
+  <rect x="308" y="180" width="180" height="32" rx="6" fill="#2E75B6" />
+  <rect x="308" y="200" width="180" height="12" fill="#2E75B6" />
+  <text x="398" y="202" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="700">DAWN PROTOCOL</text>
+  <text x="398" y="236" text-anchor="middle" fill="#1B2A4A" font-size="12" font-weight="600">Tranching Layer</text>
+  <text x="398" y="256" text-anchor="middle" fill="#444444" font-size="11">Splits yield &amp; risk</text>
+  <text x="398" y="272" text-anchor="middle" fill="#444444" font-size="11">into two tranches</text>
+  <text x="398" y="300" text-anchor="middle" fill="#888888" font-size="10">Smart-contract-enforced</text>
+
+  <!-- Arrow: Dawn → Senior -->
+  <!-- From (488, 215) to (660, 165) — angle ≈ -16.7° -->
+  <line x1="488" y1="215" x2="658" y2="165" stroke="#2E75B6" stroke-width="2" marker-end="url(#arrowBlue)" />
+  <text x="573" y="172" text-anchor="middle" fill="#2E75B6" font-size="11" font-weight="600" transform="rotate(-16.7, 573, 172)">Protected Yield</text>
+
+  <!-- Arrow: Dawn → Junior -->
+  <!-- From (488, 275) to (658, 325) — angle ≈ 16.7° -->
+  <line x1="488" y1="275" x2="658" y2="325" stroke="#2A9D8F" stroke-width="2" marker-end="url(#arrowTeal)" />
+  <text x="573" y="318" text-anchor="middle" fill="#2A9D8F" font-size="11" font-weight="600" transform="rotate(16.7, 573, 318)">Risk Premium</text>
+
+  <!-- Senior Tranche Box -->
+  <rect x="668" y="118" width="260" height="95" rx="6" fill="#E8EEF4" stroke="#1B2A4A" stroke-width="1.5" />
+  <text x="798" y="148" text-anchor="middle" fill="#1B2A4A" font-size="14" font-weight="700">Senior Tranche</text>
+  <text x="798" y="168" text-anchor="middle" fill="#444444" font-size="11">Protected yield</text>
+  <text x="798" y="184" text-anchor="middle" fill="#444444" font-size="11">Junior absorbs losses first</text>
+  <text x="798" y="204" text-anchor="middle" fill="#888888" font-size="10" font-style="italic">Lower risk, lower return</text>
+
+  <!-- Junior Tranche Box -->
+  <rect x="668" y="280" width="260" height="95" rx="6" fill="#FDF2E9" stroke="#D4A574" stroke-width="1.5" />
+  <text x="798" y="310" text-anchor="middle" fill="#1B2A4A" font-size="14" font-weight="700">Junior Tranche</text>
+  <text x="798" y="330" text-anchor="middle" fill="#444444" font-size="11">Higher yield (risk premium)</text>
+  <text x="798" y="346" text-anchor="middle" fill="#444444" font-size="11">First-loss capital</text>
+  <text x="798" y="366" text-anchor="middle" fill="#888888" font-size="10" font-style="italic">Higher risk, higher return</text>
+
+  <!-- Footer -->
+  <text x="480" y="420" text-anchor="middle" fill="#888888" font-size="11">Every Senior dollar has a defined Junior buffer standing in front of it. Losses flow bottom-up through Junior before reaching Senior.</text>
+</svg>

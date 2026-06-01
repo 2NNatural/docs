@@ -1,0 +1,44 @@
+---
+title: "7. Security and Audits"
+---
+
+#### Access Controls
+
+All direct vault depositors are KYC'd, and funds can only be withdrawn to pre-approved addresses.
+
+#### Smart Contract Audits
+
+The protocol's core smart contract infrastructure has undergone independent security reviews:
+
+| Auditor | Scope | Type |
+| --- | --- | --- |
+| Halborn | Vault infrastructure (Concrete Earn v2 Core — Standard + Async) | Manual review |
+| Cantina Public Competition | Royco Dawn protocol contracts | Competitive audit |
+| Hexens | Royco Dawn protocol contracts | Manual review |
+| Certora | Royco Dawn protocol contracts | Manual review + Formal Verification |
+
+**Audit reports:**
+
+Audit reports are available in the roycoprotocol/royco-dawn GitHub repository under the /audit directory.
+
+#### Curator Infrastructure Audits
+
+The vault curator's own operational infrastructure integration has undergone independent security review for Makina V1.1: [docs.makina.finance/contracts/security](https://docs.makina.finance/contracts/security)
+
+#### Bug Bounty Program
+
+The protocol maintains a **\$250,000 active bug bounty program** through Immunefi at [immunefi.com/bug-bounty/royco](https://immunefi.com/bug-bounty/royco/). Rewards are scaled to the severity of the finding. The scope includes the protocol's core smart contracts; specifically, any vulnerability where a privileged role can bypass whitelist protections or direct funds to non-whitelisted addresses.
+
+#### Real-Time Monitoring
+
+Hypernative is configured for real-time onchain monitoring, detecting anomalous contract interactions, unusual fund movements, and known attack patterns. The protocol also maintains an upgrade system and emergency response plan for rapid response to potential threats.
+
+#### Permission Architecture as Security
+
+As described in Section 4, the permission architecture is itself a security measure. The curator can only perform actions explicitly granted within its scoped permissions. Funds cannot be routed to arbitrary addresses, and protocol parameters cannot be modified outside the defined permission boundaries.
+
+The Foundation Root Multisig operates with a timelock on critical parameter changes, ensuring depositors have advance notice and can exit before changes take effect.
+
+---
+
+*This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions.*
