@@ -16,12 +16,12 @@ Because Junior is co-invested, the coverage ratio represents real, active capita
 
 Suppose a Dawn market is deployed on top of a USDC lending strategy yielding 8% annualized. Both Senior and Junior capital are co-invested in the same strategy:
 
-| | Deposits | APY | Source |
+|  | Deposits | APY | Source |
 | --- | --- | --- | --- |
 | Senior | \$8,000,000 | ~6.5% | Base yield minus premium paid to Junior |
 | Junior | \$2,000,000 | ~14% | Base yield plus premium for first-loss protection |
-| Total | \$10,000,000 | | |
-| Coverage | 20% | | \$2M Junior / \$10M total |
+| Total | \$10,000,000 |  |  |
+| Coverage | 20% |  | \$2M Junior / \$10M total |
 
 Both tranches are deployed into the same 8% underlying strategy. A drawdown of X% applies to the full \$10M pool. Junior absorbs those losses first. Coverage of 20% means Junior can absorb up to a 20% drawdown on the total pool before Senior is affected.
 
@@ -66,14 +66,14 @@ Put simply: **coverage tells you how much loss Junior can absorb; utilization te
 **The Yield Curve**
 
 <Frame>
-  <img src="/images/yield-curve.svg" alt="Junior's yield share across utilization" />
+  ![Junior's yield share across utilization](/images/yield-curve.svg)
 </Frame>
 
 Each market sets three values at creation that define Junior's yield share across utilization:
 
-> * Y0: at 0% utilization
-> * YT: at 90% (the target)
-> * Y100: at 100%
+> - Y0: at 0% utilization
+> - YT: at 90% (the target)
+> - Y100: at 100%
 
 **Below 90%: essentially flat.** Y0 and YT are close together. When Junior capital is plentiful, excess supply already dilutes Junior returns.
 
@@ -86,7 +86,7 @@ These three points don't stay fixed, as the curve adapts to market conditions ov
 The result is a self-balancing system. If Junior capital leaves, utilization rises and the premium increases, attracting new Juniors. If Senior capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
 <Frame>
-  <img src="/images/self-adapting-yield-curve.svg" alt="The yield curve shifting up and down as utilization changes over time" />
+  ![Image](/images/image.avif)
 </Frame>
 
 **What Depositors See**
@@ -109,10 +109,10 @@ Each market provides Seniors with first-loss coverage against persistent drawdow
 
 Some markets may include an optional configuration called **Protected Exit Bonus**. When the Protected Exit Threshold is exceeded in a market with Protected Exit Bonus enabled, any Seniors who optionally withdraw may additionally receive a small Bonus % (up to the market-defined %) for withdrawing. This is designed as a minor incentive for Seniors to withdraw into the underlying asset, which assists in restoring the market into a healthy state. The Bonus is sourced from remaining Junior capital.
 
-**Example:** A market has Protected Exit Threshold = 90% and Protected Exit Bonus = 2%. The underlying drops 9%, breaching the threshold.
+**Example:** A market has Minimum Coverage = 10%, Protected Exit Threshold = 5% and Protected Exit Bonus = 2%. The underlying drops below 5% coverage remaining, breaching the threshold.
 
 Alice (Senior, \$100k) chooses to exit. She receives her \$100k back plus a \$2k bonus from Junior capital: a reward for helping restore the market to a healthy state. Seniors who stay forgo the bonus.
 
 ---
 
-*This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions.*
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
