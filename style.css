@@ -1,0 +1,16 @@
+/* Tighten heading spacing to match GitBook's denser layout.
+   Lower the values for tighter, raise for more air. */
+
+/* Page title (e.g. "2. How Dawn Works") -> first heading/paragraph */
+#page-title {
+  margin-bottom: 0.25rem !important;
+}
+
+/* In-page section headings (##, ###, ####):
+   pull them closer to the text above and below. */
+#content-area h2,
+#content-area h3,
+#content-area h4 {
+  margin-top: 1rem !important;
+  margin-bottom: 0.25rem !important;
+}
