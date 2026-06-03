@@ -95,6 +95,8 @@ Yield sources sometimes experience short-term drawdowns; temporary dislocations,
 
 When a drawdown is detected, the protocol enters the Observation Period. Senior withdrawals are paused, new Junior deposits are blocked, and 100% of yield is redirected to Junior, accelerating the rebuild of the first-loss buffer. The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against Junior capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, Junior losses are finalized immediately, and Seniors gain the option to withdraw.
 
+<video src="/videos/chapter-06-observation-periods.mp4" controls />
+
 **The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
 
 #### Protected Exit
