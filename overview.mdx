@@ -1,13 +1,12 @@
 ---
-title: "1. Overview"
+title: "Overview"
 ---
 
-Royco is a non-custodial risk-tranching protocol. It takes a given yield source: a lending market, a staking deposit, or tokenized RWA, and splits it into two risk tranches:
+Royco is a non-custodial risk-tranching protocol. It takes a given yield source: a lending market, a staking deposit, or tokenized RWA, and splits it into three tranches:
 
-- **Senior**: earns yield with smart-contract-enforced downside coverage. A defined amount of Junior capital absorbs losses before Senior is ever impacted.
-- **Junior:** earns higher yield by serving as first-loss capital and receiving a risk premium paid by Senior in return.
-
-![Chapter 01 Pool 000](/images/chapter-01-pool_000.jpg)
+- **Senior Tranche (ST)**: earns yield with smart-contract-enforced downside coverage and secondary liquidity. A defined amount of Junior capital absorbs losses before Senior is ever impacted.
+- **Liquidity Tranche (LT):** earns higher yield by providing secondary liquidity for the Senior tranche.
+- **Junior Tranche (JT):** earns the highest yield by serving as first-loss capital and receiving a risk premium paid by Senior in return.
 
 #### **The Yield Distribution Model**
 

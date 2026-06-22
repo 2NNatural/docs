@@ -14,18 +14,44 @@
   "navigation": {
     "groups": [
       {
-        "group": "Royco",
+        "group": "Get Started",
         "pages": [
           "overview",
-          "how-royco-works",
+          "how-royco-works"
+        ]
+      },
+      {
+        "group": "The Tranches",
+        "pages": [
+          "senior-tranche",
+          "junior-tranche",
+          "liquidity-tranche"
+        ]
+      },
+      {
+        "group": "Vaults",
+        "pages": [
           "vault-products",
-          "governance-and-fees",
+          "royco-eth-roywst-eth"
+        ]
+      },
+      {
+        "group": "Mechanics",
+        "pages": [
+          "yield-distribution-model",
           "deposits-and-withdrawals",
-          "risk-framework",
+          "governance-and-fees",
+          "risk-framework"
+        ]
+      },
+      {
+        "group": "Reference",
+        "pages": [
           "security-and-audits",
           "roycoentrypoint",
+          "key-addresses",
           "faq",
-          "key-addresses"
+          "glossary"
         ]
       }
     ]
