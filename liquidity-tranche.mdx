@@ -3,4 +3,10 @@ title: "Liquidity Tranche"
 description: "Royco's Liquidity Tranche provides continuous secondary liquidity for Senior shares through a rate-scaled Balancer pool, earning a liquidity premium plus pool fees."
 ---
 
-Liquidity Tranche yield is calculated as follows: Liquidity Premium \+ ST Appreciation \+ Trading Fees - Impermanent Loss
+Liquidity Tranche (LT) is market making capital that earns yield by providing constant secondary liquidity for the senior tranche.
+
+LT yield is calculated as follows: Liquidity Premium \+ ST Appreciation \+ Trading Fees - Impermanent Loss
+
+Unlike ST and JT, LT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in a rate-scaled AMM pool between the ST and a stablecoin.
+
+LT has the same underlying risk profile as the ST. However, it is illiquid and provides constant secondary liquidity for the senior tranche. Therefore, it effectively acts as a mezzanine layer with a risk profile in between that of JT and ST.

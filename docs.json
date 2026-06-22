@@ -31,6 +31,7 @@
       {
         "group": "Vaults",
         "pages": [
+          "how-the-vaults-work",
           "vault-products",
           "royco-eth-roywst-eth"
         ]
