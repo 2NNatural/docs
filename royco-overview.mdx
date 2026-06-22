@@ -9,6 +9,10 @@ Royco is a non-custodial risk-tranching protocol. It takes a given yield source:
 - **Liquidity Tranche (LT):** earns higher yield by providing secondary liquidity for the Senior tranche.
 - **Junior Tranche (JT):** earns the highest yield by serving as first-loss capital and receiving a risk premium paid by Senior in return.
 
+**Yield Distribution**
+
+Yield flows outward from ST to both JT and LT, paying for Senior's downside coverage and liquidity based on pre-defined ratios.
+
 #### Why Does This Matter?
 
 **Seniors get smart-contract-enforced downside coverage.** Every Senior position has a quantified Junior buffer defined in the protocol's contracts. This gives risk committees a concrete, verifiable loss-absorption layer. This enables Seniors to evaluate yield sources they might otherwise be prevented from accessing.
