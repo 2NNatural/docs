@@ -4,7 +4,7 @@ title: "2. How Royco Works"
 
 #### The Tranching Mechanism
 
-Every Royco Dawn market begins with a single underlying yield source. The protocol deploys capital from Senior and Junior depositors into that source and governs how returns and losses flow back to each group.
+Every Royco market begins with a single underlying yield source. The protocol deploys capital from Senior and Junior depositors into that source and governs how returns and losses flow back to each group.
 
 The fundamental mechanism: **Junior capital provides first-loss coverage for Senior capital.** The protocol enforces a coverage ratio; the minimum amount of Junior capital that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted.
 
@@ -14,7 +14,7 @@ Because Junior is co-invested, the coverage ratio represents real, active capita
 
 **An Example**
 
-Suppose a Dawn market is deployed on top of a USDC lending strategy yielding 8% annualized. Both Senior and Junior capital are co-invested in the same strategy:
+Suppose a market is deployed on top of a USDC lending strategy yielding 8% annualized. Both Senior and Junior capital are co-invested in the same strategy:
 
 |  | Deposits | APY | Source |
 | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ Junior absorbs losses immediately, from the first dollar. Senior is only exposed
 
 #### Coverage Requirements
 
-Dawn enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before Senior capital is affected. It is a hard constraint: if coverage falls below the minimum, new Senior deposits and Junior withdrawals are paused until Junior capital returns to the required level.
+Royco enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before Senior capital is affected. It is a hard constraint: if coverage falls below the minimum, new Senior deposits and Junior withdrawals are paused until Junior capital returns to the required level.
 
 Senior depositors are shielded by the Junior buffer, and have first right to withdraw liquidity. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
 
@@ -45,7 +45,7 @@ Senior depositors are shielded by the Junior buffer, and have first right to wit
 
 #### How Yield Is Split
 
-In every Royco Dawn market, the underlying yield source generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between Senior and Junior.
+In every Royco market, the underlying yield source generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between Senior and Junior.
 
 Junior provides first-loss protection to Senior. In exchange, Junior earns a risk premium; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
 
@@ -89,7 +89,7 @@ The result is a self-balancing system. If Junior capital leaves, utilization ris
 
 **What Depositors See**
 
-The APY shown on the Dawn interface is the trailing 24-hour APY, the annualized rate from actual yield accrued over the previous 24 hours. A 7-day average is shown alongside it for a smoother view. Both are backward-looking. If utilization shifts or capital enters or exits the pool, future yields will differ.
+The APY shown on the interface is the trailing 24-hour APY, the annualized rate from actual yield accrued over the previous 24 hours. A 7-day average is shown alongside it for a smoother view. Both are backward-looking. If utilization shifts or capital enters or exits the pool, future yields will differ.
 
 #### Observation Period
 
@@ -115,4 +115,4 @@ Alice (Senior, \$100k) chooses to exit. She receives her \$100k back plus a \$2k
 
 ---
 
-_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
