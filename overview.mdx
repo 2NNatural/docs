@@ -11,9 +11,9 @@ Royco is a non-custodial risk-tranching protocol. It takes a given yield source:
 
 #### **The Yield Distribution Model**
 
-Yield distribution between tranches works similarly to lending markets. In Morpho or Aave, high utilization pushes supply rates up to attract lenders, and vice versa. Dawn utilizes a similar mechanism, with a different definition of utilization.
+Yield distribution between tranches works similarly to lending markets. In Morpho or Aave, high utilization pushes supply rates up to attract lenders, and vice versa. Royco utilizes a similar mechanism, with a different definition of utilization.
 
-**In Dawn, utilization measures how much Junior capital is currently backing Senior exposure.** If the market needs \$1 of Junior coverage and there is exactly \$1 of Junior, utilization is 100%. If there is \$2 of Junior, it is 50%. When Junior is scarce, more yield flows to Junior to attract more first-loss capital. When Junior is abundant, more yield flows to Senior. The pool rebalances toward equilibrium based on where each side wants to deploy.
+**Utilization measures how much Junior capital is currently backing Senior exposure.** If the market needs \$1 of Junior coverage and there is exactly \$1 of Junior, utilization is 100%. If there is \$2 of Junior, it is 50%. When Junior is scarce, more yield flows to Junior to attract more first-loss capital. When Junior is abundant, more yield flows to Senior. The pool rebalances toward equilibrium based on where each side wants to deploy.
 
 For example, if the market needs \$1 of Junior coverage and there is exactly \$1 of Junior, utilization is 100%. If there is \$2 of Junior, it is 50%.
 
@@ -32,19 +32,19 @@ The protocol targets **90% utilization** as the equilibrium point:
 
 **Juniors benefit from an observation period.** When the underlying strategy draws down, the protocol enters a time-bounded observation window before allocating losses. Temporary, expected volatility that reverses within the window does not slash Junior capital. Juniors only absorb actual, persistent losses, not noise. (Note that not all markets have an observation period. See Section 2 for details on when the observation period is triggered and how it resolves.)
 
-**Juniors earn a premium for risk they already underwrite.** Every yield source Dawn tranches already has LPs depositing into the underlying asset directly. Dawn lets those same participants earn a risk premium for formally taking the first-loss position, rather than simply accepting the base rate. This risk premium is paid by Senior positions.
+**Juniors earn a premium for risk they already underwrite.** Every yield source Royco tranches already has LPs depositing into the underlying asset directly. Royco lets those same participants earn a risk premium for formally taking the first-loss position, rather than simply accepting the base rate. This risk premium is paid by Senior positions.
 
 #### The Vault Products
 
-For investors who do not want to evaluate and manage individual Dawn markets, the protocol offers managed vaults.
+For investors who do not want to evaluate and manage individual Royco markets, the protocol offers managed vaults.
 
 | Vault | Deposit Asset | What It Does |
 | --- | --- | --- |
 | Dawn Senior Vault (srRoyUSDC) | USDC | Allocates across multiple Senior tranches for diversified, Senior-tranche yield. May utilize Senior tokens in lending protocols for levered exposure while still retaining first-loss coverage. |
 | Royco ETH (roywstETH) | wstETH | Borrows USDC against wstETH collateral and deploys into srRoyUSDC, earning staking rewards plus the carry spread |
 
-The **Dawn Senior Vault (srRoyUSDC)** is the foundational product, deploying USDC into Senior tranches across a diversified set of yield sources to offer buffered yield backed by Junior first-loss capital. **Royco ETH (roywstETH)** is built for ETH holders who want to earn yield without selling their ETH: it borrows USDC against wstETH collateral and deploys the proceeds into srRoyUSDC, capturing staking rewards plus the carry spread. Each vault is managed by a professional, independent curator.
+The **Senior Vault (srRoyUSDC)** is the foundational product, deploying USDC into Senior tranches across a diversified set of yield sources to offer buffered yield backed by Junior first-loss capital. **Royco ETH (roywstETH)** is built for ETH holders who want to earn yield without selling their ETH: it borrows USDC against wstETH collateral and deploys the proceeds into srRoyUSDC, capturing staking rewards plus the carry spread. Each vault is managed by a professional, independent curator.
 
 ---
 
-_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
