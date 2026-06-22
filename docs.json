@@ -14,10 +14,10 @@
   "navigation": {
     "groups": [
       {
-        "group": "Royco Dawn",
+        "group": "Royco",
         "pages": [
           "overview",
-          "how-dawn-works",
+          "how-royco-works",
           "vault-products",
           "governance-and-fees",
           "deposits-and-withdrawals",
