@@ -1,5 +1,6 @@
 ---
-title: "Overview"
+title: "Royco Overview"
+description: "Royco is a non-custodial risk-tranching protocol that splits any yield source into Senior, Junior, and Liquidity tranches, letting depositors choose their risk and liquidity profile."
 ---
 
 Royco is a non-custodial risk-tranching protocol. It takes a given yield source: a lending market, a staking deposit, or tokenized RWA, and splits it into three tranches:
@@ -27,11 +28,15 @@ The protocol targets **90% utilization** as the equilibrium point:
 
 **Seniors get smart-contract-enforced downside coverage.** Every Senior position has a quantified Junior buffer defined in the protocol's contracts. This gives risk committees a concrete, verifiable loss-absorption layer. This enables Seniors to evaluate yield sources they might otherwise be prevented from accessing.
 
+**Seniors get secondary liquidity.** 
+
 **Junior absorbs losses from the first dollar.** There is no buffer on losses. Junior capital absorbs any Senior drawdown from the very first dollar, up to the full coverage amount. Seniors are not impaired until Junior capital is fully exhausted. For Juniors, this effect is similar to a levered position.
 
 **Juniors benefit from an observation period.** When the underlying strategy draws down, the protocol enters a time-bounded observation window before allocating losses. Temporary, expected volatility that reverses within the window does not slash Junior capital. Juniors only absorb actual, persistent losses, not noise. (Note that not all markets have an observation period. See Section 2 for details on when the observation period is triggered and how it resolves.)
 
 **Juniors earn a premium for risk they already underwrite.** Every yield source Royco tranches already has LPs depositing into the underlying asset directly. Royco lets those same participants earn a risk premium for formally taking the first-loss position, rather than simply accepting the base rate. This risk premium is paid by Senior positions.
+
+**LT** earns a bonus yield on 
 
 #### The Vault Products
 
