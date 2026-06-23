@@ -22,13 +22,16 @@ Suppose a market is deployed on top of a USDC lending strategy yielding 8% annua
 
 |  | Deposits | APY | Source |
 | --- | --- | --- | --- |
-| Senior | \$8,000,000 | ~5% | Base yield minus premium paid to Junior |
-| Junior | \$2,000,000 | ~13.5% | Base yield plus premium for first-loss protection |
-| Liquidity |  | ~11% | Liquidity Premium \+ ST Appreciation \+ Trading Fees - Impermanent Loss |
-| Total | \$10,000,000 |  |  |
-| Coverage | 20% |  | \$2M Junior / \$10M total |
+| Senior (ST) | \$8,000,000 | ~5% | Base yield minus premium paid to Junior |
+| Junior (JT) | \$2,000,000 | ~13.5% | Base yield plus premium for first-loss protection |
+| Liquidity (LT) | \$2,000,000 | ~11% | Liquidity Premium \+ ST Appreciation \+ Trading Fees - Impermanent Loss |
+| Total | \$12,000,000 |  |  |
+| Coverage | 20% |  | \$2M JT / \$10M JT \+ ST |
+| Liquidity | 20% |  | \$2M LT / \$10M LT \+ ST |
 
-Coverage is measured on the Senior \+ Junior pool: \$2M Junior / \$10M total = 20% coverage. The Liquidity Tranche sits outside that pool and is sized separately, by the market's liquidity requirement (see below). Coverage of 20% means Junior can absorb up to a 20% drawdown on the \$10M pool before Senior is affected.
+Coverage is measured on the JT \+ ST pool: \$2M JT / \$10M JT \+ ST = 20% coverage. Coverage of 20% means JT can absorb up to a 20% drawdown on the \$10M pool before ST is affected.
+
+Likewise, Liquidity is measured on the LT \+ JT pool: \$2M LT / \$10M LT \+ ST = 20% coverage. Liquidity of 20% means the LT tranche is able to accommodate the exit of 20% of ST at current AMM pool size.
 
 **Loss Example Scenarios**
 
@@ -50,7 +53,7 @@ Senior depositors are shielded by the Junior buffer, and have first right to wit
 
 #### How Yield Is Split
 
-In every Royco market, the underlying yield source generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between Senior and Junior.
+In every Royco market, the underlying yield source generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between the tranches.
 
 Junior provides first-loss protection to Senior. In exchange, Junior earns a risk premium; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
 
