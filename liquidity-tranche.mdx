@@ -7,9 +7,11 @@ The **Liquidity Tranche (LT)** is market making capital that earns yield by prov
 
 LT yield is calculated as follows:
 
-> Liquidity Premium \+ ST Appreciation \+ Trading Fees - Impermanent Loss
+> Liquidity Premium \+ ST Appreciation \+ Stable RFR Yield \+ Trading Fees - Impermanent Loss
 
-Unlike ST and JT, LT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a stablecoin.
+Unlike ST and JT, LT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a tokenized-treasury stablecoin.
+
+LT earns yield from the assets deployed in the pool: both the underlying yield of the ST shares, as well as the bill rate earned by the paired stablecoin.
 
 In this mechanism, LT gets paid a premium for providing exit liquidity to the ST. LT also gets two additional sources of yield: a % of swap fees from the Balancer Pool, as well as swap premiums when ST flow imblanaces the pool.
 
