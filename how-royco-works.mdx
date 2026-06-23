@@ -34,12 +34,6 @@ Likewise, Liquidity is measured on the LT \+ JT pool: \$2M LT / \$10M LT \+ ST =
 
 **Loss Example Scenarios**
 
-| Drawdown | Loss on \$10M pool | Junior absorbs | Senior exposure | Result |
-| --- | --- | --- | --- | --- |
-| 5% | \$500K | \$500K (\$1.5M remaining) | \$0 | Junior reduced to \$1.5M. Senior unaffected. |
-| 15% | \$1.5M | \$1.5M (\$500K remaining) | \$0 | Junior reduced to \$500K. Senior unaffected. |
-| 25% | \$2.5M | \$2M (\$0 remaining) | \$500K | Junior fully consumed. Senior reduced to \$7.5M. |
-
 JT absorbs losses immediately, from the first dollar. ST, and the ST shares held by the LT, are only exposed once JT's entire balance is consumed. Because the LT's assets are partially composed of ST shares, its loss exposure tracks Senior's, in step with direct ST holders.
 
 **Unlike JT and ST, LT losses are path-dependent.** As the standing counterparty for ST exits, the LT accumulates ST shares whenever holders sell into the pool, raising its exposure to the underlying asset. When a drawdown reverts, this creates a profit: the LT buys discounted ST shares that recover to full value. When a drawdown is permanent and Seniors exit, it is a loss beyond the passive markdown: the LT converts stablecoins into impaired inventory.
