@@ -1,7 +1,6 @@
 ---
 title: "How Royco Works"
 description: "How Royco tranches a single yield source: JT provides loss coverage, LT provides secondary liquidity, and the loss waterfall protects ST."
-hidden: true
 ---
 
 #### The Tranching Mechanism
@@ -113,7 +112,13 @@ The APY shown on the interface is the trailing 24-hour APY, the annualized rate 
 
 Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss against JT capital.
 
-When a drawdown is detected, the protocol enters the Observation Period. ST withdrawals are paused, new JT deposits are blocked, and 100% of yield is redirected to JT, accelerating the rebuild of the first-loss buffer. During this window, ST deposits and JT redemptions remain enabled, provided the market remains above minimum coverage. Any JT who executes withdrawal will realize impermanent loss at the point of execution. The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against JT capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, JT losses are finalized immediately, and ST gain the option to withdraw.
+When a drawdown is detected, the protocol enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits are blocked, and 100% of yield is redirected to JT, accelerating the rebuild of the first-loss buffer. 
+
+However, ST holders are not locked into their positions. The LT continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the LT AMM pool at the pool's current price. 
+
+ST deposits and JT redemptions also remain enabled, provided the market remains above minimum coverage. Any JT holder who executes withdrawal will realize impermanent loss at the point of execution. 
+
+The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against JT capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, JT losses are finalized immediately, and ST gain the option to withdraw.
 
 <video src="/videos/chapter-06-observation-periods.mp4" controls />
 
@@ -121,7 +126,9 @@ When a drawdown is detected, the protocol enters the Observation Period. ST with
 
 #### Protected Exit
 
-Each market provides Seniors with first-loss coverage against persistent drawdowns through a **Protected Exit Threshold**. If a drawdown is deep enough, the Observation Period is terminated and Seniors can withdraw the underlying asset when there is a predefined level of coverage remaining, realizing losses against Junior capital. Those who believe the remaining Junior buffer is sufficient can choose to stay. If losses exhaust Junior capital entirely, Seniors become directly exposed to further drawdown.
+Each market provides ST with first-loss coverage against persistent drawdowns through a **Protected Exit Threshold**. If a drawdown is deep enough, the Observation Period is terminated and ST can withdraw the underlying asset when there is a predefined level of coverage remaining, realizing losses against JT capital. Those who believe the remaining JT buffer is sufficient can choose to stay. If losses exhaust JT capital entirely, ST shares become directly exposed to further drawdown.
+
+Protected Exit is the backstop to secondary liquidity. The LT pool offers immediate exit at a market price, which during drawdowns may sit below NAV. The LT pool is also finite: once the pool's available liquidity is exhausted, it can no longer provide an exit. Protected Exit serves the ST shares the pool cannot: those unwilling to sell at the pool's discounted price and willing to wait for the threshold, and those who reach the pool only to find its liquidity drained. The two exits are complementary: the LT pool gives speed at a market-set price, Protected Exit gives the underlying at a finalized loss once the threshold is breached.
 
 #### Protected Exit Bonus
 
