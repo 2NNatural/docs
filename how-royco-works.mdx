@@ -77,9 +77,9 @@ The YDM looks at one number: **utilization.** Utilization measures how much capa
 
 **Markets with liquidity enabled have a minimum liquidity requirement**, set per market**. T**he Liquidity Tranche's depth must stay at or above this floor. If it falls below, new Senior deposits and current Liquidity Tranche withdrawals are blocked until liquidity is replenished.
 
-**Utilization measures how close coverage or liquidity, respectively, is to that floor.** At 40% utilization, the tranche holds far more than the required minimum, with plenty of cushion above the floor. At 100% utilization, they are exactly at the required minimum, disabling both Senior deposits and JT/LT withdrawals. At the 90% target, JT is 90% of the way from 'maximum excess' to 'exactly at the floor.' The market is efficiently deployed but still has room to accept new capital.
+**Utilization measures how close a supporting tranche is to its respective floor**; coverage for the JT and liquidity for the LT. It is the signal that drives the premium model in the protocol. At 40% utilization, a tranche holds far more than its required minimum, with plenty of cushion above the floor. At 100% utilization, it is exactly at the required minimum, disabling both Senior deposits and either JT or LT withdrawals, depending which tranche is being utilized. At the 90% target, the tranche is 90% of the way from 'maximum excess' to 'exactly at the floor.' The market is efficiently deployed but still has room to accept new capital.
 
-Put simply: **coverage tells you how much loss JT can absorb; utilization tells you how efficiently that coverage capacity is being used.** High utilization means Junior is close to its required floor and Junior depositors earn a higher premium to attract new capital. Low utilization means Junior has built up excess above the floor, and their effective premium is lower.
+Put simply: **coverage and liquidity tell you what a tranche provides; utilization tells you how efficiently that capacity is being used.** High utilization means a tranche is close to its required floor and depositors earn a higher premium to attract new capital. Low utilization means a tranche has built up excess above the floor, and its effective premium is lower.
 
 **The Yield Curve**
 
@@ -97,9 +97,9 @@ Each market sets three values at creation that define yield share across utiliza
 
 **Self-Adapting Yield Curve Over Time**
 
-These three points don't stay fixed, as the curve adapts to market conditions over time. When utilization consistently runs above target, the curve shifts up to offer JT a bigger premium and attract more capital. When utilization consistently sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
+These three points don't stay fixed, as the curve adapts to market conditions over time. When a tranche's utilization consistently runs above target, its curve shifts up to offer a bigger premium and attract more capital. When utilization consistently sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
 
-The result is a self-balancing system. If JT capital leaves, utilization rises and the premium increases, attracting new JT. If Senior capital leaves, the opposite happens. The market continuously finds its own equilibrium.
+The result is a self-balancing system. If JT or LT capital leaves, utilization rises for that tranche and the premium increases, attracting new capital. If ST capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
 <video src="/videos/chapter-05-curve-adapts.mp4" controls />
 
@@ -111,9 +111,9 @@ The APY shown on the interface is the trailing 24-hour APY, the annualized rate 
 
 #### Observation Period
 
-Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss against Junior capital.
+Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss against JT capital.
 
-When a drawdown is detected, the protocol enters the Observation Period. Senior withdrawals are paused, new Junior deposits are blocked, and 100% of yield is redirected to Junior, accelerating the rebuild of the first-loss buffer. During this window, Senior deposits and Junior redemptions remain enabled, provided the market remains above minimum coverage. Any Junior who execute withdrawal will realize impermanent loss at the point of execution. The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against Junior capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, Junior losses are finalized immediately, and Seniors gain the option to withdraw.
+When a drawdown is detected, the protocol enters the Observation Period. ST withdrawals are paused, new JT deposits are blocked, and 100% of yield is redirected to JT, accelerating the rebuild of the first-loss buffer. During this window, ST deposits and JT redemptions remain enabled, provided the market remains above minimum coverage. Any JT who executes withdrawal will realize impermanent loss at the point of execution. The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against JT capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, JT losses are finalized immediately, and ST gain the option to withdraw.
 
 <video src="/videos/chapter-06-observation-periods.mp4" controls />
 
@@ -125,7 +125,7 @@ Each market provides Seniors with first-loss coverage against persistent drawdow
 
 #### Protected Exit Bonus
 
-Some markets may include an optional configuration called **Protected Exit Bonus**. When the Protected Exit Threshold is exceeded in a market with Protected Exit Bonus enabled, any Seniors who optionally withdraw may additionally receive a small Bonus % (up to the market-defined %) for withdrawing. This is designed as a minor incentive for Seniors to withdraw into the underlying asset, which assists in restoring the market into a healthy state. The Bonus is sourced from remaining Junior capital.
+Some markets may include an optional configuration called **Protected Exit Bonus**. When the Protected Exit Threshold is exceeded in a market with Protected Exit Bonus enabled, any Seniors who optionally withdraw may additionally receive a small Bonus % (up to the market-defined %) for withdrawing. This is designed as a minor incentive for ST to withdraw into the underlying asset, which assists in restoring the market into a healthy state. The Bonus is sourced from remaining Junior capital.
 
 **Example:** A market has Minimum Coverage = 10%, Protected Exit Threshold = 5% and Protected Exit Bonus = 2%. The underlying drops below 5% coverage remaining, breaching the threshold.
 
