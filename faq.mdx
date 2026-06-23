@@ -5,7 +5,7 @@ description: "Common questions about Royco's tranches, coverage, secondary liqui
 
 <AccordionGroup>
   <Accordion title="Does the Senior tranche offer first-loss coverage for principal?">
-    The Senior tranche has a structural first-loss buffer: JT capital absorbs all losses before ST is affected, up to the full coverage amount. However, this is not a guarantee of principal in the legal or insurance sense. If losses exceed the JT buffer, ST capital is exposed to the remainder. ST depositors may lose some or all of their capital. If a drawdown reaches the market's Protected Exit Threshold, ST can withdraw immediately with the underlying asset while JT may still have remaining capital.
+    The Senior Tranche has a structural first-loss buffer: JT capital absorbs all losses before ST is affected, up to the full coverage amount. However, this is not a guarantee of principal in the legal or insurance sense. If losses exceed the JT buffer, ST capital is exposed to the remainder. ST depositors may lose some or all of their capital. If a drawdown reaches the market's Protected Exit Threshold, ST can withdraw immediately with the underlying asset while JT may still have remaining capital.
   </Accordion>
 
   <Accordion title="Who decides where the vault invests?">
@@ -13,11 +13,11 @@ description: "Common questions about Royco's tranches, coverage, secondary liqui
   </Accordion>
 
   <Accordion title="What happens if the underlying strategy is hacked?">
-    If an underlying yield source suffers an exploit, the Royco market built on it will experience a loss. Junior capital absorbs the loss first, up to the coverage percentage. If the loss exceeds coverage, Senior is exposed to the remainder. Diversification across multiple sources means a single exploit does not necessarily affect the entire vault, only the portion allocated to that specific source.
+    If an underlying yield source suffers an exploit, the Royco market built on it will experience a loss. JT capital absorbs the loss first, up to the coverage percentage. If the loss exceeds coverage, ST and LT are exposed to the remainder. Diversification across multiple sources means a single exploit does not necessarily affect the entire vault, only the portion allocated to that specific source.
   </Accordion>
 
   <Accordion title="Can I withdraw at any time?">
-    Vault withdrawals are processed through 30-day epochs. Requests enter the current open epoch, which is processed when it closes. A secondary market for vaults may provide an alternative exit path for immediate liquidity. Senior tranche withdrawals are available at any time. Junior withdrawals are available when excess Junior capital exists above the coverage requirement.
+    Vault withdrawals are processed through 30-day epochs. Requests enter the current open epoch, which is processed when it closes. A secondary market for vaults may provide an alternative exit path for immediate liquidity. ST withdrawals are available at any time. JT withdrawals are available when excess JT capital exists above the coverage requirement.
   </Accordion>
 
   <Accordion title="What blockchains does Royco operate on?">
@@ -29,7 +29,7 @@ description: "Common questions about Royco's tranches, coverage, secondary liqui
   </Accordion>
 
   <Accordion title="Is there a lock-up period?">
-    There is no fixed lock-up for Senior deposits at the tranche level. Vault withdrawals from srRoyUSDC and roywstETH are processed through **30-day withdrawal epochs**. Depositors should plan for up to 30 days between submitting a withdrawal request and being able to claim funds. Institutional depositors may face additional processing steps in the updated withdrawal flow. A secondary market may offer an alternative exit for immediate liquidity, but availability is not guaranteed. Junior capital may be restricted from withdrawing when it is actively backing Senior exposure at the minimum coverage level.
+    There is no fixed lock-up for Senior deposits at the tranche level. Vault withdrawals from srRoyUSDC and roywstETH are processed through **30-day withdrawal epochs**. Depositors should plan for up to 30 days between submitting a withdrawal request and being able to claim funds. Institutional depositors may face additional processing steps in the updated withdrawal flow. In markets with LT enabled, LT can be used as an alternative exit for immediate liquidity, but availability is not guaranteed. Junior capital may be restricted from withdrawing when it is actively backing Senior exposure at the minimum coverage level.
   </Accordion>
 
   <Accordion title="How can I verify the protocol's state independently?">
