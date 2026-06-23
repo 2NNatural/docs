@@ -43,53 +43,63 @@ Likewise, Liquidity is measured on the LT \+ JT pool: \$2M LT / \$10M LT \+ ST =
 
 JT absorbs losses immediately, from the first dollar. ST, and the ST shares held by the LT, are only exposed once JT's entire balance is consumed. Because the LT's assets are partially composed of ST shares, its loss exposure tracks Senior's, in step with direct ST holders.
 
+**Unlike JT and ST, LT losses are path-dependent.** As the standing counterparty for ST exits, the LT accumulates ST shares whenever holders sell into the pool, raising its exposure to the underlying asset. When a drawdown reverts, this creates a profit: the LT buys discounted ST shares that recover to full value. When a drawdown is permanent and Seniors exit, it is a loss beyond the passive markdown: the LT converts stablecoins into impaired inventory.
+
 #### Coverage Requirements
 
-Royco enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before Senior capital is affected. It is a hard constraint: if coverage falls below the minimum, new Senior deposits and Junior withdrawals are paused until Junior capital returns to the required level.
+Royco enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before ST capital is affected. It is a hard constraint: if coverage falls below the minimum, new ST deposits and Junior withdrawals are paused until JT capital returns to the required level.
 
-Senior depositors are shielded by the Junior buffer, and have first right to withdraw liquidity. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
+ST depositors are shielded by the JT buffer, and are able to freely withdraw liquidity via the LT. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
 
 **Coverage minimums are set per market.** The minimum coverage requirement is calibrated individually for each market based on several factors, including but not limited to: the risk profile and historical volatility of the underlying yield source, the asset class (lending, staking, tokenized RWA), the liquidity depth of the strategy, and the overall risk tolerance of the Senior vault (if it is a participant in the market). A lending market backed by a blue-chip protocol may carry a lower minimum than a newer yield source with a shorter track record. This per-market calibration ensures the coverage floor reflects the profile of the underlying source rather than a one-size-fits-all threshold.
+
+#### Liquidity Requirements
+
+Royco also enforces a **minimum liquidity requirement** for markets with liquidity functionality enabled. The liquidity requirement reflects the size of the secondary pool available for ST to exit into. If liquidity falls below the minimum, new ST deposits and LT withdrawals will be paused, similar to the coverage mechanism.
 
 #### How Yield Is Split
 
 In every Royco market, the underlying yield source generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between the tranches.
 
-Junior provides first-loss protection to Senior. In exchange, Junior earns a risk premium; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
+JT provides first-loss protection to ST, and LT provides liquidity. In exchange, JT and LT earn premiums; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
 
-The core idea: when Junior capital is scarce, Junior earns more. When Junior capital is plentiful, Junior earns less. This happens automatically with no governance votes or manual adjustments.
+The core idea: when JT or LT capital is scarce, their respective pool earns more. When capital is plentiful, the JT and LT earn less. This happens automatically with no governance votes or manual adjustments.
 
-**What Drives the Split: Understanding Utilization and Coverage**
+**What Drives the Split: Understanding Utilization**
 
-The YDM looks at one number: **utilization.** Utilization measures how much of Junior's coverage capacity is currently being used to back the market. Understanding utilization requires understanding how coverage works:
+The YDM looks at one number: **utilization.** Utilization measures how much capacity is currently being used to back the market. Utilization is used for both coverage and liquidity. Understanding utilization requires understanding how each of these mechanisms work:
 
-**Coverage** is the percentage of the total pool that Junior represents. It represents the maximum drawdown of the underlying yield source that Junior can absorb before Senior is affected. For instance, \$2M Junior backing a \$10M pool gives 20% coverage, meaning Junior can absorb a 20% loss on the pool without touching Senior.
+**Coverage** is the percentage of the total pool that JT represents. It represents the maximum drawdown of the underlying yield source that JT can absorb before ST is affected. For instance, \$2M of JT capital backing \$8M of ST capital gives 20% coverage, meaning JT can absorb a 20% loss on the pool without touching ST capital.
 
-**Each market has a minimum coverage requirement** (set per market as described above). Junior's capital must stay at or above this floor. If it falls below, new Senior deposits and current Junior withdrawals are blocked until a Junior buffer is replenished.
+**Each market has a minimum coverage requirement** (set per market as described above). JT capital must stay at or above this floor. If it falls below, new ST deposits and current JT withdrawals are blocked until a JT buffer is replenished.
 
-**Utilization measures how close Junior is to that floor.** At 40% utilization, Junior holds far more than the required minimum, with plenty of cushion above the floor. At 100% utilization, Junior is exactly at the required minimum, disabling both Senior deposits and Junior withdrawals. At the 90% target, Junior is 90% of the way from 'maximum excess' to 'exactly at the floor.' The market is efficiently deployed but still has room to accept new capital.
+**Liquidity** is the depth of the LT relative to the ST. It represents the secondary-market depth standing behind ST shares, the capacity to absorb ST holders who want to exit by selling into the pool rather than waiting for primary redemption. For instance, \$2M of LT capital backing an \$8M ST provides 20% liquidity.
 
-Put simply: **coverage tells you how much loss Junior can absorb; utilization tells you how efficiently that coverage capacity is being used.** High utilization means Junior is close to its required floor and Junior depositors earn a higher premium to attract new capital. Low utilization means Junior has built up excess above the floor, and their effective premium is lower.
+**Markets with liquidity enabled have a minimum liquidity requirement**, set per market**. T**he Liquidity Tranche's depth must stay at or above this floor. If it falls below, new Senior deposits and current Liquidity Tranche withdrawals are blocked until liquidity is replenished.
+
+**Utilization measures how close coverage or liquidity, respectively, is to that floor.** At 40% utilization, the tranche holds far more than the required minimum, with plenty of cushion above the floor. At 100% utilization, they are exactly at the required minimum, disabling both Senior deposits and JT/LT withdrawals. At the 90% target, JT is 90% of the way from 'maximum excess' to 'exactly at the floor.' The market is efficiently deployed but still has room to accept new capital.
+
+Put simply: **coverage tells you how much loss JT can absorb; utilization tells you how efficiently that coverage capacity is being used.** High utilization means Junior is close to its required floor and Junior depositors earn a higher premium to attract new capital. Low utilization means Junior has built up excess above the floor, and their effective premium is lower.
 
 **The Yield Curve**
 
 <video src="/videos/chapter-04-premium-curve.mp4" controls />
 
-Each market sets three values at creation that define Junior's yield share across utilization:
+Each market sets three values at creation that define yield share across utilization:
 
 > - Y0: at 0% utilization
 > - YT: at 90% (the target)
 > - Y100: at 100%
 
-**Below 90%: essentially flat.** Y0 and YT are close together. When Junior capital is plentiful, excess supply already dilutes Junior returns.
+**Below 90%: essentially flat.** Y0 and YT are close together. When JT or LT capital is plentiful, excess supply already dilutes their returns.
 
-**Above 90%: steep.** Y100 is typically set notably higher than YT , meaning that as Junior capital becomes scarce, the yield share ramps aggressively to attract new Junior depositors. Y100 is set per market such that at 100% utilization, the resulting Junior yield is attractive enough to draw in new capital.
+**Above 90%: steep.** Y100 is typically set notably higher than YT , meaning that as capital becomes scarce, the yield share ramps aggressively to attract new depositors. Y100 is set per market such that at 100% utilization, the resulting JT or LT yield is attractive enough to draw in new capital.
 
 **Self-Adapting Yield Curve Over Time**
 
-These three points don't stay fixed, as the curve adapts to market conditions over time. When utilization consistently runs above target, the curve shifts up to offer Juniors a bigger premium and attract more capital. When utilization consistently sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
+These three points don't stay fixed, as the curve adapts to market conditions over time. When utilization consistently runs above target, the curve shifts up to offer JT a bigger premium and attract more capital. When utilization consistently sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
 
-The result is a self-balancing system. If Junior capital leaves, utilization rises and the premium increases, attracting new Juniors. If Senior capital leaves, the opposite happens. The market continuously finds its own equilibrium.
+The result is a self-balancing system. If JT capital leaves, utilization rises and the premium increases, attracting new JT. If Senior capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
 <video src="/videos/chapter-05-curve-adapts.mp4" controls />
 
