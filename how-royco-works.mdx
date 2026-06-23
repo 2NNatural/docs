@@ -7,11 +7,11 @@ description: "How Royco tranches a single yield source: Junior provides loss cov
 
 Every Royco market begins with a single underlying yield source. The protocol deploys capital from Senior and Junior depositors into that source and governs how returns and losses flow back to each group.
 
-The fundamental mechanism: **Junior capital provides first-loss coverage for Senior capital.** The protocol enforces a coverage ratio; the minimum amount of Junior capital that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted.
+The fundamental mechanism: **JT capital provides first-loss coverage for Senior capital, while LT provides exit liquidity.** The protocol enforces both a coverage and protection ratio; the minimum amount of JT and LT capital, respectively, that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted.
 
-Both Senior and Junior capital are deployed into the same underlying strategy. Junior is not sitting in a separate reserve; it is co-invested alongside Senior, earning the base yield from the same source. The difference is that Junior also earns a risk premium for providing first-loss coverage, and in exchange, Junior absorbs losses immediately. Any drawdown reduces Junior's capital before Senior is affected.
+Both ST and JT capital are deployed into the same underlying strategy. JT is not sitting in a separate reserve; it is co-invested alongside ST, earning the base yield from the same source. The difference is that JT also earns a risk premium for providing first-loss coverage, and in exchange, JT absorbs losses immediately. Any drawdown reduces JT's capital before ST is affected.
 
-Because Junior is co-invested, the coverage ratio represents real, active capital that is earning yield, not idle collateral. This makes the structure capital-efficient for both sides.
+Because JT is co-invested, the coverage ratio represents real, active capital that is earning yield, not idle collateral. This makes the structure capital-efficient for both sides.
 
 **An Example**
 
