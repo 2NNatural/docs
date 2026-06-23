@@ -1,6 +1,7 @@
 ---
 title: "How Royco Works"
 description: "How Royco tranches a single yield source: Junior provides loss coverage, the Liquidity Tranche provides secondary liquidity, and the loss waterfall protects Senior."
+hidden: true
 ---
 
 #### The Tranching Mechanism
@@ -24,7 +25,7 @@ Suppose a market is deployed on top of a USDC lending strategy yielding 8% annua
 | Total | \$10,000,000 |  |  |
 | Coverage | 20% |  | \$2M Junior / \$10M total |
 
-Both tranches are deployed into the same 8% underlying strategy. A drawdown of X% applies to the full \$10M pool. Junior absorbs those losses first. Coverage of 20% means Junior can absorb up to a 20% drawdown on the total pool before Senior is affected.
+Coverage is measured on the Senior \+ Junior pool: \$2M Junior / \$10M total = 20% coverage. The Liquidity Tranche sits outside that pool and is sized separately, by the market's liquidity requirement (see below). Coverage of 20% means Junior can absorb up to a 20% drawdown on the \$10M pool before Senior is affected.
 
 **Loss Example Scenarios**
 
@@ -34,7 +35,7 @@ Both tranches are deployed into the same 8% underlying strategy. A drawdown of X
 | 15% | \$1.5M | \$1.5M (\$500K remaining) | \$0 | Junior reduced to \$500K. Senior unaffected. |
 | 25% | \$2.5M | \$2M (\$0 remaining) | \$500K | Junior fully consumed. Senior reduced to \$7.5M. |
 
-Junior absorbs losses immediately, from the first dollar. Senior is only exposed once Junior's entire balance is consumed.
+JT absorbs losses immediately, from the first dollar. ST, and the ST shares held by the LT, are only exposed once JT's entire balance is consumed. Because the LT's assets are partially composed of ST shares, its loss exposure tracks Senior's, in step with direct ST holders.
 
 #### Coverage Requirements
 
