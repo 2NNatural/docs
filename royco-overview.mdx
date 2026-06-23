@@ -15,17 +15,17 @@ Yield flows outward from ST to both JT and LT, paying for Senior's downside cove
 
 #### Why Does This Matter?
 
-**ST gets smart-contract-enforced downside coverage.** Every ST position has a quantified JKT buffer defined in the protocol's contracts. This gives risk committees a concrete, verifiable loss-absorption layer. This enables allocators to evaluate yield sources they might otherwise be prevented from accessing.
+**ST gets smart-contract-enforced downside coverage.** Every ST position has a quantified JT buffer defined in the protocol's contracts. This gives risk committees a concrete, verifiable loss-absorption layer. This enables allocators to evaluate yield sources they might otherwise be prevented from accessing.
 
-**Seniors get secondary liquidity.** 
+**ST gets secondary liquidity.** Many RWAs are illiquid by design. The LT design now allows ST to buy/sell their RWAs positions at any time, with constant liquidity.
 
-**Junior absorbs losses from the first dollar.** There is no buffer on losses. Junior capital absorbs any Senior drawdown from the very first dollar, up to the full coverage amount. Seniors are not impaired until Junior capital is fully exhausted. For Juniors, this effect is similar to a levered position.
+**JT absorbs losses from the first dollar.** There is no buffer on losses. JT absorbs any ST drawdown from the very first dollar, up to the full coverage amount. ST is not impaired until JT capital is fully exhausted. For JT, this effect is similar to a levered position.
 
-**Juniors benefit from an observation period.** When the underlying strategy draws down, the protocol enters a time-bounded observation window before allocating losses. Temporary, expected volatility that reverses within the window does not slash Junior capital. Juniors only absorb actual, persistent losses, not noise. (Note that not all markets have an observation period. See Section 2 for details on when the observation period is triggered and how it resolves.)
+**JT benefits from an observation period.** When the underlying strategy draws down, the protocol enters a time-bounded observation window before allocating losses. Temporary, expected volatility that reverses within the window does not slash JT capital. JT only absorbs actual, persistent losses, not noise. (Note that not all markets have an observation period. See Section 2 for details on when the observation period is triggered and how it resolves.)
 
-**Juniors earn a premium for risk they already underwrite.** Every yield source Royco tranches already has LPs depositing into the underlying asset directly. Royco lets those same participants earn a risk premium for formally taking the first-loss position, rather than simply accepting the base rate. This risk premium is paid by Senior positions.
+**JT earns a premium for risk they already underwrite.** Every yield source Royco tranches already has LPs depositing into the underlying asset directly. Royco lets those same participants earn a risk premium for formally taking the first-loss position, rather than simply accepting the base rate. This risk premium is paid by Senior positions.
 
-**LT** earns a boosted yield for the same 
+**LT gets paid to be the exit.** LT provides the counterparty for ST redemptions, earning a liquidity premium and pool fees, as well as buying shares at a discount when ST sells shares into the pool. Additionally, they still benefit from JT's first-loss coverage. In return, they accept the pool's lockup and impermanent loss in a drawdown scenario.
 
 #### The Vault Products
 
