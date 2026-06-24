@@ -1,6 +1,6 @@
 ---
 title: "How Royco Works"
-description: "How Royco tranches a single yield source: JT provides loss coverage, LT provides secondary liquidity, and ST receives protection/liquidity."
+description: "How Royco tranches a single yield source: JT provides loss coverage, LT provides secondary liquidity, and the loss waterfall protects ST."
 ---
 
 #### The Tranching Mechanism
@@ -64,6 +64,10 @@ The YDM looks at one number: **utilization.** Utilization measures how much capa
 
 **Coverage** is the percentage of the total pool that JT represents. It represents the maximum drawdown JT can absorb before ST is affected. For instance, \$2M of JT capital backing \$8M of ST capital gives 20% coverage, meaning JT can absorb a 20% loss on the pool without ST capital being touched.
 
+**Liquidity** is the depth of the LT relative to the ST. It represents the secondary-market depth standing behind ST shares, the capacity to absorb ST holders who want to exit by selling into the pool rather than waiting for primary redemption. For instance, \$2M of LT capital backing an \$8M ST provides 20% liquidity.
+
+**Markets with liquidity enabled have a minimum liquidity requirement**, set per market**. T**he Liquidity Tranche's depth must stay at or above this floor. If it falls below, new Senior deposits and current Liquidity Tranche withdrawals are blocked until liquidity is replenished.
+
 **Liquidity** is the depth of the LT relative to the ST. Instead of waiting for primary redemption, Seniors can sell shares into the LT pool, up to the liquidity available there.
 
 **Utilization measures how close a supporting tranche is to its respective floor**; coverage for the JT and liquidity for the LT. It is the signal that drives the premium model in the protocol. At 40% utilization, a tranche holds far more than its required minimum. At 100% utilization, it has hit its required minimum, disabling both Senior deposits and either JT or LT withdrawals, depending which tranche is being utilized. At the 90% target, the tranche is 90% of the way between its maximum and the floor. The market is efficiently deployed but still has room to accept new capital.
@@ -71,8 +75,6 @@ The YDM looks at one number: **utilization.** Utilization measures how much capa
 Put simply: **coverage and liquidity tell you what a tranche provides; utilization tells you how efficiently that capacity is being used.**
 
 **The Yield Curve**
-
-<video src="/videos/chapter-04-premium-curve.mp4" controls />
 
 Each market sets two yield curves. One sets JT's risk premium from coverage utilization, the other sets the LT's liquidity premium from liquidity utilization. Each curve is defined by three points:
 
@@ -104,7 +106,7 @@ The APY shown on the interface is the trailing APY, the annualized rate from act
 
 Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss to JT capital.
 
-When a drawdown is detected by a market oracle, the protocol automatically enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits and LT redemptions are blocked, and 100% of yield is redirected to JT recovery, accelerating the rebuild of the first-loss buffer.
+When a drawdown is detected, the protocol enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits are blocked, and 100% of yield is redirected to JT, accelerating the rebuild of the first-loss buffer.  When a drawdown is detected by a market oracle, the protocol automatically enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits and LT redemptions are blocked, and 100% of yield is redirected to JT recovery, accelerating the rebuild of the first-loss buffer.
 
 However, ST holders are not locked into their positions. The LT continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the LT AMM pool at the pool's current price. 
 

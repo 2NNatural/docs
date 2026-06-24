@@ -5,6 +5,8 @@ description: "The Yield Distribution Model sets each tranche's share of yield fr
 
 #### **The Yield Distribution Model**
 
+Yield distribution between tranches works similarly to lending markets. In Morpho or Aave, high utilization pushes supply rates up to attract lenders, and vice versa. Royco utilizes a similar mechanism, with a different definition of utilization. This model is applied to both the JT risk premium for providing coverage, and the LT liquidity premium.
+
 Yield distribution between tranches works similarly to lending markets. Two premiums are paid directly out of the Senior Tranche (ST) yield: a Risk Premium to the Junior Tranche (JT) and a Liquidity Premium to the Liquidity Tranche (LT). The two are constrained together so that the **risk premium plus the liquidity premium never exceeds 100% of ST yield**. ST gives up part of its yield to JT for coverage and part to LT for liquidity, and keeps the rest.
 
 #### **Coverage utilization → Junior's risk premium**
@@ -24,3 +26,7 @@ The same **90% target** applies, for the same reasons:
 
 - **Senior depositors** need secondary liquidity so their shares remain tradable. At 100%, the LT is exactly at its floor, and the market stops accepting new ST deposits to avoid exceeding available liquidity.
 - **LT depositors**: At low utilization, the premium fails to sufficiently compensate the capital commitment. There is a tail risk at exceptionally low utilization where LT depositors may slightly underperform the baseline Senior yield. However, at a healthy utilization, the LT earns meaningful extra yield, with the curve steepening above that point to incentivize new market-making capital.
+
+---
+
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
