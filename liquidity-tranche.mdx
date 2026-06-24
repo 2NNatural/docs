@@ -3,16 +3,16 @@ title: "Liquidity Tranche (LT)"
 description: "Royco's Liquidity Tranche provides continuous secondary liquidity for Senior shares through a rate-scaled Balancer pool, earning a liquidity premium plus pool fees."
 ---
 
-The **Liquidity Tranche (LT)** is market making capital that earns yield by providing constant secondary liquidity for the senior tranche.
+The **Liquidity Tranche (LT)** is a dedicated capital pool that earns yield by providing constant secondary liquidity for the senior tranche.
 
 LT yield is calculated as follows:
 
-> Liquidity Premium \+ ST Appreciation \+ Stable RFR Yield \+ Trading Fees - Impermanent Loss
+> Liquidity Premium \+ ST Appreciation \+ Stablecoin Yield \+ Trading Fees − Impermanent Loss
 
-Unlike ST and JT, LT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a tokenized-treasury stablecoin.
+Unlike ST and JT, LT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in an AMM pool made up of ST tokens and a tokenized-treasury stablecoin.
 
-LT earns yield from the assets deployed in the pool: both the underlying yield of the ST shares, as well as the bill rate earned by the paired stablecoin.
+LT earns yield from the assets deployed in the pool: both the underlying yield of the ST shares, as well as the rate earned by the paired stablecoin.
 
-In this mechanism, LT gets paid a premium for providing exit liquidity to the ST. LT also gets two additional sources of yield: a % of swap fees from the Balancer Pool, as well as swap premiums when ST flow imblanaces the pool.
+In this mechanism, LT gets paid a premium for providing exit liquidity to the ST. LT also gets two additional sources of yield: a % of swap fees from the Balancer Pool, as well as swap premiums when ST flow imbalances the pool.
 
-LT has the same underlying risk profile as the ST. However, it is illiquid and provides constant secondary liquidity for the senior tranche. Therefore, it effectively acts as a mezzanine layer with a risk profile in between that of JT and ST.
+LT has the same credit profile as the ST, with the liquidity profile of the JT. Therefore, it effectively acts as a mezzanine layer with a risk profile in between that of JT and ST.

@@ -1,28 +1,28 @@
 ---
 title: "How Royco Works"
-description: "How Royco tranches a single yield source: JT provides loss coverage, LT provides secondary liquidity, and the loss waterfall protects ST."
+description: "How Royco tranches a single yield source: JT provides loss coverage, LT provides secondary liquidity, and ST receives protection/liquidity."
 ---
 
 #### The Tranching Mechanism
 
-Every Royco market begins with a single underlying yield source. The protocol deploys capital from depositors into that source and governs how returns and losses flow back to the different tranches.
+Every Royco market begins with a single underlying yield source. Capital from depositors is routed into that source, with contracts governing how returns and losses flow back to the different tranches.
 
-The fundamental mechanism: **JT capital provides first-loss coverage for Senior capital, while LT provides exit liquidity.** The protocol enforces both a coverage and protection ratio; the minimum amount of JT and LT capital, respectively, that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted.
+The fundamental mechanism: **JT capital provides first-loss coverage for Senior capital, while LT provides liquidity.** The protocol enforces a minimum amount of JT capital (the Coverage Ratio) and LT capital (the Protection Ratio), respectively, that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted and yield is redirected to them.
 
 Both ST and JT capital are deployed into the same underlying strategy. JT is not sitting in a separate reserve; it is co-invested alongside ST, earning the base yield from the same source. The difference is that JT also earns a risk premium for providing first-loss coverage, and in exchange, JT absorbs losses immediately. Any drawdown reduces JT's capital before ST is affected.
 
-LT is not directly deployed into the same underlying strategy, instead it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a stablecoin.
+LT is not directly deployed into the same underlying strategy, instead it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a stablecoin. ST holders can sell into this pool at any time, with the resulting price discrepancies creating arbitrage opportunities that maintain the pool's peg.
 
-JT and LT are co-invested in varying degrees to the same underlying strategy as ST. This means that the coverage and liquidity layers are real, active capital that is earning yield, making the structure capital-efficient for all parties.
+JT and LT are co-invested in varying degrees to the same underlying strategy as ST.
 
 **An Example**
 
-Suppose a market is deployed on top of a USDC lending strategy yielding 8% annualized. Both Senior and Junior capital are co-invested in the same strategy:
+Suppose a market is deployed on top of a USDC lending strategy yielding 8% annualized:
 
 |  | Deposits | APY | Source |
 | --- | --- | --- | --- |
-| Senior (ST) | \$8,000,000 | ~5% | Base yield minus premium paid to Junior |
-| Junior (JT) | \$2,000,000 | ~13.5% | Base yield plus premium for first-loss protection |
+| Senior (ST) | \$8,000,000 | ~5% | Base yield minus premium paid to JT for coverage |
+| Junior (JT) | \$2,000,000 | ~13.5% | Base yield plus premium for first-loss coverage |
 | Liquidity (LT) | \$2,000,000 | ~11% | Pool Asset Yield plus premium for liquidity provision and trading fees, minus impermanent loss |
 | Total | \$12,000,000 |  |  |
 | Coverage | 20% |  | \$2M JT / \$10M JT \+ ST |
@@ -30,25 +30,25 @@ Suppose a market is deployed on top of a USDC lending strategy yielding 8% annua
 
 Coverage is measured on the JT \+ ST pool: \$2M JT / \$10M JT \+ ST = 20% coverage. Coverage of 20% means JT can absorb up to a 20% drawdown on the \$10M pool before ST is affected.
 
-Likewise, Liquidity is measured on the LT \+ JT pool: \$2M LT / \$10M LT \+ ST = 20% coverage. Liquidity of 20% means the LT tranche is able to accommodate the exit of 20% of ST at current AMM pool size.
+Likewise, Liquidity is measured on the LT \+ JT pool: \$2M LT / \$10M LT \+ ST = 20% liquidity. Liquidity of 20% means the LT tranche is able to accommodate the exit of 20% of ST at current AMM pool size.
 
 **Loss Example Scenarios**
 
-JT absorbs losses immediately, from the first dollar. ST, and the ST shares held by the LT, are only exposed once JT's entire balance is consumed. Because the LT's assets are partially composed of ST shares, its loss exposure tracks Senior's, in step with direct ST holders.
+JT absorbs losses immediately, from the first dollar. ST and LT are only exposed once JT's entire balance is consumed. Because the LT's assets are partially composed of ST shares, its loss exposure mirrors that of the Senior tranche.
 
-**Unlike JT and ST, LT losses are path-dependent.** As the standing counterparty for ST exits, the LT accumulates ST shares whenever holders sell into the pool, raising its exposure to the underlying asset. When a drawdown reverts, this creates a profit: the LT buys discounted ST shares that recover to full value. When a drawdown is permanent and Seniors exit, it is a loss beyond the passive markdown: the LT converts stablecoins into impaired inventory.
+**Unlike JT and ST, LT losses are path-dependent.** During a drawdown, ST holders sell into the pool, raising LT's exposure to the senior asset. If the market recovers, this creates a profit: the LT bought discounted ST shares that recover to full value. However, in a realized drawdown, the LT suffers losses because it actively converted stablecoins into devalued ST shares.
 
 #### Coverage Requirements
 
 Royco enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before ST capital is affected. It is a hard constraint: if coverage falls below the minimum, new ST deposits and Junior withdrawals are paused until JT capital returns to the required level.
 
-ST depositors are shielded by the JT buffer, and are able to freely withdraw liquidity via the LT. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
+ST depositors are shielded by the JT buffer, and are able to freely exit via the LT. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
 
-**Coverage minimums are set per market.** The minimum coverage requirement is calibrated individually for each market based on several factors, including but not limited to: the risk profile and historical volatility of the underlying yield source, the asset class (lending, staking, tokenized RWA), the liquidity depth of the strategy, and the overall risk tolerance of the Senior vault (if it is a participant in the market). A lending market backed by a blue-chip protocol may carry a lower minimum than a newer yield source with a shorter track record. This per-market calibration ensures the coverage floor reflects the profile of the underlying source rather than a one-size-fits-all threshold.
+**Coverage minimums are set per market by external risk curators.** The minimum coverage requirement is calibrated individually for each market based on several factors, including but not limited to: the risk profile and historical volatility of the underlying yield source, the asset class (lending, staking, tokenized RWA), the liquidity depth of the strategy, and the overall risk tolerance of the Senior vault (if it is a participant in the market).
 
 #### Liquidity Requirements
 
-Royco also enforces a **minimum liquidity requirement** for markets with liquidity functionality enabled. The liquidity requirement reflects the size of the secondary pool available for ST to exit into. If liquidity falls below the minimum, new ST deposits and LT withdrawals will be paused, similar to the coverage mechanism.
+Royco also enforces a **minimum liquidity requirement** for markets with liquidity functionality enabled. The liquidity requirement reflects the size of the AMM pool available for ST to exit into. If liquidity falls below the minimum, new ST deposits and LT withdrawals will be paused, similar to the coverage mechanism.
 
 #### How Yield Is Split
 
@@ -62,27 +62,25 @@ The core idea: when JT or LT capital is scarce, their respective pool earns more
 
 The YDM looks at one number: **utilization.** Utilization measures how much capacity is currently being used to back the market. Utilization is used for both coverage and liquidity. Understanding utilization requires understanding how each of these mechanisms work:
 
-**Coverage** is the percentage of the total pool that JT represents. It represents the maximum drawdown of the underlying yield source that JT can absorb before ST is affected. For instance, \$2M of JT capital backing \$8M of ST capital gives 20% coverage, meaning JT can absorb a 20% loss on the pool without touching ST capital.
+**Coverage** is the percentage of the total pool that JT represents. It represents the maximum drawdown JT can absorb before ST is affected. For instance, \$2M of JT capital backing \$8M of ST capital gives 20% coverage, meaning JT can absorb a 20% loss on the pool without ST capital being touched.
 
-**Each market has a minimum coverage requirement** (set per market as described above). JT capital must stay at or above this floor. If it falls below, new ST deposits and current JT withdrawals are blocked until a JT buffer is replenished.
+**Liquidity** is the depth of the LT relative to the ST. Instead of waiting for primary redemption, Seniors can sell shares into the LT pool, up to the liquidity available there.
 
-**Liquidity** is the depth of the LT relative to the ST. It represents the secondary-market depth standing behind ST shares, the capacity to absorb ST holders who want to exit by selling into the pool rather than waiting for primary redemption. For instance, \$2M of LT capital backing an \$8M ST provides 20% liquidity.
+**Utilization measures how close a supporting tranche is to its respective floor**; coverage for the JT and liquidity for the LT. It is the signal that drives the premium model in the protocol. At 40% utilization, a tranche holds far more than its required minimum. At 100% utilization, it has hit its required minimum, disabling both Senior deposits and either JT or LT withdrawals, depending which tranche is being utilized. At the 90% target, the tranche is 90% of the way between its maximum and the floor. The market is efficiently deployed but still has room to accept new capital.
 
-**Markets with liquidity enabled have a minimum liquidity requirement**, set per market**. T**he Liquidity Tranche's depth must stay at or above this floor. If it falls below, new Senior deposits and current Liquidity Tranche withdrawals are blocked until liquidity is replenished.
-
-**Utilization measures how close a supporting tranche is to its respective floor**; coverage for the JT and liquidity for the LT. It is the signal that drives the premium model in the protocol. At 40% utilization, a tranche holds far more than its required minimum, with plenty of cushion above the floor. At 100% utilization, it is exactly at the required minimum, disabling both Senior deposits and either JT or LT withdrawals, depending which tranche is being utilized. At the 90% target, the tranche is 90% of the way from 'maximum excess' to 'exactly at the floor.' The market is efficiently deployed but still has room to accept new capital.
-
-Put simply: **coverage and liquidity tell you what a tranche provides; utilization tells you how efficiently that capacity is being used.** High utilization means a tranche is close to its required floor and depositors earn a higher premium to attract new capital. Low utilization means a tranche has built up excess above the floor, and its effective premium is lower.
+Put simply: **coverage and liquidity tell you what a tranche provides; utilization tells you how efficiently that capacity is being used.**
 
 **The Yield Curve**
 
 <video src="/videos/chapter-04-premium-curve.mp4" controls />
 
-Each market sets three values at creation that define yield share across utilization:
+Each market sets two yield curves. One sets JT's risk premium from coverage utilization, the other sets the LT's liquidity premium from liquidity utilization. Each curve is defined by three points:
 
 > - Y0: at 0% utilization
 > - YT: at 90% (the target)
-> - Y100: at 100%
+> - Y100: at 100%, the maximum spend
+
+Each curve is bounded by a maximum spend, expressed as a % of Senior yield. The two curves' maximums combined never exceed 100% of Senior yield.
 
 **Below 90%: essentially flat.** Y0 and YT are close together. When JT or LT capital is plentiful, excess supply already dilutes their returns.
 
@@ -100,13 +98,13 @@ The result is a self-balancing system. If JT or LT capital leaves, utilization r
 
 **What Depositors See**
 
-The APY shown on the interface is the trailing 24-hour APY, the annualized rate from actual yield accrued over the previous 24 hours. A 7-day average is shown alongside it for a smoother view. Both are backward-looking. If utilization shifts or capital enters or exits the pool, future yields will differ.
+The APY shown on the interface is the trailing APY, the annualized rate from actual yield accrued over the stated duration. If utilization shifts or capital enters or exits the pool, future yields will differ.
 
 #### Observation Period
 
-Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss against JT capital.
+Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss to JT capital.
 
-When a drawdown is detected, the protocol enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits are blocked, and 100% of yield is redirected to JT, accelerating the rebuild of the first-loss buffer. 
+When a drawdown is detected by a market oracle, the protocol automatically enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits and LT redemptions are blocked, and 100% of yield is redirected to JT recovery, accelerating the rebuild of the first-loss buffer.
 
 However, ST holders are not locked into their positions. The LT continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the LT AMM pool at the pool's current price. 
 
@@ -120,13 +118,13 @@ The protocol then observes a defined time window. If the strategy recovers withi
 
 #### Protected Exit
 
-Each market provides ST with first-loss coverage against persistent drawdowns through a **Protected Exit Threshold**. If a drawdown is deep enough, the Observation Period is terminated and ST can withdraw the underlying asset when there is a predefined level of coverage remaining, realizing losses against JT capital. Those who believe the remaining JT buffer is sufficient can choose to stay. If losses exhaust JT capital entirely, ST shares become directly exposed to further drawdown.
+The Protected Exit allows ST depositors to safely withdraw their underlying assets at fair value when a market drawdown breaches a pre-configured threshold. If a strategy suffers a markdown that breaches this **Protected Exit Threshold**, the Observation Period is terminated and ST can withdraw their assets. This realizes losses against JT capital. Those who believe the remaining JT buffer is sufficient can choose to stay. If losses exhaust JT capital entirely, ST shares become directly exposed to further drawdown.
 
-Protected Exit is the backstop to secondary liquidity. The LT pool offers immediate exit at a market price, which during drawdowns may sit below NAV. The LT pool is also finite: once the pool's available liquidity is exhausted, it can no longer provide an exit. Protected Exit serves the ST shares the pool cannot: those unwilling to sell at the pool's discounted price and willing to wait for the threshold, and those who reach the pool only to find its liquidity drained. The two exits are complementary: the LT pool gives speed at a market-set price, Protected Exit gives the underlying at a finalized loss once the threshold is breached.
+Senior's two exits are complementary: the LT pool gives an instant exit at the pool's current price, Protected Exit returns the underlying at fair value, but only once a drawdown breaches the threshold.
 
 #### Protected Exit Bonus
 
-Some markets may include an optional configuration called **Protected Exit Bonus**. When the Protected Exit Threshold is exceeded in a market with Protected Exit Bonus enabled, any Seniors who optionally withdraw may additionally receive a small Bonus % (up to the market-defined %) for withdrawing. This is designed as a minor incentive for ST to withdraw into the underlying asset, which assists in restoring the market into a healthy state. The Bonus is sourced from remaining Junior capital.
+Some markets may include an optional configuration called **Protected Exit Bonus**. When the Protected Exit Threshold is exceeded in a market with Protected Exit Bonus enabled, any Seniors who optionally withdraw may additionally receive a Bonus % (up to the market-defined %) for withdrawing. This is designed to assist ST in unwinding their positions, and help restore the market into a healthy state. The Bonus is sourced from remaining Junior capital.
 
 **Example:** A market has Minimum Coverage = 10%, Protected Exit Threshold = 5% and Protected Exit Bonus = 2%. The underlying drops below 5% coverage remaining, breaching the threshold.
 
