@@ -94,8 +94,6 @@ These three points don't stay fixed, as the curve adapts to market conditions ov
 
 The result is a self-balancing system. If JT or LT capital leaves, utilization rises for that tranche and the premium increases, attracting new capital. If ST capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
-<video src="/videos/chapter-05-curve-adapts.mp4" controls />
-
 **_For an interactive yield model, feel free to check out our simulator: [https://royco-school.vercel.app/](https://royco-school.vercel.app/)_**
 
 **What Depositors See**
@@ -114,9 +112,11 @@ ST deposits and JT redemptions also remain enabled, provided the market remains 
 
 The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against JT capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, JT losses are finalized immediately, and ST gain the option to withdraw.
 
-<video src="/videos/chapter-06-observation-periods.mp4" controls />
-
 **The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
+
+<Frame>
+  ![Screenshot 2026 06 23 At 7 34 26 PM](/images/Screenshot-2026-06-23-at-7.34.26-PM.png)
+</Frame>
 
 #### Protected Exit
 
