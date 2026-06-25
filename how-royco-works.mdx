@@ -11,7 +11,7 @@ The fundamental mechanism: **JT capital provides first-loss coverage for Senior 
 
 Both ST and JT capital are deployed into the same underlying strategy. JT is not sitting in a separate reserve; it is co-invested alongside ST, earning the base yield from the same source. The difference is that JT also earns a risk premium for providing first-loss coverage, and in exchange, JT absorbs losses immediately. Any drawdown reduces JT's capital before ST is affected.
 
-LT is not directly deployed into the same underlying strategy, instead it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a stablecoin. ST holders can sell into this pool at any time, with the resulting price discrepancies creating arbitrage opportunities that maintain the pool's peg.
+LT is not directly deployed into the same underlying strategy. Instead, it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a stablecoin. ST holders can sell into this pool at any time, with the resulting price discrepancies creating arbitrage opportunities that maintain the pool's peg.
 
 JT and LT are co-invested in varying degrees to the same underlying strategy as ST.
 
@@ -66,7 +66,7 @@ The YDM looks at one number: **utilization.** Utilization measures how much capa
 
 **Liquidity** is the depth of the LT relative to the ST. It represents the secondary-market depth standing behind ST shares, the capacity to absorb ST holders who want to exit by selling into the pool rather than waiting for primary redemption. For instance, \$2M of LT capital backing an \$8M ST provides 20% liquidity.
 
-**Markets with liquidity enabled have a minimum liquidity requirement**, set per market**. T**he Liquidity Tranche's depth must stay at or above this floor. If it falls below, new Senior deposits and current Liquidity Tranche withdrawals are blocked until liquidity is replenished.
+**Markets with liquidity enabled have a minimum liquidity requirement**, set per market. The Liquidity Tranche's depth must stay at or above this floor. If it falls below, new Senior deposits and current Liquidity Tranche withdrawals are blocked until liquidity is replenished.
 
 **Liquidity** is the depth of the LT relative to the ST. Instead of waiting for primary redemption, Seniors can sell shares into the LT pool, up to the liquidity available there.
 
@@ -93,8 +93,6 @@ Each curve is bounded by a maximum spend, expressed as a % of Senior yield. The 
 These three points don't stay fixed, as the curve adapts to market conditions over time. When a tranche's utilization consistently runs above target, its curve shifts up to offer a bigger premium and attract more capital. When utilization consistently sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
 
 The result is a self-balancing system. If JT or LT capital leaves, utilization rises for that tranche and the premium increases, attracting new capital. If ST capital leaves, the opposite happens. The market continuously finds its own equilibrium.
-
-**_For an interactive yield model, feel free to check out our simulator: [https://royco-school.vercel.app/](https://royco-school.vercel.app/)_**
 
 **What Depositors See**
 
