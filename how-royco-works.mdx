@@ -30,7 +30,7 @@ Suppose a market is deployed on top of a USDC lending strategy yielding 8% annua
 
 Coverage is measured on the JT \+ ST pool: \$2M JT / \$10M JT \+ ST = 20% coverage. Coverage of 20% means JT can absorb up to a 20% drawdown on the \$10M pool before ST is affected.
 
-Likewise, Liquidity is measured on the LT \+ JT pool: \$2M LT / \$10M LT \+ ST = 20% liquidity. Liquidity of 20% means the LT tranche is able to accommodate the exit of 20% of ST at current AMM pool size.
+Likewise, Liquidity is measured on the LT \+ ST pool: \$2M LT / \$10M LT \+ ST = 20% liquidity. Liquidity of 20% means the LT tranche is able to accommodate the exit of 20% of ST at current AMM pool size.
 
 **Loss Example Scenarios**
 
@@ -60,21 +60,21 @@ The core idea: when JT or LT capital is scarce, their respective pool earns more
 
 **What Drives the Split: Understanding Utilization**
 
+<video src="/videos/chapter-03-utilization-1.mp4" controls />
+
 The YDM looks at one number: **utilization.** Utilization measures how much capacity is currently being used to back the market. Utilization is used for both coverage and liquidity. Understanding utilization requires understanding how each of these mechanisms work:
 
 **Coverage** is the percentage of the total pool that JT represents. It represents the maximum drawdown JT can absorb before ST is affected. For instance, \$2M of JT capital backing \$8M of ST capital gives 20% coverage, meaning JT can absorb a 20% loss on the pool without ST capital being touched.
 
-**Liquidity** is the depth of the LT relative to the ST. It represents the secondary-market depth standing behind ST shares, the capacity to absorb ST holders who want to exit by selling into the pool rather than waiting for primary redemption. For instance, \$2M of LT capital backing an \$8M ST provides 20% liquidity.
-
-**Markets with liquidity enabled have a minimum liquidity requirement**, set per market. The Liquidity Tranche's depth must stay at or above this floor. If it falls below, new Senior deposits and current Liquidity Tranche withdrawals are blocked until liquidity is replenished.
-
-**Liquidity** is the depth of the LT relative to the ST. Instead of waiting for primary redemption, Seniors can sell shares into the LT pool, up to the liquidity available there.
+**Liquidity** is the depth of the LT relative to the ST. Instead of waiting for primary redemption, Seniors can sell shares into the LT pool, up to the liquidity available there. 
 
 **Utilization measures how close a supporting tranche is to its respective floor**; coverage for the JT and liquidity for the LT. It is the signal that drives the premium model in the protocol. At 40% utilization, a tranche holds far more than its required minimum. At 100% utilization, it has hit its required minimum, disabling both Senior deposits and either JT or LT withdrawals, depending which tranche is being utilized. At the 90% target, the tranche is 90% of the way between its maximum and the floor. The market is efficiently deployed but still has room to accept new capital.
 
 Put simply: **coverage and liquidity tell you what a tranche provides; utilization tells you how efficiently that capacity is being used.**
 
 **The Yield Curve**
+
+<video src="/videos/chapter-04-premium-curve-1.mp4" controls />
 
 Each market sets two yield curves. One sets JT's risk premium from coverage utilization, the other sets the LT's liquidity premium from liquidity utilization. Each curve is defined by three points:
 
@@ -94,6 +94,8 @@ These three points don't stay fixed, as the curve adapts to market conditions ov
 
 The result is a self-balancing system. If JT or LT capital leaves, utilization rises for that tranche and the premium increases, attracting new capital. If ST capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
+<video src="/videos/chapter-05-curve-adapts-1.mp4" controls />
+
 **What Depositors See**
 
 The APY shown on the interface is the trailing APY, the annualized rate from actual yield accrued over the stated duration. If utilization shifts or capital enters or exits the pool, future yields will differ.
@@ -112,9 +114,7 @@ The protocol then observes a defined time window. If the strategy recovers withi
 
 **The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
 
-<Frame>
-  ![Screenshot 2026 06 23 At 7 34 26 PM](/images/Screenshot-2026-06-23-at-7.34.26-PM.png)
-</Frame>
+<video src="/videos/chapter-06-observation-periods-1.mp4" controls />
 
 #### Protected Exit
 
