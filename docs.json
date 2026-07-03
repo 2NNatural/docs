@@ -1,42 +1,137 @@
 {
+
   "$schema": "https://mintlify.com/docs.json",
+
   "theme": "mint",
+
   "name": "Royco",
+
   "logo": {
+
     "light": "/images/royco-logo.svg",
+
     "dark": "/images/royco-logo.svg"
+
   },
+
   "colors": {
+
     "primary": "#346DDB",
+
     "light": "#6E9BEC",
+
     "dark": "#2556C2"
+
   },
+
   "appearance": {
+
     "default": "light"
+
   },
+
   "favicon": "/favicon.svg",
+
   "navigation": {
+
     "groups": [
+
       {
-        "group": "Royco",
+
+        "group": "Get Started",
+
         "pages": [
-          "overview",
-          "how-dawn-works",
-          "vault-products",
-          "governance-and-fees",
-          "deposits-and-withdrawals",
-          "risk-framework",
-          "security-and-audits",
-          "roycoentrypoint",
-          "faq",
-          "key-addresses"
+
+          "royco-overview",
+
+          "how-royco-works"
+
         ]
+
+      },
+
+      {
+
+        "group": "The Tranches",
+
+        "pages": [
+
+          "senior-tranche",
+
+          "junior-tranche",
+
+          "liquidity-tranche"
+
+        ]
+
+      },
+
+      {
+
+        "group": "Vaults",
+
+        "pages": [
+
+          "how-the-vaults-work",
+
+          "vault-products",
+
+          "royco-eth-roywst-eth"
+
+        ]
+
+      },
+
+      {
+
+        "group": "Mechanics",
+
+        "pages": [
+
+          "yield-distribution-model",
+
+          "deposits-and-withdrawals",
+
+          "governance-and-fees",
+
+          "risk-framework"
+
+        ]
+
+      },
+
+      {
+
+        "group": "Reference",
+
+        "pages": [
+
+          "security-and-audits",
+
+          "roycoentrypoint",
+
+          "key-addresses",
+
+          "faq",
+
+          "glossary"
+
+        ]
+
       }
+
     ]
+
   },
+
   "footer": {
+
     "socials": {
+
       "website": "https://royco.org"
+
     }
+
   }
+
 }
