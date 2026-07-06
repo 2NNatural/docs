@@ -4,7 +4,7 @@
   "name": "Royco",
   "logo": {
     "light": "/images/royco-logo.svg",
-    "dark": "/images/royco-logo.svg"
+    "dark": "/images/roycodarklogo.png"
   },
   "colors": {
     "primary": "#346DDB",
