@@ -64,7 +64,7 @@ The core idea: when JT or LT capital is scarce, their respective pool earns more
 
 **What Drives the Split: Understanding Utilization**
 
-<video src="/videos/chapter-03-utilization-1.mp4" controls />
+<video src="/videos/chapter-04-utilization.mp4" controls />
 
 The YDM looks at one number: **utilization.** Utilization measures how much capacity is currently being used to back the market. Utilization is used for both coverage and liquidity. Understanding utilization requires understanding how each of these mechanisms work:
 
@@ -78,7 +78,7 @@ Put simply: **coverage and liquidity tell you what a tranche provides; utilizati
 
 **The Yield Curve**
 
-<video src="/videos/chapter-04-premium-curve-2.mp4" controls />
+<video src="/videos/chapter-05-yield-curves.mp4" controls />
 
 Each market sets two yield curves. One sets JT's risk premium from coverage utilization, the other sets the LT's liquidity premium from liquidity utilization. Each curve is defined by three points:
 
@@ -98,9 +98,9 @@ These three points don't stay fixed, as the curve adapts to market conditions ov
 
 The result is a self-balancing system. If JT or LT capital leaves, utilization rises for that tranche and the premium increases, attracting new capital. If ST capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
-<video src="/videos/chapter-05-curve-adapts-2.mp4" controls />
-
 **What Depositors See**
+
+<video src="/videos/chapter-06-premiums-adapt.mp4" controls />
 
 The APY shown on the interface is the trailing APY, the annualized rate from actual yield accrued over the stated duration. If utilization shifts or capital enters or exits the pool, future yields will differ.
 
@@ -118,7 +118,7 @@ The protocol then observes a defined time window. If the strategy recovers withi
 
 **The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
 
-<video src="/videos/chapter-06-observation-periods-1.mp4" controls />
+<video src="/videos/chapter-07-observation-periods.mp4" controls />
 
 #### Protected Exit
 
