@@ -112,8 +112,6 @@ When a drawdown is detected by a market oracle, the protocol automatically enter
 
 However, ST holders are not locked into their positions. The LPT continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the LPT AMM pool at the pool's current price.
 
-ST deposits and JT redemptions also remain enabled, provided the market remains above minimum coverage. Any JT holder who executes withdrawal will realize drawdown losses at current NAV.
-
 The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against JT capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, JT losses are finalized immediately, and ST gain the option to withdraw.
 
 **The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
