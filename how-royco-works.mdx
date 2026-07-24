@@ -64,8 +64,6 @@ The core idea: when JT or LT capital is scarce, their respective pool earns more
 
 **What Drives the Split: Understanding Utilization**
 
-<video src="/videos/chapter-04-utilization.mp4" controls />
-
 The YDM looks at one number: **utilization.** Utilization measures how much capacity is currently being used to back the market. Utilization is used for both coverage and liquidity. Understanding utilization requires understanding how each of these mechanisms work:
 
 **Coverage** is the percentage of the JT\+ST pool that JT represents. It represents the maximum drawdown JT can absorb before ST is affected. For instance, \$2M of JT capital backing \$8M of ST capital gives 20% coverage, meaning JT can absorb a 20% loss on the pool without ST capital being touched.
@@ -76,9 +74,9 @@ The YDM looks at one number: **utilization.** Utilization measures how much capa
 
 Put simply: **coverage and liquidity tell you what a tranche provides; utilization tells you how efficiently that capacity is being used.**
 
-**The Yield Curve**
+<video src="/videos/chapter-04-utilization.mp4" controls />
 
-<video src="/videos/chapter-05-yield-curves.mp4" controls />
+**The Yield Curve**
 
 Each market sets two yield curves. One sets JT's risk premium from coverage utilization, the other sets the LT's liquidity premium from liquidity utilization. Each curve is defined by three points:
 
@@ -98,11 +96,13 @@ These three points don't stay fixed, as the curve adapts to market conditions ov
 
 The result is a self-balancing system. If JT or LT capital leaves, utilization rises for that tranche and the premium increases, attracting new capital. If ST capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
+<video src="/videos/chapter-05-yield-curves.mp4" controls />
+
 **What Depositors See**
 
-<video src="/videos/chapter-06-premiums-adapt.mp4" controls />
-
 The APY shown on the interface is the trailing APY, the annualized rate from actual yield accrued over the stated duration. If utilization shifts or capital enters or exits the pool, future yields will differ.
+
+<video src="/videos/chapter-06-premiums-adapt.mp4" controls />
 
 #### Observation Period
 
