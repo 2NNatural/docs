@@ -108,7 +108,7 @@ The APY shown on the interface is the trailing APY, the annualized rate from act
 
 Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss to JT capital.
 
-When a drawdown is detected by a market oracle, the protocol automatically enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits and LPT redemptions are blocked, and 100% of yield is redirected to JT recovery, accelerating the rebuild of the first-loss buffer.
+When a drawdown is detected by a market oracle, the protocol automatically enters the Observation Period. Seniors can no longer deposit or redeem directly via redemption, new JT deposits/redemptions, and LPT redemptions are blocked, and 100% of yield is redirected to JT recovery, accelerating the rebuild of the first-loss buffer.
 
 However, ST holders are not locked into their positions. The LPT continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the LPT AMM pool at the pool's current price.
 
