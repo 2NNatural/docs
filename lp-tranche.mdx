@@ -1,0 +1,20 @@
+---
+title: "Liquidity Provider Tranche (LPT)"
+description: "Royco's Liquidity Provider Tranche provides continuous secondary liquidity for Senior shares through an AMM pool, earning a liquidity premium plus trading fees."
+---
+
+The **Liquidity Provider Tranche (LPT)** is a dedicated capital pool that earns yield by providing constant secondary liquidity for the senior tranche.
+
+LPT yield is calculated as follows:
+
+> Liquidity Premium \+ ST Appreciation \+ Stablecoin Yield \+ Trading Fees − Impermanent Loss
+
+Unlike ST and JT, LPT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in an AMM pool made up of ST tokens and a tokenized-treasury stablecoin.
+
+LPT earns yield from the assets deployed in the pool: both the underlying yield of the ST shares, as well as the rate earned by the paired stablecoin.
+
+In this mechanism, LPT gets paid a premium for providing exit liquidity to the ST. LPT also gets additional sources of yield: a % of swap fees from the Balancer Pool, as well as swap premiums when ST flow imbalances the pool.
+
+---
+
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
