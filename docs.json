@@ -59,9 +59,7 @@
           "senior-tranche",
 
           "junior-tranche",
-
-          "liquidity-tranche"
-
+          "lp-tranche"
         ]
 
       },

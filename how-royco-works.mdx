@@ -23,7 +23,7 @@ Suppose a market is deployed on top of a USDC lending strategy yielding 8% annua
 | --- | --- | --- | --- |
 | Senior (ST) | \$8,000,000 | ~5% | Base yield minus premium paid to JT for coverage |
 | Junior (JT) | \$2,000,000 | ~13.5% | Base yield plus premium for first-loss coverage |
-| Liquidity (LT) | \$2,000,000 | ~11% | Pool Asset Yield plus premium for liquidity provision and trading fees, minus impermanent loss |
+| LP (LT) | \$2,000,000 | ~11% | Pool Asset Yield plus premium for liquidity provision and trading fees, minus impermanent loss |
 | Total | \$12,000,000 |  |  |
 | Coverage | 20% |  | \$2M JT / \$10M JT \+ ST |
 | Liquidity | 25% |  | \$2M LT / \$8M ST |
@@ -35,7 +35,7 @@ Liquidity is measured against Senior: \$2M LT / \$8M ST = 25% liquidity. This si
 **Loss Scenarios**
 
 <Frame>
-  ![Image](/images/image-2.png)
+  ![Image](/images/image-2.png "Image")
 </Frame>
 
 JT absorbs any losses immediately. ST and LT are only exposed once JT's entire balance is consumed. Because the LT's assets are partially composed of ST shares, its loss exposure mirrors that of the Senior tranche.
