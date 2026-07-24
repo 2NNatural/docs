@@ -1,19 +1,19 @@
 ---
 title: "How Royco Works"
-description: "How Royco tranches a single yield source: JT provides loss coverage, LT provides secondary liquidity, and ST receives protection/liquidity."
+description: "How Royco tranches a single yield source: JT provides loss coverage, LPT provides secondary liquidity, and ST receives protection/liquidity."
 ---
 
 #### The Tranching Mechanism
 
 Every Royco market begins with a single strategy base asset. Capital from depositors is routed into that source, with contracts governing how returns and losses flow back to the different tranches.
 
-The fundamental mechanism: **JT capital provides first-loss coverage for Senior capital, while LT provides liquidity.** The protocol enforces a minimum amount of JT capital (the Coverage Ratio) and LT capital (the Protection Ratio), respectively, that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted and yield is redirected to them.
+The fundamental mechanism: **JT capital provides first-loss coverage for Senior capital, while LPT provides liquidity.** The protocol enforces a minimum amount of JT capital (the Coverage Ratio) and LPT capital (the Protection Ratio), respectively, that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted and yield is redirected to them.
 
 Both ST and JT capital are deployed into the same base asset. JT is not sitting in a separate reserve; it is co-invested alongside ST, earning the base yield from the same source. The difference is that JT also earns a risk premium for providing first-loss coverage, and in exchange, JT absorbs losses immediately. Any drawdown reduces JT's capital before ST is affected.
 
-LT is not directly deployed into the same base asset. Instead, it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a stablecoin. ST holders can sell into this pool at any time, with the resulting price discrepancies creating arbitrage opportunities that maintain the pool’s peg.
+LPT is not directly deployed into the same base asset. Instead, it is deployed into a Balancer Pool Token in a rate-scaled AMM pool made up of ST tokens and a stablecoin. ST holders can sell into this pool at any time, with the resulting price discrepancies creating arbitrage opportunities that maintain the pool’s peg.
 
-JT and LT are co-invested in varying degrees to the same base asset as ST.
+JT and LPT are co-invested in varying degrees to the same base asset as ST.
 
 **An Example**
 
@@ -23,14 +23,14 @@ Suppose a market is deployed on top of a USDC lending strategy yielding 8% annua
 | --- | --- | --- | --- |
 | Senior (ST) | \$8,000,000 | ~5% | Base yield minus premium paid to JT for coverage |
 | Junior (JT) | \$2,000,000 | ~13.5% | Base yield plus premium for first-loss coverage |
-| LP (LT) | \$2,000,000 | ~11% | Pool Asset Yield plus premium for liquidity provision and trading fees, minus impermanent loss |
+| LP (LPT) | \$2,000,000 | ~11% | Pool Asset Yield plus premium for liquidity provision and trading fees, minus impermanent loss |
 | Total | \$12,000,000 |  |  |
 | Coverage | 20% |  | \$2M JT / \$10M JT \+ ST |
 | Liquidity | 25% |  | \$2M LT / \$8M ST |
 
 Coverage is measured on the JT \+ ST pool: \$2M JT / \$10M (JT \+ ST) = 20% coverage. Coverage of 20% means JT can absorb up to a 20% drawdown on the \$10M pool before ST is affected.
 
-Liquidity is measured against Senior: \$2M LT / \$8M ST = 25% liquidity. This sizes the LT's market-making depth to an amount equivalent to 25% of Senior's value, in the pool as exit depth behind Senior shares.
+Liquidity is measured against Senior: \$2M LPT / \$8M ST = 25% liquidity. This sizes the LT's market-making depth to an amount equivalent to 25% of Senior's value, in the pool as exit depth behind Senior shares.
 
 **Loss Scenarios**
 
@@ -38,9 +38,9 @@ Liquidity is measured against Senior: \$2M LT / \$8M ST = 25% liquidity. This si
   ![Image](/images/image-2.png "Image")
 </Frame>
 
-JT absorbs any losses immediately. ST and LT are only exposed once JT's entire balance is consumed. Because the LT's assets are partially composed of ST shares, its loss exposure mirrors that of the Senior tranche.
+JT absorbs any losses immediately. ST and LPT are only exposed once JT's entire balance is consumed. Because the LPT's assets are partially composed of ST shares, its loss exposure mirrors that of the Senior tranche.
 
-**Unlike JT and ST, LT losses are path-dependent.** During a drawdown, ST holders sell into the pool, raising LT's exposure to the senior asset. If the market recovers, this creates a profit: the LT bought discounted ST shares that recover to full value. However, in a realized drawdown, the LT suffers losses because it actively converted stablecoins into devalued ST shares.
+**Unlike JT and ST, LPT losses are path-dependent.** During a drawdown, ST holders sell into the pool, raising LPT's exposure to the senior asset. If the market recovers, this creates a profit: the LPT bought discounted ST shares that recover to full value. However, in a realized drawdown, the LPT suffers losses because it actively converted stablecoins into devalued ST shares.
 
 #### Coverage Requirements
 
@@ -52,15 +52,15 @@ ST depositors are shielded by the JT buffer, and are able to freely exit via the
 
 #### Liquidity Requirements
 
-Royco also enforces a **minimum liquidity requirement** for markets with liquidity functionality enabled. The liquidity requirement reflects the size of the AMM pool available for ST to exit into. If liquidity falls below the minimum, new ST deposits and LT withdrawals will be paused, similar to the coverage mechanism.
+Royco also enforces a **minimum liquidity requirement** for markets with liquidity functionality enabled. The liquidity requirement reflects the size of the AMM pool available for ST to exit into. If liquidity falls below the minimum, new ST deposits and LPT withdrawals will be paused, similar to the coverage mechanism.
 
 #### How Yield Is Split
 
 In every Royco market, the base asset generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between the tranches.
 
-JT provides first-loss protection to ST, and LT provides liquidity. In exchange, JT and LT earn premiums; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
+JT provides first-loss protection to ST, and LPT provides liquidity. In exchange, JT and LPT earn premiums; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
 
-The core idea: when JT or LT capital is scarce, their respective pool earns more. When capital is plentiful, the JT and LT earn less. This happens automatically with no governance votes or manual adjustments.
+The core idea: when JT or LPT capital is scarce, their respective pool earns more. When capital is plentiful, the JT and LPT earn less. This happens automatically with no governance votes or manual adjustments.
 
 **What Drives the Split: Understanding Utilization**
 
@@ -68,9 +68,9 @@ The YDM looks at one number: **utilization.** Utilization measures how much capa
 
 **Coverage** is the percentage of the JT\+ST pool that JT represents. It represents the maximum drawdown JT can absorb before ST is affected. For instance, \$2M of JT capital backing \$8M of ST capital gives 20% coverage, meaning JT can absorb a 20% loss on the pool without ST capital being touched.
 
-**Liquidity** is the depth of the LT relative to the ST. Instead of waiting for primary redemption, Seniors can sell shares into the LT pool, up to the liquidity available there.
+**Liquidity** is the depth of the LPT relative to the ST. Instead of waiting for primary redemption, Seniors can sell shares into the LPT pool, up to the liquidity available there.
 
-**Utilization measures how close a supporting tranche is to its respective floor**; coverage for the JT and liquidity for the LT. It is the signal that drives the premium model in the protocol. At 40% utilization, a tranche holds far more than its required minimum. At 100% utilization, it has hit its required minimum, disabling both Senior deposits and either JT or LT withdrawals, depending which tranche is being utilized. At the 90% target, the tranche is 90% of the way between its maximum and the floor. The market is efficiently deployed but still has room to accept new capital.
+**Utilization measures how close a supporting tranche is to its respective floor**; coverage for the JT and liquidity for the LPT. It is the signal that drives the premium model in the protocol. At 40% utilization, a tranche holds far more than its required minimum. At 100% utilization, it has hit its required minimum, disabling both Senior deposits and either JT or LPT withdrawals, depending which tranche is being utilized. At the 90% target, the tranche is 90% of the way between its maximum and the floor. The market is efficiently deployed but still has room to accept new capital.
 
 Put simply: **coverage and liquidity tell you what a tranche provides; utilization tells you how efficiently that capacity is being used.**
 
@@ -78,7 +78,7 @@ Put simply: **coverage and liquidity tell you what a tranche provides; utilizati
 
 **The Yield Curve**
 
-Each market sets two yield curves. One sets JT's risk premium from coverage utilization, the other sets the LT's liquidity premium from liquidity utilization. Each curve is defined by three points:
+Each market sets two yield curves. One sets JT's risk premium from coverage utilization, the other sets the LPT's liquidity premium from liquidity utilization. Each curve is defined by three points:
 
 > - Y0: at 0% utilization
 > - YT: at 90% (the target)
@@ -86,15 +86,15 @@ Each market sets two yield curves. One sets JT's risk premium from coverage util
 
 Each curve is bounded by a maximum spend, expressed as a % of Senior yield. The two curves' maximums combined never exceed 100% of Senior yield.
 
-**Below 90%: essentially flat.** Y0 and YT are close together. When JT or LT capital is plentiful, excess supply already dilutes their returns.
+**Below 90%: essentially flat.** Y0 and YT are close together. When JT or LPT capital is plentiful, excess supply already dilutes their returns.
 
-**Above 90%: steep.** Y100 is typically set notably higher than YT , meaning that as capital becomes scarce, the yield share ramps aggressively to attract new depositors. Y100 is set per market such that at 100% utilization, the resulting JT or LT yield is attractive enough to draw in new capital.
+**Above 90%: steep.** Y100 is typically set notably higher than YT , meaning that as capital becomes scarce, the yield share ramps aggressively to attract new depositors. Y100 is set per market such that at 100% utilization, the resulting JT or LPT yield is attractive enough to draw in new capital.
 
 **Self-Adapting Yield Curve Over Time**
 
 These three points don't stay fixed, as the curve adapts to market conditions over time. When a tranche's utilization consistently runs above target, its curve shifts up to offer a bigger premium and attract more capital. When utilization consistently sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
 
-The result is a self-balancing system. If JT or LT capital leaves, utilization rises for that tranche and the premium increases, attracting new capital. If ST capital leaves, the opposite happens. The market continuously finds its own equilibrium.
+The result is a self-balancing system. If JT or LPT capital leaves, utilization rises for that tranche and the premium increases, attracting new capital. If ST capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
 <video src="/videos/chapter-05-yield-curves.mp4" controls />
 
@@ -108,9 +108,9 @@ The APY shown on the interface is the trailing APY, the annualized rate from act
 
 Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss to JT capital.
 
-When a drawdown is detected by a market oracle, the protocol automatically enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits and LT redemptions are blocked, and 100% of yield is redirected to JT recovery, accelerating the rebuild of the first-loss buffer.
+When a drawdown is detected by a market oracle, the protocol automatically enters the Observation Period. Seniors can no longer redeem directly via redemption, new JT deposits and LPT redemptions are blocked, and 100% of yield is redirected to JT recovery, accelerating the rebuild of the first-loss buffer.
 
-However, ST holders are not locked into their positions. The LT continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the LT AMM pool at the pool's current price.
+However, ST holders are not locked into their positions. The LPT continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the LPT AMM pool at the pool's current price.
 
 ST deposits and JT redemptions also remain enabled, provided the market remains above minimum coverage. Any JT holder who executes withdrawal will realize drawdown losses at current NAV.
 
@@ -124,7 +124,7 @@ The protocol then observes a defined time window. If the strategy recovers withi
 
 The **Protected Exit** allows ST depositors to safely withdraw their base assets at fair value when a market drawdown breaches a pre-configured threshold. If a strategy suffers a markdown that breaches this **Protected Exit Threshold**, the Observation Period is terminated and ST can withdraw their assets. This realizes losses against JT capital. Those who believe the remaining JT buffer is sufficient can choose to stay. If losses exhaust JT capital entirely, ST shares become directly exposed to further drawdown.
 
-Senior's two exits are complementary: the LT pool gives an instant exit at the pool's current price, Protected Exit returns the underlying at fair value, but only once a drawdown breaches the threshold.
+Senior's two exits are complementary: the LPT pool gives an instant exit at the pool's current price, Protected Exit returns the underlying at fair value, but only once a drawdown breaches the threshold.
 
 #### Protected Exit Bonus
 
