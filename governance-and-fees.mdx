@@ -15,7 +15,7 @@ description: "Royco's per-market parameters and protocol fee structure."
 
 Vault assets are held in a Concrete Vault. The curator's operational permissions are scoped per vault and per operation: it can rebalance between approved markets, update NAVs, manage collateral positions, and whitelist depositors; but it has limitations on actions outside this scope. Funds cannot be routed to addresses outside the whitelist.
 
-The Royco Foundation Multisig sits above this structure. It sets the permissions framework and manages protocol-level configurations. Critical changes (as defined above) are subject to a timelock, giving depositors advance notice.
+The Royco Foundation Multisig sits above this structure. It sets the permissions framework and manages protocol-level configurations. Critical changes (as defined above) are subject to a role-based delay.
 
 #### Fee Structure
 

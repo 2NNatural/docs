@@ -9,9 +9,9 @@ LPT yield is calculated as follows:
 
 > Liquidity Premium \+ ST Appreciation \+ Stablecoin Yield \+ Trading Fees − Impermanent Loss
 
-Unlike ST and JT, LPT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in an AMM pool made up of ST tokens and a tokenized-treasury stablecoin.
+Unlike ST and JT, LPT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in an AMM pool made up of ST tokens and a configurable quote asset.
 
-LPT earns yield from the assets deployed in the pool: both the underlying yield of the ST shares, as well as the rate earned by the paired stablecoin.
+LPT earns yield from the assets deployed in the pool: both the underlying yield of the ST shares, as well as any rate earned by the paired quote asset.
 
 In this mechanism, LPT gets paid a premium for providing exit liquidity to the ST. LPT also gets additional sources of yield: a % of swap fees from the Balancer Pool, as well as swap premiums when ST flow imbalances the pool.
 
