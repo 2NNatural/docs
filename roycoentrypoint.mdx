@@ -8,7 +8,7 @@ description: "The RoycoEntryPoint contract is the single entry interface for dep
 1. **Queued execution:** Deposits are batched and executed in processing cycles, preventing front-running and ensuring fair ordering.
 2. **Upgradeability:** Entry point logic can be updated by the Foundation without requiring vault contract changes.
 
-Once submitted, a request becomes executable after a waiting period. Once a request's delay elapses, anyone can execute it in a separate transaction; the depositor can attach an optional executor bonus to incentivize a third party.
+Once submitted, a request becomes executable after a waiting period. Once a request's delay elapses, anyone can execute it in a separate transaction; the depositor can attach an optional executor bonus to incentivize autonomous execution.
 
 Depositors should always interact with Royco products via the official app at royco.org, which routes transactions through the RoycoEntryPoint. Direct vault deposits bypass access controls and are not supported.
 
