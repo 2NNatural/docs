@@ -1,137 +1,91 @@
 {
-
-  "$schema": "https://mintlify.com/docs.json",
-
-  "theme": "mint",
-
-  "name": "Royco",
-
-  "logo": {
-
-    "light": "/images/royco-logo.svg",
-
-    "dark": "/images/roycodarklogo.png"
-
-  },
-
-  "colors": {
-
-    "primary": "#346DDB",
-
-    "light": "#6E9BEC",
-
-    "dark": "#2556C2"
-
-  },
-
-  "appearance": {
-
-    "default": "light"
-
-  },
-
-  "favicon": "/favicon.svg",
-
-  "navigation": {
-
-    "groups": [
-
-      {
-
-        "group": "Get Started",
-
-        "pages": [
-
-          "royco-overview",
-
-          "how-royco-works"
-
-        ]
-
-      },
-
-      {
-
-        "group": "The Tranches",
-
-        "pages": [
-
-          "senior-tranche",
-
-          "junior-tranche",
-          "liquidity-provider-tranche"
-        ]
-
-      },
-
-      {
-
-        "group": "Vaults",
-
-        "pages": [
-
-          "how-the-vaults-work",
-
-          "vault-products",
-
-          "royco-eth-roywst-eth"
-
-        ]
-
-      },
-
-      {
-
-        "group": "Mechanics",
-
-        "pages": [
-
-          "yield-distribution-model",
-          "market-dynamics",
-
-          "deposits-and-withdrawals",
-
-          "governance-and-fees",
-
-          "risk-framework"
-
-        ]
-
-      },
-
-      {
-
-        "group": "Reference",
-
-        "pages": [
-
-          "security-and-audits",
-
-          "roycoentrypoint",
-
-          "key-addresses",
-
-          "faq",
-
-          "glossary",
-          "api-reference"
-
-        ]
-
-      }
-
-    ]
-
-  },
-
-  "footer": {
-
-    "socials": {
-
-      "website": "https://royco.org"
-
+    "$schema": "https://mintlify.com/docs.json",
+    "theme": "mint",
+    "name": "Royco",
+    "logo": {
+          "light": "/images/royco-logo.svg",
+          "dark": "/images/roycodarklogo.png"
+    },
+    "colors": {
+          "primary": "#346DDB",
+          "light": "#6E9BEC",
+          "dark": "#2556C2"
+    },
+    "appearance": {
+          "default": "light"
+    },
+    "favicon": "/favicon.svg",
+    "navigation": {
+          "groups": [
+                  {
+                            "group": "Royco Dawn",
+                            "pages": [
+                                        "royco-dawn/overview",
+                                        "royco-dawn/how-dawn-works",
+                                        "royco-dawn/vault-products",
+                                        "royco-dawn/governance-and-fees",
+                                        "royco-dawn/deposits-and-withdrawals",
+                                        "royco-dawn/risk-framework",
+                                        "royco-dawn/security-and-audits",
+                                        "royco-dawn/roycoentrypoint",
+                                        "royco-dawn/faq",
+                                        "royco-dawn/key-addresses"
+                            ]
+                  },
+                  {
+                            "group": "Royco Day",
+                            "pages": [
+                                        {
+                                                      "group": "Get Started",
+                                                      "pages": [
+                                                                      "royco-overview",
+                                                                      "how-royco-works"
+                                                      ]
+                                        },
+                                        {
+                                                      "group": "The Tranches",
+                                                      "pages": [
+                                                                      "senior-tranche",
+                                                                      "junior-tranche",
+                                                                      "liquidity-provider-tranche"
+                                                      ]
+                                        },
+                                        {
+                                                      "group": "Vaults",
+                                                      "pages": [
+                                                                      "how-the-vaults-work",
+                                                                      "vault-products",
+                                                                      "royco-eth-roywst-eth"
+                                                      ]
+                                        },
+                                        {
+                                                      "group": "Mechanics",
+                                                      "pages": [
+                                                                      "yield-distribution-model",
+                                                                      "market-dynamics",
+                                                                      "deposits-and-withdrawals",
+                                                                      "governance-and-fees",
+                                                                      "risk-framework"
+                                                      ]
+                                        },
+                                        {
+                                                      "group": "Reference",
+                                                      "pages": [
+                                                                      "security-and-audits",
+                                                                      "roycoentrypoint",
+                                                                      "key-addresses",
+                                                                      "faq",
+                                                                      "glossary",
+                                                                      "api-reference"
+                                                      ]
+                                        }
+                            ]
+                  }
+          ]
+    },
+    "footer": {
+          "socials": {
+                  "website": "https://royco.org"
+          }
     }
-
-  }
-
 }
