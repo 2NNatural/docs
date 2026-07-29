@@ -6,7 +6,7 @@ The **Liquidity Provider Tranche (LPT)** is a dedicated capital pool that earns 
 
 LPT yield is calculated as follows:
 
-> Liquidity Premium \+ ST Appreciation \+ Stablecoin Yield \+ Trading Fees − Impermanent Loss
+> Liquidity Premium \+ (ST Appreciation \* ST Shares) \+ (Stablecoin Yield \* Stable Shares)   \+ Trading Fees − Impermanent Loss
 
 Unlike ST and JT, LPT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in an AMM pool made up of ST tokens and a tokenized-treasury stablecoin.
 
