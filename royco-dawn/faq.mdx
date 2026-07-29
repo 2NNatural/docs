@@ -1,0 +1,50 @@
+---
+title: "9. Frequently Asked Questions"
+---
+
+<AccordionGroup>
+  <Accordion title="Does the Senior tranche offer first-loss coverage for principal?">
+      The Senior tranche has a structural first-loss buffer: Junior capital absorbs all losses before Senior is affected, up to the full coverage amount. However, this is not a guarantee of principal in the legal or insurance sense. If losses exceed the Junior buffer, Senior capital is exposed to the remainder. Senior depositors may lose some or all of their capital. If a drawdown reaches the market's Protected Exit Threshold, Senior can withdraw immediately with the underlying asset while Junior may still have remaining capital.
+        </Accordion>
+
+          <Accordion title="Who decides where the vault invests?">
+              The vault's independent curator makes all investment decisions: which yield sources to allocate to, at what coverage levels, and how to size positions. The Foundation makes yield sources available based on objective criteria but does not direct specific allocations. The depositor chooses which vault or tranche to enter.
+                </Accordion>
+
+                  <Accordion title="What happens if the underlying strategy is hacked?">
+                      If an underlying yield source suffers an exploit, the Dawn market built on it will experience a loss. Junior capital absorbs the loss first, up to the coverage percentage. If the loss exceeds coverage, Senior is exposed to the remainder. Diversification across multiple sources means a single exploit does not necessarily affect the entire vault, only the portion allocated to that specific source.
+                        </Accordion>
+
+                          <Accordion title="Can I withdraw at any time?">
+                              Vault withdrawals are processed through 30-day epochs. Requests enter the current open epoch, which is processed when it closes. A secondary market for vaults may provide an alternative exit path for immediate liquidity. Senior tranche withdrawals are available at any time. Junior withdrawals are available when excess Junior capital exists above the coverage requirement.
+                                </Accordion>
+
+                                  <Accordion title="What blockchains does Dawn operate on?">
+                                      Dawn has been deployed on Ethereum and Avalanche. The srRoyUSDC vault operates across multiple chains, moving capital via Circle's CCTP to access the best available yield opportunities. The ETH-based vaults operate on Ethereum.
+                                        </Accordion>
+
+                                          <Accordion title="What if the curator underperforms or acts improperly?">
+                                              The curator is bound by a contractual standard of care and defined performance expectations. The Foundation can terminate the curator relationship for material breach, sustained underperformance attributable to curator decisions, failure to maintain risk controls, or unauthorized actions. On termination, the curator must cooperate in an orderly transition to a successor.
+                                                </Accordion>
+
+                                                  <Accordion title="Is there a lock-up period?">
+                                                      There is no fixed lock-up for Senior deposits at the tranche level. Vault withdrawals from srRoyUSDC and roywstETH are processed through **30-day withdrawal epochs**. Depositors should plan for up to 30 days between submitting a withdrawal request and being able to claim funds. Institutional depositors may face additional processing steps in the updated withdrawal flow. A secondary market may offer an alternative exit for immediate liquidity, but availability is not guaranteed. Junior capital may be restricted from withdrawing when it is actively backing Senior exposure at the minimum coverage level.
+                                                        </Accordion>
+
+                                                          <Accordion title="How can I verify the protocol's state independently?">
+                                                              All protocol state: coverage ratios, yield rates, vault composition, fee accrual, and transaction history, is recorded on public blockchains and can be independently verified using any blockchain explorer. The protocol's smart contracts are published and can be reviewed by any party.
+                                                                </Accordion>
+
+                                                                  <Accordion title="Who backs the protocol?">
+                                                                      Royco raised a Series A in 2025 led by Electric Capital. Ecosystem partners have also raised from Coinbase Ventures, Hashed, Amber Group, and DCF God.
+                                                                        </Accordion>
+
+                                                                          <Accordion title="Where can I learn more/find interactive simulators?">
+                                                                              [https://royco-school.vercel.app/#/](https://royco-school.vercel.app/#/)
+                                                                                </Accordion>
+                                                                                </AccordionGroup>
+
+                                                                                ***
+
+                                                                                *This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions.*
+                                                                                

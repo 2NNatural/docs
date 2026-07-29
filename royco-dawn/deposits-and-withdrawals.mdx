@@ -1,0 +1,13 @@
+---
+title: "5. Deposits and Withdrawals"
+---
+
+#### Users are currently able to:
+
+* **Permissionlessly Acquire/Dispose.** Buy or sell any vault or individual tranche (Senior or Junior) through decentralized AMM pools using assets like USDC or USDT. For tranche purchases routed via deposit, the **RoycoEntryPoint** applies a per-market delay (MEV/frontrunning protection) before the position settles and starts earning. Depositors can pre-pay gas for auto-execution.
+* **Direct Mint/Redeem Tranches.** Deposit the accepted asset into any individual Senior or Junior Dawn market and receive the corresponding tranche token, or burn it to redeem the underlying. Tranche deposits route through the **RoycoEntryPoint** with the same per-market delay. Redemptions are immediate at the protocol layer, but bounded by the underlying yield source's liquidity (if the underlying position has a lock-up or redemption window, the tranche inherits it). Senior gains an immediate-exit option if a market hits its **Protected Exit Threshold**. If Junior's full balance is backing Senior exposure (utilization at 100%), Junior withdrawals are restricted until either additional Junior capital enters or Senior capital exits. During an Observation Period, Senior withdrawals and new Junior deposits in that market are paused.
+* **Direct Mint/Redeem Vaults.** Transfer accepted reserve assets (USDC for srRoyUSDC, wstETH for roywstETH) and receive an ERC-4626 share token whose exchange rate accrues yield over time; burn to redeem. Vault redemptions are processed via **30-day withdrawal epochs**: request enters the open epoch, epoch closes every 30 days, the vault sources liquidity from Senior tranches over a ~2-day processing window, then funds are claimable. Subject to KYC/KYB.
+
+***
+
+*This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions.*

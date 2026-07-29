@@ -1,75 +1,12 @@
 ---
-title: "3. Vault Products"
+title: "Senior Vault (srRoyUSDC)"
+description: "srRoyUSDC is a managed USDC vault that allocates across Royco Senior Tranches for diversified, coverage-backed senior yield."
 ---
 
-Royco offers two key Vault products, managed by an external curator: Dialectic.
-
-### **About Dialectic**
-
-Dialectic is a Swiss crypto-native investment firm founded in 2019. The firm specializes in systematic, market-neutral DeFi yield strategies, powered by proprietary on-chain automation and risk-management tooling built by its in-house research arm, Atelier.
-
-### **The Vaults**
-
-**Senior Royco USDC (srRoyUSDC)**
-
-srRoyUSDC is Royco Dawn's Senior Vault token. Users deposit USDC and receive a yield-bearing ERC-4626 token. Dawn splits every yield opportunity into two tranches: Junior capital absorbs losses first (up to the coverage amount) before Senior is affected, while Senior earns yield on the remaining share. srRoyUSDC deposits are allocated exclusively to Senior tranches. Dialectic manages the vault, selecting which Senior tranches to allocate to and rebalancing based on real-time coverage and risk signals.
-
-**Royco ETH (roywstETH)**
-
-roywstETH is Royco Dawn's Carry Vault, allowing users to deposit wstETH and earn yield without selling wstETH. The vault posts deposited wstETH as collateral to a lending venue, borrows USDC against it, and deploys that USDC into srRoyUSDC to earn the Senior tranche yield. Returns come from two sources: the underlying stETH staking reward plus the spread between the Senior tranche yield and the borrow cost. Dialectic manages the vault, handling collateral management, borrowing, and rebalancing across market conditions. Carry vault depositors are exposed to collateral liquidation risk if ETH price declines significantly relative to the outstanding borrow position.
+Users deposit USDC and receive a yield-bearing ERC-4626 token. srRoyUSDC deposits are allocated exclusively to ST assets. Dialectic manages the vault, selecting which STs to allocate to and rebalancing based on real-time coverage and risk signals.
 
 Vault performance is variable and depends on underlying market conditions, borrow costs, and yield source performance. Past performance is not indicative of future results. All depositors should review Section 6 (Risk Framework) before participating.
 
-### Portfolio Strategy
-
-Dialectic has built a robust framework for how they will manage the following parameters across the Vaults:
-
-1. Concentration limits
-2. Rebalancing expectations
-3. Market evaluation criteria
-
-It can be found at: [https://www.notion.so/dialectic/Dialectic-DD-Framework-31feeae9e9298020a8fbfc5f15d1347b](https://www.notion.so/dialectic/Dialectic-DD-Framework-31feeae9e9298020a8fbfc5f15d1347b)
-
-### Key Risks
-
-Dialectic has published an overview of all key risks, accessible at: [https://www.notion.so/dialectic/Royco-Vault-Risk-Overview-31feeae9e9298090add8c1dea433517d](https://www.notion.so/dialectic/Royco-Vault-Risk-Overview-31feeae9e9298090add8c1dea433517d)
-
-### Allocation Delays
-
-New strategy allocations are subject to a notice period. When a curator queues a new strategy, it is displayed in the app and remains visible for a minimum of 7 days before the curator may allocate capital to it.
-
-### **Audits**
-
-Royco's audits can be found in [Section 7](/security-and-audits). Concrete has completed audits with [Cantina](https://docs.concrete.xyz/assets/files/cantinacode-concrete-finance-813b45d86d6450723139b0cc55857c4d.pdf/) and [Halborn](https://docs.concrete.xyz/assets/files/Standard-Implementation-9948d7fcebb518e5c29051bc2326b5ec.pdf/). Additionally, Makina has completed audits from [ChainSecurity, Enigma Dark, Sigma Prime, Cantina and Ottersec](https://docs.makina.finance/contracts/security).
-
-### **Withdrawals & Liquidity**
-
-**Delays**
-
-It may take up to 30 days for a withdrawal to process. Each Vault requires users to request a redemption. Dialectic will then process the liquidity for the redemption. Users will then need to claim the assets once the liquidity is open for redemption.
-
-Users may be able to sell Vault positions via decentralized protocols such as LiFi, Curve, Balancer and Uniswap, bypassing the processing period associated with native deposit or withdrawal.
-
-**Sequence**
-
-The Vault will process withdrawals in the following priority:
-
-1. Royco's own Vaults (i.e., roywstETH and sroywstETH)
-2. Priority Partners
-3. Remaining Withdrawals
-
-### **Flow of Funds**
-
-The funds are managed through both Makina and Concrete to preserve self-custody. Depositors can review each custodian's infrastructure and security documentation directly: [docs.makina.finance](https://docs.makina.finance) and [docs.concrete.xyz](https://docs.concrete.xyz).
-
-<Frame>
-  ![Flowoffunds](/images/royco-flow-of-funds.jpg)
-</Frame>
-
-### **Fees**
-
-Vault-level fees are detailed in [Section 4](/governance-and-fees) (Governance and Fees).
-
 ---
 
-_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. There is no guarantee of returns, and depositors may lose some or all of their capital. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions. By participating, depositors acknowledge that they have reviewed the Risk Framework (Section 6) and the Terms of Service \[link\]._
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. There is no guarantee of returns, and depositors may lose some or all of their capital. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions. By participating, depositors acknowledge that they have reviewed the Risk Framework (Section 6) and the Terms of Service \[link\]._

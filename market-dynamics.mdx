@@ -1,0 +1,25 @@
+---
+title: "Market Dynamics"
+---
+
+### **Market States**
+
+Markets operate as perpetual instruments with full liquidity for all tranches under normal conditions. If senior capital incurs a loss, junior coverage is immediately applied and the market enters an Observation Period. This gives the underlying position time to recover before junior LPs realize any losses. If the position recovers, juniors are made whole and the market shifts back to a perpetual state. In the event that losses persist and coverage runs thin, seniors can exit early with their guaranteed protection intact.
+
+The two states are:
+
+**PERPETUAL**: The normal operating state governed by market forces, and the permanent state of a market configured with no fixed-term duration. The market is either healthy (no losses beyond the dust tolerance), severely undercollateralized (its liquidation coverage utilization breached), or uncollateralized (no junior NAV remaining against a non-zero senior NAV). All three tranches are liquid, subject to the coverage and liquidity requirements. Premiums and protocol fees accrue on senior yield, and adaptive-curve models adapt to the market's coverage and liquidity utilization.
+
+**OBSERVATION PERIOD**: A temporary recovery state entered when junior coverage first absorbs a senior drawdown while coverage stays within the liquidation threshold, giving the underlying position time to recover before junior LPs realize any losses. Senior and junior deposits and redemptions are all blocked. This stops seniors from withdrawing coverage from existing juniors, and new juniors from diluting existing juniors, on arbitrary volatility. Liquidity provider tranche redemptions are also blocked so the LPT keeps market-making the senior when secondary liquidity is most valuable, while liquidity provider tranche deposits stay open (multi-asset deposits accept only the quote leg during a fixed term, since minting the senior leg is a senior deposit). No liquidity premium is paid and no protocol fees are taken, and the adaptive-curve models do not adapt, since utilization moves on underlying PnL rather than market forces during recovery.
+
+**State Transitions**: A market configured with no fixed-term duration is permanently perpetual and never leaves the perpetual state. Otherwise the market enters an Observation Period from PERPETUAL when a senior drawdown is first absorbed by junior coverage while coverage stays within the liquidation threshold, which starts the fixed-term. It returns to PERPETUAL when the junior coverage impermanent loss clears to within the market's dust tolerance, meaning the position recovered and junior was made whole (any dust remainder is erased), or when the fixed-term duration elapses. The market is additionally forced back to PERPETUAL on a liquidation breach or an uncollateralized market. When the return is forced, or the fixed-term elapses before the loss recovers, the junior coverage impermanent loss is reset, so junior forfeits its recovery claim.
+
+### **Impermanent Loss**
+
+When losses occur, they are handled differently based on which tranche experiences them:
+
+**Losses**: A collateral loss is absorbed junior-first: the junior buffer (its effective NAV) takes the whole loss up to exhaustion, and every unit absorbed is tracked as the junior coverage impermanent loss, JT's first claim on future collateral appreciation. Only the loss exceeding JT's remaining buffer is borne by senior effective NAV, and a market whose junior buffer is exhausted against live senior exposure is uncollateralized, which forces the perpetual state and resets JT's recovery claim.
+
+**Recovery**: When the collateral appreciates, the junior coverage impermanent loss is repaid off the top of the gain before any distribution, restoring junior's claim at its original proportions so a dip-and-recover path lands exactly where the direct path would. The residual gain splits pro-rata across the restored claims: junior's share is junior yield, and senior's share pays the risk premium to junior and the liquidity premium to the liquidity provider tranche via the two YDM instances, accrues protocol fees, and the remainder accrues to senior. Repayment is restoration, never yield, so it is never fee'd.
+
+**JT Coverage IL Reset**: The JT coverage impermanent loss is reset (JT forfeits its claim) when the market is forced back to PERPETUAL. This happens when the fixed-term duration elapses, on a liquidation breach, or on an uncollateralized market (no junior NAV remaining against a non-zero senior NAV).

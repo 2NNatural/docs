@@ -1,0 +1,47 @@
+---
+title: "Royco Overview"
+description: "Royco is a non-custodial risk-tranching protocol that splits any yield source into Senior, Junior, and Liquidity Provider tranches, letting depositors choose their risk and liquidity profile."
+---
+
+Every Royco market starts from a single yield source: a lending market, a staking deposit, or tokenized RWA, and splits it into three tranches:
+
+- **Senior Tranche (ST)**: earns the least yield but benefits from seniority and secondary liquidity.
+- **Junior Tranche (JT):** earns the highest yield by serving as first-loss capital and receives a risk premium paid by Senior, in addition to the base asset yield.
+- **Liquidity Provider Tranche (LPT):** earns a premium and trading fees by providing secondary liquidity for the Senior tranche.
+
+**Yield Distribution**
+
+Yield flows from the ST to both JT and LPT, paying for Senior's coverage and liquidity based on pre-defined ratios.
+
+<Frame>
+  <video src="/videos/chapter-01-pool.mp4" controls />
+</Frame>
+
+#### Why This Matters
+
+**ST get real downside coverage.** Every ST position has a minimum amount of JT capital in front of it. ST is not impaired until  this JT capital is fully exhausted.
+
+**ST gets secondary liquidity.** Many yield opportunities are illiquid by design. Despite that, ST can buy/sell their positions, without having to wait out the asset's full duration. This functions as an alternative exit in addition to primary redemption.
+
+**JT takes the first loss.** JT absorbs any ST drawdown. For JT, this effect is similar to a levered position without the negative carry.
+
+**JT benefits from an observation period.** When the base asset draws down, the protocol enters a time-bounded observation window before allocating losses. Temporary, expected volatility that reverses within the window does not slash JT capital. JT only absorbs actual, persistent losses, not noise. 
+
+**JT earns a premium for risk.** JT earns a risk premium, paid by ST positions, for formally taking the first-loss position.
+
+**LPT gets paid to be the exit.** LPT is the counterparty for ST redemptions, providing liquidity to an AMM pool composed of ST shares and stablecoins. LPT earns a liquidity premium and trading fees, as well as buying shares at a discount when ST sells shares into the pool.
+
+#### The Vault Products
+
+For users who do not want to evaluate and manage individual Royco markets, curators offer automated products.
+
+| Vault | Curator | Deposit Asset | What It Does |
+| --- | --- | --- | --- |
+| Senior Vault (srRoyUSDC) | Dialectic | USDC | Allocates across multiple Senior tranches for diversified, Senior-tranche yield. May utilize Senior tokens in lending protocols for levered exposure while retaining first-loss coverage. |
+| Royco ETH (roywstETH) | Dialectic | wstETH | Borrows USDC against wstETH collateral and deploys into srRoyUSDC, earning staking rewards plus the carry spread |
+
+The **Senior Vault (srRoyUSDC)** is the foundational product, deploying USDC into Senior tranches across a diversified set of yield sources to offer buffered yield backed by JT first-loss capital. **Royco ETH (roywstETH)** is built for ETH holders who want to earn yield: it borrows USDC against wstETH collateral and deploys the proceeds into srRoyUSDC, capturing staking rewards plus the carry spread. Each vault is managed by a professional, independent curator.
+
+---
+
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
