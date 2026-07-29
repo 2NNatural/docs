@@ -16,22 +16,22 @@ Because Junior is co-invested, the coverage ratio represents real, active capita
 
 Suppose a Dawn market is deployed on top of a USDC lending strategy yielding 8% annualized. Both Senior and Junior capital are co-invested in the same strategy:
 
-|          | Deposits     | APY    | Source                                            |
-| -------- | ------------ | ------ | ------------------------------------------------- |
-| Senior   | $8,000,000  | ~6.5% | Base yield minus premium paid to Junior           |
-| Junior   | $2,000,000  | ~14%  | Base yield plus premium for first-loss protection |
-| Total    | $10,000,000 |        |                                                   |
-| Coverage | 20%          |        | $2M Junior / $10M total                         |
+|  | Deposits | APY | Source |
+| --- | --- | --- | --- |
+| Senior | \$8,000,000 | ~6.5% | Base yield minus premium paid to Junior |
+| Junior | \$2,000,000 | ~14% | Base yield plus premium for first-loss protection |
+| Total | \$10,000,000 |  |  |
+| Coverage | 20% |  |  |
 
-Both tranches are deployed into the same 8% underlying strategy. A drawdown of X% applies to the full $10M pool. Junior absorbs those losses first. Coverage of 20% means Junior can absorb up to a 20% drawdown on the total pool before Senior is affected.
+Both tranches are deployed into the same 8% underlying strategy. A drawdown of X% applies to the full \$10M pool. Junior absorbs those losses first. Coverage of 20% means Junior can absorb up to a 20% drawdown on the total pool before Senior is affected.
 
 **Loss Example Scenarios**
 
-| Drawdown | Loss on $10M pool | Junior absorbs            | Senior exposure | Result                                           |
-| -------- | ------------------ | -------------------------- | ---------------- | -------------------------------------------------- |
-| 5%       | $500K             | $500K ($1.5M remaining) | $0             | Junior reduced to $1.5M. Senior unaffected.     |
-| 15%      | $1.5M             | $1.5M ($500K remaining) | $0             | Junior reduced to $500K. Senior unaffected.     |
-| 25%      | $2.5M             | $2M ($0 remaining)      | $500K          | Junior fully consumed. Senior reduced to $7.5M. |
+| Drawdown | Loss on \$10M pool | Junior absorbs | Senior exposure | Result |
+| --- | --- | --- | --- | --- |
+| 5% | \$500K | \$0 | Junior reduced to \$1.5M. Senior unaffected. |  |
+| 15% | \$1.5M | \$0 | Junior reduced to \$500K. Senior unaffected. |  |
+| 25% | \$2.5M | \$500K | Junior fully consumed. Senior reduced to \$7.5M. |  |
 
 Junior absorbs losses immediately, from the first dollar. Senior is only exposed once Junior's entire balance is consumed.
 
@@ -55,7 +55,7 @@ The core idea: when Junior capital is scarce, Junior earns more. When Junior cap
 
 The YDM looks at one number: **utilization.** Utilization measures how much of Junior's coverage capacity is currently being used to back the market. Understanding utilization requires understanding how coverage works:
 
-**Coverage** is the percentage of the total pool that Junior represents. It represents the maximum drawdown of the underlying yield source that Junior can absorb before Senior is affected. For instance, $2M Junior backing a $10M pool gives 20% coverage, meaning Junior can absorb a 20% loss on the pool without touching Senior.
+**Coverage** is the percentage of the total pool that Junior represents. It represents the maximum drawdown of the underlying yield source that Junior can absorb before Senior is affected. For instance, $$2M Junior backing a $$10M pool gives 20% coverage, meaning Junior can absorb a 20% loss on the pool without touching Senior.
 
 **Each market has a minimum coverage requirement** (set per market as described above). Junior's capital must stay at or above this floor. If it falls below, new Senior deposits and current Junior withdrawals are blocked until a Junior buffer is replenished.
 
@@ -67,9 +67,9 @@ Put simply: **coverage tells you how much loss Junior can absorb; utilization te
 
 Each market sets three values at creation that define Junior's yield share across utilization:
 
-> * Y0: at 0% utilization
-> * YT: at 90% (the target)
-> * Y100: at 100%
+> - Y0: at 0% utilization
+> - YT: at 90% (the target)
+> - Y100: at 100%
 
 **Below 90%: essentially flat.** Y0 and YT are close together. When Junior capital is plentiful, excess supply already dilutes Junior returns.
 
@@ -81,7 +81,7 @@ These three points don't stay fixed, as the curve adapts to market conditions ov
 
 The result is a self-balancing system. If Junior capital leaves, utilization rises and the premium increases, attracting new Juniors. If Senior capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
-***For an interactive yield model, feel free to check out our simulator: [https://royco-school.vercel.app/](https://royco-school.vercel.app/)***
+**_For an interactive yield model, feel free to check out our simulator: [https://royco-school.vercel.app/](https://royco-school.vercel.app/)_**
 
 **What Depositors See**
 
@@ -105,8 +105,8 @@ Some markets may include an optional configuration called **Protected Exit Bonus
 
 **Example:** A market has Minimum Coverage = 10%, Protected Exit Threshold = 5% and Protected Exit Bonus = 2%. The underlying drops below 5% coverage remaining, breaching the threshold.
 
-Alice (Senior, $100k) chooses to exit. She receives her $100k back plus a $2k bonus from Junior capital: a reward for helping restore the market to a healthy state. Seniors who stay forgo the bonus.
+Alice (Senior, $$100k) chooses to exit. She receives her $$100k back plus a \$2k bonus from Junior capital: a reward for helping restore the market to a healthy state. Seniors who stay forgo the bonus.
 
-***
+---
 
-*This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions.*
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
