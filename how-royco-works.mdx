@@ -48,7 +48,7 @@ Royco enforces a **minimum coverage requirement** for each market. Coverage repr
 
 ST depositors are shielded by the JT buffer, and are able to freely exit via the LT. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
 
-**Coverage minimums are set per market** by external risk curators. The minimum coverage requirement is calibrated individually for each market based on its individual risk factors. 
+**Coverage minimums are set per market** by pool creators. The minimum coverage requirement is calibrated individually for each market based on its individual risk factors. 
 
 #### Liquidity Requirements
 
@@ -56,11 +56,11 @@ Royco also enforces a **minimum liquidity requirement** for markets with liquidi
 
 #### How Yield Is Split
 
-In every Royco market, the base asset generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between the tranches.
+In every Royco market, the **Yield Distribution Model (YDM)** decides how base asset returns are divided between the tranches.
 
-JT provides first-loss protection to ST, and LPT provides liquidity. In exchange, JT and LPT earn premiums; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
+JT provides first-loss protection to ST, and LPT provides liquidity. In exchange, JT and LPT earn premiums; a share of Senior's yield. The YDM automatically determines the size of that premium based on supply and demand.
 
-The core idea: when JT or LPT capital is scarce, their respective pool earns more. When capital is plentiful, the JT and LPT earn less. This happens automatically with no governance votes or manual adjustments.
+When JT or LPT capital is scarce, their respective pool earns more. When capital is plentiful, the JT and LPT earn less. 
 
 **What Drives the Split: Understanding Utilization**
 
