@@ -44,7 +44,7 @@ JT absorbs any losses. ST and LPT are only exposed once JT's entire balance is c
 
 #### Coverage Requirements
 
-Royco enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before ST capital is affected. It is a hard constraint: if coverage falls below the minimum, new ST deposits and Junior withdrawals are paused until JT capital returns to the required level.
+Royco enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before ST capital is affected. It is a hard constraint: if coverage falls below the minimum, JT absorbs the loss and coverage is consumed. New ST deposits and Junior withdrawals will be paused until JT capital returns to the required level.
 
 ST depositors are shielded by the JT buffer, and are able to freely exit via the LT. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
 
