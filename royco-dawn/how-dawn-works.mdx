@@ -1,103 +1,103 @@
 ---
-  title: "2. How Dawn Works"
-  ---
+title: "2. How Dawn Works"
+---
 
-  #### The Tranching Mechanism
+#### The Tranching Mechanism
 
-  Every Royco Dawn market begins with a single underlying yield source. The protocol deploys capital from Senior and Junior depositors into that source and governs how returns and losses flow back to each group.
+Every Royco Dawn market begins with a single underlying yield source. The protocol deploys capital from Senior and Junior depositors into that source and governs how returns and losses flow back to each group.
 
-  The fundamental mechanism: **Junior capital provides first-loss coverage for Senior capital.** The protocol enforces a coverage ratio; the minimum amount of Junior capital that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted.
+The fundamental mechanism: **Junior capital provides first-loss coverage for Senior capital.** The protocol enforces a coverage ratio; the minimum amount of Junior capital that must stand behind every dollar of Senior deposits. If this ratio is not met, new Senior deposits are not accepted.
 
-  Both Senior and Junior capital are deployed into the same underlying strategy. Junior is not sitting in a separate reserve; it is co-invested alongside Senior, earning the base yield from the same source. The difference is that Junior also earns a risk premium for providing first-loss coverage, and in exchange, Junior absorbs losses immediately. Any drawdown reduces Junior's capital before Senior is affected.
+Both Senior and Junior capital are deployed into the same underlying strategy. Junior is not sitting in a separate reserve; it is co-invested alongside Senior, earning the base yield from the same source. The difference is that Junior also earns a risk premium for providing first-loss coverage, and in exchange, Junior absorbs losses immediately. Any drawdown reduces Junior's capital before Senior is affected.
 
-  Because Junior is co-invested, the coverage ratio represents real, active capital that is earning yield, not idle collateral. This makes the structure capital-efficient for both sides.
+Because Junior is co-invested, the coverage ratio represents real, active capital that is earning yield, not idle collateral. This makes the structure capital-efficient for both sides.
 
-  **An Example**
+**An Example**
 
 Suppose a Dawn market is deployed on top of a USDC lending strategy yielding 8% annualized. Both Senior and Junior capital are co-invested in the same strategy:
 
 |          | Deposits     | APY    | Source                                            |
-  | -------- | ------------ | ------ | ------------------------------------------------- |
-  | Senior   | $8,000,000  | ~6.5% | Base yield minus premium paid to Junior           |
-  | Junior   | $2,000,000  | ~14%  | Base yield plus premium for first-loss protection |
-  | Total    | $10,000,000 |        |                                                   |
-  | Coverage | 20%          |        | $2M Junior / $10M total                         |
+| -------- | ------------ | ------ | ------------------------------------------------- |
+| Senior   | $8,000,000  | ~6.5% | Base yield minus premium paid to Junior           |
+| Junior   | $2,000,000  | ~14%  | Base yield plus premium for first-loss protection |
+| Total    | $10,000,000 |        |                                                   |
+| Coverage | 20%          |        | $2M Junior / $10M total                         |
 
-  Both tranches are deployed into the same 8% underlying strategy. A drawdown of X% applies to the full $10M pool. Junior absorbs those losses first. Coverage of 20% means Junior can absorb up to a 20% drawdown on the total pool before Senior is affected.
+Both tranches are deployed into the same 8% underlying strategy. A drawdown of X% applies to the full $10M pool. Junior absorbs those losses first. Coverage of 20% means Junior can absorb up to a 20% drawdown on the total pool before Senior is affected.
 
-  **Loss Example Scenarios**
+**Loss Example Scenarios**
 
 | Drawdown | Loss on $10M pool | Junior absorbs            | Senior exposure | Result                                           |
-  | -------- | ------------------ | -------------------------- | ---------------- | -------------------------------------------------- |
-  | 5%       | $500K             | $500K ($1.5M remaining) | $0             | Junior reduced to $1.5M. Senior unaffected.     |
-  | 15%      | $1.5M             | $1.5M ($500K remaining) | $0             | Junior reduced to $500K. Senior unaffected.     |
-  | 25%      | $2.5M             | $2M ($0 remaining)      | $500K          | Junior fully consumed. Senior reduced to $7.5M. |
+| -------- | ------------------ | -------------------------- | ---------------- | -------------------------------------------------- |
+| 5%       | $500K             | $500K ($1.5M remaining) | $0             | Junior reduced to $1.5M. Senior unaffected.     |
+| 15%      | $1.5M             | $1.5M ($500K remaining) | $0             | Junior reduced to $500K. Senior unaffected.     |
+| 25%      | $2.5M             | $2M ($0 remaining)      | $500K          | Junior fully consumed. Senior reduced to $7.5M. |
 
-  Junior absorbs losses immediately, from the first dollar. Senior is only exposed once Junior's entire balance is consumed.
+Junior absorbs losses immediately, from the first dollar. Senior is only exposed once Junior's entire balance is consumed.
 
 #### Coverage Requirements
 
 Dawn enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before Senior capital is affected. It is a hard constraint: if coverage falls below the minimum, new Senior deposits and Junior withdrawals are paused until Junior capital returns to the required level.
 
-  Senior depositors are shielded by the Junior buffer, and have first right to withdraw liquidity. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
+Senior depositors are shielded by the Junior buffer, and have first right to withdraw liquidity. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
 
-  **Coverage minimums are set per market.** The minimum coverage requirement is calibrated individually for each market based on several factors, including but not limited to: the risk profile and historical volatility of the underlying yield source, the asset class (lending, staking, tokenized RWA), the liquidity depth of the strategy, and the overall risk tolerance of the Senior vault (if it is a participant in the market). A lending market backed by a blue-chip protocol may carry a lower minimum than a newer yield source with a shorter track record. This per-market calibration ensures the coverage floor reflects the profile of the underlying source rather than a one-size-fits-all threshold.
+**Coverage minimums are set per market.** The minimum coverage requirement is calibrated individually for each market based on several factors, including but not limited to: the risk profile and historical volatility of the underlying yield source, the asset class (lending, staking, tokenized RWA), the liquidity depth of the strategy, and the overall risk tolerance of the Senior vault (if it is a participant in the market). A lending market backed by a blue-chip protocol may carry a lower minimum than a newer yield source with a shorter track record. This per-market calibration ensures the coverage floor reflects the profile of the underlying source rather than a one-size-fits-all threshold.
 
-  #### How Yield Is Split
+#### How Yield Is Split
 
-  In every Royco Dawn market, the underlying yield source generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between Senior and Junior.
+In every Royco Dawn market, the underlying yield source generates returns. The **Yield Distribution Model (YDM)** decides how those returns are divided between Senior and Junior.
 
-  Junior provides first-loss protection to Senior. In exchange, Junior earns a risk premium; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
+Junior provides first-loss protection to Senior. In exchange, Junior earns a risk premium; a share of Senior's yield. The YDM determines the size of that premium based on supply and demand.
 
-  The core idea: when Junior capital is scarce, Junior earns more. When Junior capital is plentiful, Junior earns less. This happens automatically with no governance votes or manual adjustments.
+The core idea: when Junior capital is scarce, Junior earns more. When Junior capital is plentiful, Junior earns less. This happens automatically with no governance votes or manual adjustments.
 
 **What Drives the Split: Understanding Utilization and Coverage**
 
 The YDM looks at one number: **utilization.** Utilization measures how much of Junior's coverage capacity is currently being used to back the market. Understanding utilization requires understanding how coverage works:
 
-  **Coverage** is the percentage of the total pool that Junior represents. It represents the maximum drawdown of the underlying yield source that Junior can absorb before Senior is affected. For instance, $2M Junior backing a $10M pool gives 20% coverage, meaning Junior can absorb a 20% loss on the pool without touching Senior.
+**Coverage** is the percentage of the total pool that Junior represents. It represents the maximum drawdown of the underlying yield source that Junior can absorb before Senior is affected. For instance, $2M Junior backing a $10M pool gives 20% coverage, meaning Junior can absorb a 20% loss on the pool without touching Senior.
 
 **Each market has a minimum coverage requirement** (set per market as described above). Junior's capital must stay at or above this floor. If it falls below, new Senior deposits and current Junior withdrawals are blocked until a Junior buffer is replenished.
 
-  **Utilization measures how close Junior is to that floor.** At 40% utilization, Junior holds far more than the required minimum, with plenty of cushion above the floor. At 100% utilization, Junior is exactly at the required minimum, disabling both Senior deposits and Junior withdrawals. At the 90% target, Junior is 90% of the way from 'maximum excess' to 'exactly at the floor.' The market is efficiently deployed but still has room to accept new capital.
+**Utilization measures how close Junior is to that floor.** At 40% utilization, Junior holds far more than the required minimum, with plenty of cushion above the floor. At 100% utilization, Junior is exactly at the required minimum, disabling both Senior deposits and Junior withdrawals. At the 90% target, Junior is 90% of the way from 'maximum excess' to 'exactly at the floor.' The market is efficiently deployed but still has room to accept new capital.
 
-  Put simply: **coverage tells you how much loss Junior can absorb; utilization tells you how efficiently that coverage capacity is being used.** High utilization means Junior is close to its required floor and Junior depositors earn a higher premium to attract new capital. Low utilization means Junior has built up excess above the floor, and their effective premium is lower.
+Put simply: **coverage tells you how much loss Junior can absorb; utilization tells you how efficiently that coverage capacity is being used.** High utilization means Junior is close to its required floor and Junior depositors earn a higher premium to attract new capital. Low utilization means Junior has built up excess above the floor, and their effective premium is lower.
 
-  **The Yield Curve**
+**The Yield Curve**
 
 Each market sets three values at creation that define Junior's yield share across utilization:
 
 > * Y0: at 0% utilization
-  > * YT: at 90% (the target)
-  > * Y100: at 100%
+> * YT: at 90% (the target)
+> * Y100: at 100%
 
-  **Below 90%: essentially flat.** Y0 and YT are close together. When Junior capital is plentiful, excess supply already dilutes Junior returns.
+**Below 90%: essentially flat.** Y0 and YT are close together. When Junior capital is plentiful, excess supply already dilutes Junior returns.
 
-  **Above 90%: steep.** Y100 is typically set notably higher than YT , meaning that as Junior capital becomes scarce, the yield share ramps aggressively to attract new Junior depositors. Y100 is set per market such that at 100% utilization, the resulting Junior yield is attractive enough to draw in new capital.
+**Above 90%: steep.** Y100 is typically set notably higher than YT , meaning that as Junior capital becomes scarce, the yield share ramps aggressively to attract new Junior depositors. Y100 is set per market such that at 100% utilization, the resulting Junior yield is attractive enough to draw in new capital.
 
-  **Self-Adapting Yield Curve Over Time**
+**Self-Adapting Yield Curve Over Time**
 
 These three points don't stay fixed, as the curve adapts to market conditions over time. When utilization consistently runs above target, the curve shifts up to offer Juniors a bigger premium and attract more capital. When utilization consistently sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
 
-  The result is a self-balancing system. If Junior capital leaves, utilization rises and the premium increases, attracting new Juniors. If Senior capital leaves, the opposite happens. The market continuously finds its own equilibrium.
+The result is a self-balancing system. If Junior capital leaves, utilization rises and the premium increases, attracting new Juniors. If Senior capital leaves, the opposite happens. The market continuously finds its own equilibrium.
 
-  ***For an interactive yield model, feel free to check out our simulator: [https://royco-school.vercel.app/](https://royco-school.vercel.app/)***
+***For an interactive yield model, feel free to check out our simulator: [https://royco-school.vercel.app/](https://royco-school.vercel.app/)***
 
 **What Depositors See**
 
 The APY shown on the Dawn interface is the trailing 24-hour APY, the annualized rate from actual yield accrued over the previous 24 hours. A 7-day average is shown alongside it for a smoother view. Both are backward-looking. If utilization shifts or capital enters or exits the pool, future yields will differ.
 
-  #### Observation Period
+#### Observation Period
 
-  Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss against Junior capital.
+Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the protocol observe whether a drawdown is real and sustained or just noise before allocating any loss against Junior capital.
 
-  When a drawdown is detected, the protocol enters the Observation Period. Senior withdrawals are paused, new Junior deposits are blocked, and 100% of yield is redirected to Junior, accelerating the rebuild of the first-loss buffer. During this window, Senior deposits and Junior redemptions remain enabled, provided the market remains above minimum coverage. Any Junior who execute withdrawal will realize impermanent loss at the point of execution. The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against Junior capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, Junior losses are finalized immediately, and Seniors gain the option to withdraw.
+When a drawdown is detected, the protocol enters the Observation Period. Senior withdrawals are paused, new Junior deposits are blocked, and 100% of yield is redirected to Junior, accelerating the rebuild of the first-loss buffer. During this window, Senior deposits and Junior redemptions remain enabled, provided the market remains above minimum coverage. Any Junior who execute withdrawal will realize impermanent loss at the point of execution. The protocol then observes a defined time window. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against Junior capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold (see below) before the window expires, Junior losses are finalized immediately, and Seniors gain the option to withdraw.
 
-  **The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
+**The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
 
-  #### Protected Exit
+#### Protected Exit
 
-  Each market provides Seniors with first-loss coverage against persistent drawdowns through a **Protected Exit Threshold**. If a drawdown is deep enough, the Observation Period is terminated and Seniors can withdraw the underlying asset when there is a predefined level of coverage remaining, realizing losses against Junior capital. Those who believe the remaining Junior buffer is sufficient can choose to stay. If losses exhaust Junior capital entirely, Seniors become directly exposed to further drawdown.
+Each market provides Seniors with first-loss coverage against persistent drawdowns through a **Protected Exit Threshold**. If a drawdown is deep enough, the Observation Period is terminated and Seniors can withdraw the underlying asset when there is a predefined level of coverage remaining, realizing losses against Junior capital. Those who believe the remaining Junior buffer is sufficient can choose to stay. If losses exhaust Junior capital entirely, Seniors become directly exposed to further drawdown.
 
 #### Protected Exit Bonus
 
