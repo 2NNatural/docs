@@ -7,11 +7,11 @@ Every Royco market starts from a single yield source: a lending market, a stakin
 
 - **Senior Tranche (ST)**: earns the least yield but benefits from seniority and secondary liquidity.
 - **Junior Tranche (JT):** earns the highest yield by serving as first-loss capital and receives a risk premium paid by Senior, in addition to the base asset yield.
-- **Liquidity Provider Tranche (LPT):** earns a premium and trading fees by providing secondary liquidity for the Senior tranche.
+- **Senior Liquidity Provider (SLP):** earns a premium and trading fees by providing secondary liquidity for the Senior tranche.
 
 **Yield Distribution**
 
-Yield flows from the ST to both JT and LPT, paying for Senior's coverage and liquidity based on pre-defined ratios.
+Yield flows from the ST to both JT and SLP, paying for Senior's coverage and liquidity based on pre-defined ratios.
 
 <Frame>
   <video src="/videos/chapter-01-pool.mp4" controls />
@@ -25,11 +25,11 @@ Yield flows from the ST to both JT and LPT, paying for Senior's coverage and liq
 
 **JT takes the first loss.** JT absorbs any ST drawdown. For JT, this effect is similar to a levered position without the negative carry.
 
-**JT benefits from an observation period.** When the base asset draws down, the protocol enters a time-bounded observation window before allocating losses. Temporary, expected volatility that reverses within the window does not slash JT capital. JT only absorbs actual, persistent losses, not noise. 
+**JT benefits from an observation period.** When the base asset draws down, the protocol enters a time-bounded observation window before allocating losses. Temporary, expected volatility that reverses within the window does not slash JT capital. JT only absorbs actual, persistent losses, not noise.
 
 **JT earns a premium for risk.** JT earns a risk premium, paid by ST positions, for formally taking the first-loss position.
 
-**LPT gets paid to be the exit.** LPT is the counterparty for ST redemptions, providing liquidity to an AMM pool composed of ST shares and stablecoins. LPT earns a liquidity premium and trading fees, as well as buying shares at a discount when ST sells shares into the pool.
+**SLP gets paid to be the exit.** SLP is the counterparty for ST redemptions, providing liquidity to an AMM pool composed of SLP shares and stablecoins. SLP earns a liquidity premium and trading fees, as well as buying shares at a discount when ST sells shares into the pool.
 
 #### The Vault Products
 

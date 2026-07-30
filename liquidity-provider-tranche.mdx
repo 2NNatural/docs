@@ -1,18 +1,18 @@
 ---
-title: "Liquidity Provider Tranche (LPT)"
+title: "Senior Liquidity Provider (SLP)"
 ---
 
-The **Liquidity Provider Tranche (LPT)** is a dedicated capital pool that earns yield by providing constant secondary liquidity for the senior tranche.
+The **Senior Liquidity Provider (SLP)** is a dedicated capital pool that earns yield by providing constant secondary liquidity for the senior tranche.
 
-LPT yield is calculated as follows:
+SLP yield is calculated as follows:
 
 > Liquidity Premium \+ (ST Appreciation \* ST Shares) \+ (Stablecoin Yield \* Stable Shares)   \+ Trading Fees − Impermanent Loss
 
-Unlike ST and JT, LPT is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in an AMM pool made up of ST tokens and a tokenized-treasury stablecoin.
+Unlike ST and JT, SLP is not deployed directly into the yield-bearing asset. Instead, it is deployed into a Balancer Pool Token in an AMM pool made up of ST tokens and a tokenized-treasury stablecoin.
 
-LPT earns yield from the assets deployed in the pool: both the underlying yield of the ST shares, as well as the rate earned by the paired stablecoin.
+SLP earns yield from the assets deployed in the pool: both the underlying yield of the ST shares, as well as the rate earned by the paired stablecoin.
 
-In this mechanism, LPT gets paid a premium for providing exit liquidity to the ST. LPT also gets additional sources of yield: a % of swap fees from the Balancer Pool, as well as swap premiums when ST flow imbalances the pool.
+In this mechanism, SLP gets paid a premium for providing exit liquidity to the ST. SLP also gets additional sources of yield: a % of swap fees from the Balancer Pool, as well as swap premiums when ST flow imbalances the pool.
 
 ---
 
