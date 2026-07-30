@@ -1,16 +1,16 @@
 ---
-title: "RoycoEntryPoint"
-description: "The RoycoEntryPoint contract is the single entry interface for deposits, withdrawals, and tranche operations across Royco markets."
+title: "EntryPoint"
+description: "The EntryPoint contract is the single entry interface for deposits, withdrawals, and tranche operations across Royco markets."
 ---
 
-**RoycoEntryPoint** is the protocol's tranche deposit gateway contract. All deposits into Royco markets are routed through the RoycoEntryPoint rather than depositing directly into tranche contracts. This design enables several protocol-level safeguards:
+**EntryPoint** is the protocol's tranche deposit gateway contract. All deposits into Royco markets are routed through the EntryPoint rather than depositing directly into tranche contracts. This design enables several protocol-level safeguards:
 
 1. **Queued execution:** Deposits are subject to T\+1 settlement delay before they can be executed. This is a safeguard to prevent front-running and ensure fair ordering.
-2. **Upgradeability:** Entry point logic can be updated by the Foundation without requiring vault contract changes.
+2. **Upgradeability:** EntryPoint logic can be updated by the Foundation without requiring vault contract changes.
 
 Once submitted, a request becomes executable after the T\+1 waiting period. Once this delay elapses, anyone can execute it in a separate transaction; the depositor can attach an optional executor bonus to incentivize autonomous execution.
 
-Depositors should always interact with Royco products via the official app at royco.org, which routes transactions through the RoycoEntryPoint. Direct vault deposits bypass access controls and are not supported.
+Depositors should always interact with Royco products via the official app at royco.org, which routes transactions through the EntryPoint. Direct vault deposits bypass access controls and are not supported.
 
 ---
 
