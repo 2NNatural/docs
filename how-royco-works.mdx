@@ -7,7 +7,7 @@ description: "How Royco tranches a single yield source: JT provides loss coverag
 
 Every Royco market begins with a single strategy base asset. Contracts govern how strategy returns and losses flow back to the different tranches.
 
-The fundamental mechanism: **JT capital provides first-loss coverage for Senior capital, while SLP provides liquidity.** The protocol enforces a minimum amount of JT capital (the Coverage Ratio) and SLP capital (the Liquidity Ratio), respectively, that must stand behind every dollar of Senior deposits. If either minimum is not met, new Senior deposits are not accepted and yield is redirected to JT and SLP until enough of that capital comes in to restore a proper ratio.
+The fundamental mechanism: **Junior capital provides first-loss coverage for Senior capital, while SLP provides liquidity.** The protocol enforces a minimum amount of JT capital (the Coverage Ratio) and SLP capital (the Liquidity Ratio), respectively, that must stand behind every dollar of ST deposits. If either minimum is not met, new ST deposits are not accepted and yield is redirected to JT and SLP until enough of that capital comes in to restore a proper ratio.
 
 Both ST and JT capital are deployed into the same base asset. The difference is that JT also earns a risk premium for providing first-loss coverage, and in exchange, JT absorbs losses.
 
@@ -19,16 +19,16 @@ Suppose a market is deployed on top of a USDC lending strategy yielding 8% annua
 
 |  | Deposits | APY | Source |
 | --- | --- | --- | --- |
-| Senior (ST) | \$8,000,000 | ~5% | Base yield minus premium paid to JT for coverage and SLP for liquidity |
-| Junior (JT) | \$2,000,000 | ~13.5% | Base yield plus premium for first-loss coverage |
-| SLP | \$2,000,000 | ~11% | Pool Asset Yield plus premium for liquidity provision and trading fees, minus impermanent loss |
+| Senior (ST) | \$8,000,000 | ~5% | Base Asset Yield − Risk Premium − Liquidity Premium |
+| Junior (JT) | \$2,000,000 | ~13.5% | Base Asset Yield \+ Risk Premium |
+| SLP | \$2,000,000 | ~11% | Liquidity Premium \+ (ST Appreciation \* ST Shares) \+ (Stablecoin Yield _\*_ Stable Shares) \+ Trading Fees − Impermanent Loss |
 | Total | \$12,000,000 |  |  |
 | Coverage | 20% |  | \$2M JT / \$10M JT \+ ST |
 | Liquidity | 25% |  | \$2M SLP / \$8M ST |
 
 Coverage is measured on the JT \+ ST pool: \$2M JT / \$10M (JT \+ ST) = 20% coverage. Coverage of 20% means JT can absorb up to a 20% drawdown on the \$10M pool before ST is affected.
 
-Liquidity is measured against Senior: \$2M SLP / \$8M ST = 25% liquidity. This sizes the SLP's market-making depth to an amount equivalent to 25% of Senior's value, in the pool as exit depth behind Senior shares.
+Liquidity is measured against ST: \$2M SLP / \$8M ST = 25% liquidity. This sizes the SLP's market-making depth to an amount equivalent to 25% of Senior's value, in the pool as exit depth behind ST shares.
 
 **Loss Scenarios**
 
@@ -44,7 +44,7 @@ JT absorbs any losses. ST and SLP are only exposed once JT's entire balance is c
 
 Royco enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before ST capital is affected. It is a hard constraint: if coverage falls below the minimum, JT absorbs the loss and coverage is consumed. New ST deposits and Junior withdrawals will be paused until JT capital returns to the required level.
 
-ST depositors are shielded by the JT buffer, and are able to freely exit via the SLP. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
+ST depositors are shielded by the JT buffer, and are able to exit via the SLP. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
 
 **Coverage minimums are set per market** by pool creators. The minimum coverage requirement is calibrated individually for each market based on its individual risk factors. 
 
@@ -58,7 +58,7 @@ In every Royco market, the **Yield Distribution Model (YDM)** decides how base a
 
 #### **Coverage utilization → Junior's risk premium**
 
-**Coverage utilization measures how much JT capital is currently backing ST exposure.** For example, if the market needs \$1 of Junior coverage and there is exactly \$1 of Junior, utilization is 100%. If there is \$2 of Junior, it is 50%. When JT capital is scarce, more yield flows to JT to attract more first-loss capital. When JT capital is abundant, more yield flows to ST. The pool rebalances toward equilibrium based on where each side wants to deploy.
+**Coverage utilization measures how much JT capital is currently backing ST exposure.** For example, if the market needs \$1 of JT coverage and there is exactly \$1 of JT capital, utilization is 100%. If there is \$2 of JT, it is 50%. When JT capital is scarce, more yield flows to JT to attract more first-loss capital. When JT capital is abundant, more yield flows to ST. The pool rebalances toward equilibrium based on where each side wants to deploy.
 
 The protocol targets **90% utilization** as the equilibrium point:
 
@@ -112,7 +112,7 @@ When a drawdown is detected by a market oracle, the market automatically enters 
 
 However, ST holders are not locked into their positions. The SLP continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the SLP AMM pool at the pool's current price.
 
-The protocol then observes a defined time window per market. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against JT capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold before the window expires, JT losses are finalized immediately, and ST gain the option to withdraw.
+The protocol then observes a defined time window per market. If the strategy recovers within that window, no loss is realized. If the drawdown persists beyond the window, it is treated as a genuine loss and permanently allocated against JT capital. If the drawdown is severe enough to reach the market's Protected Exit Threshold before the window expires, JT losses are finalized immediately, and ST gains the option to withdraw.
 
 **The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
 
@@ -122,7 +122,7 @@ The protocol then observes a defined time window per market. If the strategy rec
 
 The **Protected Exit** allows ST depositors to safely withdraw their base assets at fair value when a market drawdown breaches a pre-configured threshold. If a strategy suffers a markdown that breaches this **Protected Exit Threshold**, the Observation Period is terminated and ST can withdraw their assets. This realizes losses against JT capital. Those who believe the remaining JT buffer is sufficient can choose to stay. If losses exhaust JT capital entirely and the user has not withdrawn, their ST position becomes directly exposed to further drawdowns.
 
-Senior's two exits are complementary: the SLP pool gives an instant exit at the pool's current price, and Primary and Protected Exits return the underlying at fair value, but only once a drawdown breaches the threshold.
+Senior's exits are complementary: the SLP pool gives an instant exit at the pool's current price, and Primary and Protected Exits return the underlying at fair value, but only once a drawdown breaches the threshold.
 
 #### Protected Exit Bonus
 

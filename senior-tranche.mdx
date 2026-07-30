@@ -7,7 +7,7 @@ ST Net Yield is calculated as follows:
 
 > Base Asset Yield − Risk Premium − Liquidity Premium
 
-The ST has **two key benefits: 1) risk protection, and 2) liquidity transformation.** On risk protection, if the strategy drops, the JT absorbs the losses first up to its size. On liquidity transformation, the senior benefits from a constantly funded AMM pool with stablecoins and the senior tranche assets. This enables holders to exit without waiting until the redemption. The mechanism ensures there is always a minimum amount of JT (for protection), and SLP (for liquidity), a parameter set at pool initialization. ST assets are both protected and continuously tradable.
+The ST has **two key benefits: 1) risk protection, and 2) liquidity transformation.** On risk protection, if the strategy drops, the JT absorbs the losses first up to its size. On liquidity transformation, the ST benefits from a constantly funded AMM pool with stablecoins and the senior tranche assets. This enables holders to exit without waiting until the redemption. The mechanism ensures there is always a minimum amount of JT (for protection), and SLP (for liquidity), a parameter set at pool initialization. ST assets are both protected and liquid.
 
 When looking to exit a position, Seniors have two ways out. They can redeem: claim their share of the market's collateral at full marked value, paid in the base asset. Or they can sell: trade their shares into the SLP pool for stablecoin liquidity at the current market price. Redemption settles after a queue, while selling is immediate.
 
