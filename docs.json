@@ -18,21 +18,6 @@
     "navigation": {
           "groups": [
                   {
-                            "group": "Royco Dawn",
-                            "pages": [
-                                        "royco-dawn/overview",
-                                        "royco-dawn/how-dawn-works",
-                                        "royco-dawn/vault-products",
-                                        "royco-dawn/governance-and-fees",
-                                        "royco-dawn/deposits-and-withdrawals",
-                                        "royco-dawn/risk-framework",
-                                        "royco-dawn/security-and-audits",
-                                        "royco-dawn/roycoentrypoint",
-                                        "royco-dawn/faq",
-                                        "royco-dawn/key-addresses"
-                            ]
-                  },
-                  {
                             "group": "Royco Day",
                             "pages": [
                                         {
@@ -79,6 +64,21 @@
                                                       ]
                                         }
                             ]
+                  },
+                  {
+                    "group": "Royco Dawn",
+                    "pages": [
+                      "royco-dawn/overview",
+                      "royco-dawn/how-dawn-works",
+                      "royco-dawn/vault-products",
+                      "royco-dawn/governance-and-fees",
+                      "royco-dawn/deposits-and-withdrawals",
+                      "royco-dawn/risk-framework",
+                      "royco-dawn/security-and-audits",
+                      "royco-dawn/roycoentrypoint",
+                      "royco-dawn/faq",
+                      "royco-dawn/key-addresses"
+                    ]
                   }
           ]
     },
