@@ -23,7 +23,7 @@ description: "Definitions of Royco terms: Senior, Junior, and SLP tranches, util
 
 **Risk Premium:** The share of Senior yield paid to JT in exchange for first-loss coverage. Sized by coverage utilization through the YDM.
 
-**Liquidity Premium:** The share of Senior yield paid to SLP in exchange for providing secondary liquidity. Sized by liquidity utilization through the YDM.
+**Liquidity Premium:** The share of Senior yield paid to SLP in exchange for providing secondary liquidity. Sized by liquidity utilization through the YDM, and paid as Senior Tranche shares that are progressively redeployed into SLP's liquidity position.
 
 **Observation Period:** A per-market time window the protocol enters automatically when a market oracle detects a base-asset drawdown, before allocating any loss to JT. If the drawdown reverses within the window, no loss is realized; if it persists past the window (or breaches the Protected Exit Threshold), the loss is allocated to JT. During the Observation Period, direct ST redemptions, new JT deposits, and SLP redemptions are paused and 100% of yield routes to rebuilding JT's buffer. However, ST can still exit through the SLP pool. Window length is set per market and may be 0 days (immediate finalization).
 
