@@ -2,24 +2,34 @@
 title: "7. Security and Audits"
 ---
 
+This page gives an overview of Royco's comprehensive due diligence and security processes. To read more, visit our dedicated security page at:
+
+[https://www.royco.org/security](https://www.royco.org/security)
+
 #### Access Controls
 
-All direct vault depositors are KYC'd, and funds can only be withdrawn to pre-approved addresses.
+Funds can only be withdrawn to pre-approved addresses.
 
-#### Smart Contract Audits
+#### Audits
 
 The protocol's core smart contract infrastructure has undergone independent security reviews:
 
-| Auditor | Scope | Type |  |  |
-| --- | --- | --- | --- | --- |
-| Halborn | Vault infrastructure (Concrete Earn v2 Core — Standard \+ Async) | Manual review |  |  |
-| Cantina Public Competition | Royco Dawn protocol contracts | Competitive audit |  |  |
-| Hexens | Royco Dawn protocol contracts ([Jan 2026 Audit](https://hexens.io/audit-reports/royco-perpetual-risk-tranching-protocol-jan-2026) | [Mar 2026 Update](https://hexens.io/audit-reports/royco-risk-tranching-protocol-update-mar-2026) | [Apr 2026 Update](https://hexens.io/audit-reports/royco-entry-point-contract-update-apr-2026)) | Manual review |
-| Certora | Royco Dawn protocol contracts ([Jun 2026 Audit](https://github.com/roycoprotocol/royco-dawn/blob/main/formal-verification/Certora-Royco-Dawn-FV.pdf)) | Manual review \+ Formal Verification |  |  |
+**Royco Day:**
 
-**Audit reports:**
+| Auditor | Scope | Type |
+| :-- | :-- | :-- |
+| Tomer Ganor | [Royco Day protocol contracts](https://github.com/roycoprotocol/royco-day/blob/main/audit/Tomer-Royco-Day.pdf) | Manual review |
+| Certora | [Royco Day protocol contracts](https://github.com/roycoprotocol/royco-day/blob/main/audit/Certora-Royco-Day.pdf) | Manual review |
+| Hexens | [Royco Day protocol contracts](https://github.com/roycoprotocol/royco-day/blob/main/audit/Hexens-Royco-Day.pdf) | Manual review |
 
-Audit reports are available in the roycoprotocol/royco-dawn GitHub repository under the /audit directory.
+**Royco Dawn:**
+
+| Auditor | Scope | Type |
+| :-- | :-- | :-- |
+| Halborn | Vault infrastructure (Concrete Earn v2 Core — Standard \+ Async) | Manual review |
+| Cantina Public Competition | [Royco Dawn protocol contracts](https://github.com/roycoprotocol/royco-dawn/blob/main/audit/Cantina-Royco-Dawn-Whitelist.pdf) | Competitive audit |
+| Hexens | Royco Dawn protocol contracts ([Jan 2026 Audit](https://hexens.io/audit-reports/royco-perpetual-risk-tranching-protocol-jan-2026) \| [Mar 2026 Update](https://hexens.io/audit-reports/royco-risk-tranching-protocol-update-mar-2026) \| [Apr 2026 Update](https://hexens.io/audit-reports/royco-entry-point-contract-update-apr-2026)) | Manual review |
+| Certora | Royco Dawn protocol contracts ([Jun 2026 Audit](https://github.com/roycoprotocol/royco-dawn/blob/main/formal-verification/Certora-Royco-Dawn-FV.pdf)) | Manual review \+ Formal Verification |
 
 #### Curator Infrastructure Audits
 
@@ -35,10 +45,10 @@ Hypernative is configured for real-time onchain monitoring, detecting anomalous 
 
 #### Permission Architecture as Security
 
-As described in Section 4, the permission architecture is itself a security measure. The curator can only perform actions explicitly granted within its scoped permissions. Funds cannot be routed to arbitrary addresses, and protocol parameters cannot be modified outside the defined permission boundaries.
+As described in [Governance and Fees](/governance-and-fees), the permission architecture is itself a security measure. The curator can only perform actions explicitly granted within its scoped permissions. Funds cannot be routed to arbitrary addresses, and protocol parameters cannot be modified outside the defined permission boundaries.
 
 The Foundation Root Multisig operates with a timelock on critical parameter changes, ensuring depositors have advance notice and can exit before changes take effect.
 
 ---
 
-_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._

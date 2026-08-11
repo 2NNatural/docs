@@ -74,6 +74,8 @@ The same **90% target** applies, for the same reasons:
 - **Senior depositors** need secondary liquidity so their shares remain tradable. At 100%, the SLP is exactly at its floor, and the market stops accepting new ST deposits to avoid exceeding available liquidity.
 - **SLP depositors**: At low utilization, the premium fails to sufficiently compensate the capital commitment. There is a tail risk at exceptionally low utilization where SLP depositors may underperform the baseline Senior yield. However, at a healthy utilization, the SLP earns meaningful extra yield, with the curve steepening above that point to incentivize new market-making capital.
 
+The liquidity premium itself is minted as ST shares, credited to the SLP's position, which are then periodically redeployed into the SLP's AMM pool as single-sided liquidity. This design ensures that SLP yield compounds rather than sitting idle.
+
 <video src="/videos/chapter-04-utilization.mp4" controls />
 
 **The Yield Curve**
