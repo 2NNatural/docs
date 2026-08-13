@@ -5,7 +5,7 @@ description: "Common questions about Royco's tranches, coverage, secondary liqui
 
 <AccordionGroup>
   <Accordion title="Do Senior tranches offer first-loss coverage for principal?">
-    The Senior tranches have a structural first-loss buffer: JT capital absorbs all losses before ST is affected, up to the full coverage amount. However, this is not a guarantee of principal in the legal or insurance sense. If losses exceed the JT buffer, ST capital is exposed to the remainder. ST depositors may lose some or all of their capital. If a drawdown reaches the market's Protected Exit Threshold, ST can withdraw immediately with the strategy base asset while JT may still have remaining capital.
+    The Senior tranches have a structural first-loss buffer: JT capital absorbs all losses before ST is affected, up to the full coverage amount. However, this is not a guarantee of principal in the legal or insurance sense. If losses exceed the JT buffer, ST capital is exposed to the remainder. ST depositors may lose some or all of their capital. If a drawdown reaches the market's Protected Exit Threshold, ST can withdraw with the strategy base asset while JT may still have remaining capital.
   </Accordion>
 
   <Accordion title="Who decides where the vault invests?">
@@ -13,11 +13,11 @@ description: "Common questions about Royco's tranches, coverage, secondary liqui
   </Accordion>
 
   <Accordion title="What happens if the strategy base asset is hacked?">
-    If a base asset suffers an exploit, the Royco market built on it will experience a loss. JT capital absorbs the loss first, up to the coverage percentage. If the loss exceeds coverage, ST and LT are exposed to the remainder. Diversification across multiple sources means a single exploit does not necessarily affect the entire vault, only the portion allocated to that specific source.
+    If a base asset suffers an exploit, the Royco market built on it will experience a loss. JT capital absorbs the loss first, up to the coverage percentage. If collateral losses exceed the remaining JT buffer, ST is exposed to the  remainder. SLP has separate exposure through its market-making position, including its ST and quote-asset holdings. Diversification across multiple sources means a single exploit does not necessarily affect the entire vault, only the portion allocated to that specific source.
   </Accordion>
 
   <Accordion title="Can I withdraw at any time?">
-    Vault withdrawals are processed through 30-day epochs. Requests enter the current open epoch, which is processed when it closes. A secondary market for vaults may provide an alternative exit path for immediate liquidity. Seniors can request a withdrawal at any time, settling after a queue of about a day. (During an observation period, withdrawals are locked until the term ends.) JT withdrawals are available when excess JT capital exists above the coverage requirement.
+    Vault withdrawals are processed through 30-day epochs. Requests enter the current open epoch, which is processed when it closes. A secondary market for vaults may provide an alternative exit path for immediate liquidity. Seniors can request a withdrawal at any time, settling after a queue of about a day. (During an Observation Period, withdrawals are locked until the market recovers, the term ends, or Protected Exit is triggered.) JT withdrawals are available when excess JT capital exists above the coverage requirement.
   </Accordion>
 
   <Accordion title="What blockchains does Royco operate on?">

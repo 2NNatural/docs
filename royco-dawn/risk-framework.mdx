@@ -7,7 +7,7 @@ description: "This section describes the primary risk categories, organized by w
 
 **Smart Contract Risk**
 
-All protocol functionality is executed by smart contracts. A bug or exploit could result in partial or total loss of deposited capital. **Mitigants:** Multiple independent audits of the core vault infrastructure (Concrete Earn v2), multiple audits on the core tranche infrastructure, active $250,000 bug bounty on Immunefi, real-time monitoring via Hypernative. See [Section 7](/royco-dawn/security-and-audits) for details.
+All protocol functionality is executed by smart contracts. A bug or exploit could result in partial or total loss of deposited capital. **Mitigants:** Multiple independent audits of the core vault infrastructure (Concrete Earn v2), multiple audits on the core tranche infrastructure, active \$250,000 bug bounty on Immunefi, real-time monitoring via Hypernative. See [Section 7](/royco-dawn/security-and-audits) for details.
 
 **Underlying Strategy Risk**
 
@@ -19,7 +19,7 @@ Senior is backed by Junior's first-loss buffer, but if losses exceed Junior's ba
 
 **Junior-Specific: First-Loss and Liquidity Constraints**
 
-Junior absorbs all losses from the first dollar. Because both tranches are co-invested (beta = 1), losses are amplified by the coverage ratio: at 20% coverage, Junior is effectively 5x levered on the downside. Therefore, a 2% drawdown on the underlying would translate to a 10% loss on Junior's capital. Junior losses can be finalized in two ways: if the Observation Period window expires without recovery, or if the drawdown reaches the market's Protected Exit Threshold and Senior withdraws. Once finalized, Junior loses recovery optionality but may still have remaining capital.
+Junior absorbs all losses from the first dollar. Because both tranches are co-invested (beta = 1), losses are amplified by the coverage ratio: at 20% coverage, Junior is effectively 5x levered on the downside. Therefore, a 2% drawdown on the underlying would translate to a 10% loss on Junior's capital. Junior losses can be finalized in two ways: if the Observation Period window expires without recovery, or if the drawdown reaches the market's Protected Exit Threshold. Once finalized, Junior loses recovery optionality but may still have remaining capital.
 
 Junior withdrawals are constrained by the coverage requirement. If Junior's capital is fully committed to backing Senior, withdrawals are restricted until utilization decreases. Junior deposits into illiquid underlying sources (e.g., RWA positions with 30-day redemption windows) inherit that illiquidity.
 
@@ -37,6 +37,6 @@ The curator has operational control of vault positions. Poor allocation decision
 
 The protocol relies on price feeds to value positions and determine collateral ratios. Oracle manipulation or failure could lead to incorrect valuations. **Mitigants:** Established oracle providers (Chainlink, RedStone). For tokenized RWAs, admin-controlled configurations source prices from NAV rather than thin secondary markets. Vault-level pricing is reviewed daily through the NAV update process.
 
-***
+---
 
-*This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions.*
+_This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco Dawn products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._

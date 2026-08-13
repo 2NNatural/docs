@@ -9,22 +9,22 @@ Deposit delays are configurable per market. Redemption delays are also configura
 
 Once submitted, a request becomes executable after its set market delay. Once this delay elapses, anyone can execute it in a separate transaction; the depositor can attach an optional executor bonus to incentivize autonomous execution.
 
-#### **Your price is fixed at request time**
+#### **Your request is priced at submission**
 
-- A deposit is pinned to the tranche shares it would have minted at request time. If the share price falls during the delay, the extra shares your assets would now buy are forfeited to the protocol. 
+- A deposit is pinned to the tranche shares it would have minted at request time. If the share price falls during the delay, the extra shares your assets would now buy are forfeited to the protocol.
 - A redemption is pinned to the value its shares were worth at request time. If that value rises or yield accrues during the delay, the increase is forfeited to the protocol.
 
 #### **Oracle Gate**
 
-- Deployers can optionally enable the oracle gate; executing a deposit request only after the collateral asset's oracle posts a new price update. This prevents someone from submitting a deposit just before a scheduled NAV update to capture yield from a period they did not hold through.
+- Deployers can optionally enable the oracle gate; executing a deposit or redemption request only after the collateral asset's oracle posts a new price update. This prevents someone from submitting a deposit just before a scheduled NAV update to capture yield from a period they did not hold through.
 
 #### Expiry and cancellation
 
-- Every request has an execution window. Once it elapses, the request can no longer be executed and may only be cancelled. 
-- You can cancel a pending request at any time and reclaim your escrowed assets or shares. 
+- Every request has an execution window. Once it elapses, the request can no longer be executed and may only be cancelled.
+- You can cancel a pending request at any time and reclaim your escrowed assets or shares.
 - Requests can also be filled partially. If a market can only serve part of your request right now, the rest stays queued at its original request-time price and can be filled as capacity frees up.
 
-Depositors should always interact with Royco products via the official app at royco.org, which routes transactions through the EntryPoint. Direct vault deposits bypass access controls and are not supported.
+Depositors should always interact with Royco products via the official app at royco.org, which routes transactions through the EntryPoint. Direct vault deposits bypass the EntryPoint's queue protections and are not supported.
 
 ---
 
