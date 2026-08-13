@@ -7,11 +7,11 @@ description: "How Royco tranches a single yield source: JT provides loss coverag
 
 Every Royco market begins with a single strategy base asset. Contracts govern how strategy returns and losses flow back to the different tranches.
 
-The fundamental mechanism: **Junior capital provides first-loss coverage for Senior capital, while SLP provides liquidity.** The protocol enforces a minimum amount of JT capital (the Coverage Ratio) and SLP capital (the Liquidity Ratio), respectively, that must stand behind every dollar of ST deposits. If either minimum is not met, new ST deposits are not accepted and yield is redirected to JT and SLP until enough of that capital comes in to restore a proper ratio.
+The fundamental mechanism: **Junior capital provides first-loss coverage for Senior capital, while SLP provides liquidity.** The protocol enforces a minimum amount of JT capital (the Coverage Ratio) and SLP capital (the Liquidity Ratio), respectively, that must stand behind every dollar of ST deposits. If either minimum is not met, new ST deposits are not accepted and yield is redirected to JT and SLP to incentivize enough capital to come in and restore the proper ratio.
 
 Both ST and JT capital are deployed into the same base asset. The difference is that JT also earns a risk premium for providing first-loss coverage, and in exchange, JT absorbs losses.
 
-SLP is not directly deployed into the same base asset. Instead, it is deployed into a rate-scaled AMM pool made up of ST tokens and srRoyUSDC. ST holders can sell into this pool at any time, with the resulting price discrepancies creating arbitrage opportunities that maintain the pool’s peg.
+SLP is not directly deployed into the same base asset. Instead, it is deployed into a rate-scaled AMM pool made up of StT tokens and the market's configured quote asset. ST holders can use this pool as a secondary exit route, with the resulting price discrepancies creating arbitrage opportunities that maintain the pool’s peg.
 
 **Pool Example**
 
@@ -36,7 +36,7 @@ Liquidity is measured against ST: \$2M SLP / \$8M ST = 25% liquidity. This sizes
   ![Liquidity Tranche Seniority Slp](/images/liquidity_tranche_seniority_slp.png "Liquidity Tranche Seniority Slp")
 </Frame>
 
-JT absorbs any losses. ST and SLP are only exposed once JT's entire balance is consumed. Because the SLP's assets are partially composed of ST shares, its loss exposure mirrors that of the Senior tranche.
+JT absorbs any losses. ST and SLP are only exposed once JT's entire balance is consumed. Because the SLP’s assets are partially composed of ST shares, its exposure to losses in the base asset is similarly protected by the Junior buffer.
 
 **Unlike JT and ST, SLP losses are path-dependent.** During a drawdown, ST holders sell into the pool, raising SLP's exposure to the senior asset. If the market recovers, this creates a profit: the SLP bought discounted ST shares that recover to full value. However, in a realized drawdown, the SLP suffers losses because it actively converted stablecoins into devalued ST shares.
 
@@ -44,7 +44,7 @@ JT absorbs any losses. ST and SLP are only exposed once JT's entire balance is c
 
 Royco enforces a **minimum coverage requirement** for each market. Coverage represents the maximum percentage drawdown the underlying can experience before ST capital is affected. It is a hard constraint: if coverage falls below the minimum, JT absorbs the loss and coverage is consumed. New ST deposits and Junior withdrawals will be paused until JT capital returns to the required level.
 
-ST depositors are shielded by the JT buffer, and are able to exit via the SLP. The minimum buffer is smart-contract-enforced, so Seniors always know the floor backing their position.
+ST depositors are shielded by the JT buffer, and are able to exit via the SLP. The minimum buffer is smart-contract-enforced, so Seniors know the transparent, market-specific protection threshold.
 
 **Coverage minimums are set per market** by pool creators. The minimum coverage requirement is calibrated individually for each market based on its individual risk factors. 
 
@@ -94,7 +94,7 @@ Each curve is bounded by a maximum spend, expressed as a % of Senior yield. The 
 
 **Self-Adapting Yield Curve Over Time**
 
-These three points adapt to market conditions over time. When a tranche's utilization runs above target, its curve shifts up to attract more capital. When utilization sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
+Adaptive YDMs adjust their pricing curves to market conditions over time. When a tranche's utilization runs above target, its curve shifts up to attract more capital. When utilization sits below target, the curve shifts down. The further from 90%, the faster the adjustment. These shifts happen gradually, over days or weeks.
 
 The result is a self-balancing system. If JT or SLP capital leaves, utilization rises for that tranche and the premium increases. If ST capital leaves, the opposite happens, allowing the market to find its own equilibrium.
 
@@ -110,7 +110,7 @@ The APY shown on the interface is the trailing APY, the annualized rate from act
 
 Yield sources sometimes experience short-term drawdowns; temporary dislocations, oracle lag, or brief liquidity events that reverse within hours or days. The Observation Period lets the market observe whether a drawdown is sustained before allocating any loss to JT capital.
 
-When a drawdown is detected by a market oracle, the market automatically enters the Observation Period. Seniors can no longer deposit or redeem directly via redemption, new JT deposits/redemptions, and SLP redemptions are blocked, and 100% of yield is redirected to JT recovery, accelerating the rebuild of the first-loss buffer.
+When a drawdown is detected by an accounting sync, the market automatically enters the Observation Period. Seniors can no longer deposit or redeem directly via redemption, new JT deposits/redemptions, and SLP redemptions are blocked, and 100% of any base-asset recovery is applied to restoring JT until its outstanding loss is fully recovered.
 
 However, ST holders are not locked into their positions. The SLP continues to provide secondary liquidity throughout the Observation Period, allowing ST holders to exit by selling ST shares into the SLP AMM pool at the pool's current price.
 
@@ -124,9 +124,9 @@ If a deployer chooses, they can configure an Observation Grace Period; a period 
 
 #### Protected Exit
 
-The **Protected Exit** allows ST depositors to safely withdraw their base assets at fair value when a market drawdown breaches a pre-configured threshold. If a strategy suffers a markdown that breaches this **Protected Exit Threshold**, the Observation Period is terminated and ST can withdraw their assets. This realizes losses against JT capital. Those who believe the remaining JT buffer is sufficient can choose to stay. If losses exhaust JT capital entirely and the user has not withdrawn, their ST position becomes directly exposed to further drawdowns.
+The **Protected Exit** allows ST depositors to safely withdraw their base assets at fair value when a market drawdown breaches a pre-configured threshold. If a strategy suffers a markdown that breaches this **Protected Exit Threshold**, the Observation Period is terminated and ST can withdraw their assets, subject to the EntryPoint's configured settlement delay. This realizes losses against JT capital. Those who believe the remaining JT buffer is sufficient can choose to stay. If losses exhaust JT capital entirely and the user has not withdrawn, their ST position becomes directly exposed to further drawdowns.
 
-Senior's exits are complementary: the SLP pool gives an instant exit at the pool's current price, and Primary and Protected Exits return the underlying at fair value, but only once a drawdown breaches the threshold.
+Senior's exits are complementary: the SLP pool gives an instant exit at the pool's current price. During an Observation Period, primary redemption of the underlying becomes available again once a drawdown breaches the Protected Exit Threshold.
 
 #### Protected Exit Bonus
 
@@ -134,7 +134,7 @@ Some markets may include an optional configuration called **Protected Exit Bonus
 
 **Example:** A market has Minimum Coverage = 10%, Protected Exit Threshold = 5% and Protected Exit Bonus = 2%. The base asset drops below 5% coverage remaining, breaching the threshold.
 
-Alice (Senior, \$100k) chooses to exit. She receives her \$100k back plus a \$2k bonus from Junior capital: a reward for helping restore the market to a healthy state. Seniors who stay forgo the bonus.
+Alice (Senior, \$100k) chooses to exit. She receives her \$100k back plus up to a \$2k bonus from Junior capital: a reward for helping restore the market to a healthy state. Seniors who stay forgo the bonus.
 
 ---
 

@@ -3,7 +3,7 @@ title: "Glossary"
 description: "Definitions of Royco terms: Senior, Junior, and SLP tranches, utilization, coverage, risk and liquidity premiums, observation period, and more."
 ---
 
-**Senior Tranche (ST):** First-loss covered capital. Earns the base asset’s yield minus a risk premium paid to JT (for loss coverage) and a liquidity premium paid to LT (for secondary liquidity). Backed by JT first-loss capital and exitable via the LT pool or Protected Exit.
+**Senior Tranche (ST):** First-loss covered capital. Earns the base asset’s yield minus a risk premium paid to JT (for loss coverage) and a liquidity premium paid to SLP (for secondary liquidity). Backed by JT first-loss capital and exitable via the SLP pool or Protected Exit.
 
 **Junior Tranche (JT):** First-loss capital co-invested in the same base asset as ST. Absorbs all losses first, in exchange for a risk premium paid by ST. Highest yield and highest risk of the three tranches.
 
@@ -13,7 +13,7 @@ description: "Definitions of Royco terms: Senior, Junior, and SLP tranches, util
 
 **Royco ETH (roywstETH):** Managed wstETH vault. Posts wstETH as collateral, borrows USDC against it, and deploys the USDC into srRoyUSDC. Returns come from stETH staking rewards plus the spread between senior yield and borrow cost. Curated by Dialectic.
 
-**Yield Distribution Model (YDM):** The mechanism that splits base-asset yield among the tranches. Sets JT's risk premium from coverage utilization and SLP's liquidity premium from liquidity utilization, each via a per-market yield curve, with the two premiums jointly capped so they never exceed 100% of Senior yield.
+**Yield Distribution Model (YDM):** Royco uses separate YDMs for JT’s risk premium and SLP’s liquidity premium. Depending on the selected model, each premium may be fixed or determined by a utilization-sensitive curve.
 
 **Coverage Utilization:** How close JT coverage sits to its required minimum floor. Drives the risk premium. 
 
@@ -25,7 +25,7 @@ description: "Definitions of Royco terms: Senior, Junior, and SLP tranches, util
 
 **Liquidity Premium:** The share of Senior yield paid to SLP in exchange for providing secondary liquidity. Sized by liquidity utilization through the YDM, and paid as Senior Tranche shares that are progressively redeployed into SLP's liquidity position.
 
-**Observation Period:** A per-market time window the protocol enters automatically when a market oracle detects a base-asset drawdown, before allocating any loss to JT. If the drawdown reverses within the window, no loss is realized; if it persists past the window (or breaches the Protected Exit Threshold), the loss is allocated to JT. During the Observation Period, direct ST redemptions, new JT deposits, and SLP redemptions are paused and 100% of yield routes to rebuilding JT's buffer. However, ST can still exit through the SLP pool. Window length is set per market and may be 0 days (immediate finalization).
+**Observation Period:** A per-market recovery window that may begin when an accounting sync observes a collateral drawdown absorbed by JT and leaves a recoverable JT loss. JT effective NAV is marked down during the period, but JT cannot redeem and subsequent collateral recovery restores the outstanding JT loss first. If the drawdown reverses within the window, no loss is realized; if it persists past the window (or breaches the Protected Exit Threshold), the loss is allocated to JT. During the Observation Period, direct ST redemptions, new JT deposits, and SLP redemptions are paused and 100% of yield routes to rebuilding JT's buffer. However, ST can still exit through the SLP pool. Window length is set per market and may be 0 days (immediate finalization).
 
 **Strategy Base Asset (Base Asset):** The single underlying yield source a Royco market is built on. Both ST and JT capital are invested in it, and its returns and losses flow to the tranches according to the YDM.
 
