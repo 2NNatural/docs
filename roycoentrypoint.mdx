@@ -3,19 +3,26 @@ title: "EntryPoint"
 description: "The EntryPoint contract is the single interface for tranche operations across Royco markets."
 ---
 
-**EntryPoint** is the protocol's tranche deposit and redemption gateway contract. Deposits and redemptions are routed through the EntryPoint, and both are asynchronous with a T\+1 delay. 
+**EntryPoint** is the protocol's tranche deposit and redemption gateway contract. Deposits and redemptions are routed through the EntryPoint, and both are asynchronous.
 
-The T\+1 delay is an intentional design choice, closing the window where attackers could deposit/redeem to take advantage of a mark that is about to move.
+Deposit delays are configurable per market. Redemption delays are also configurable, with a minimum T\+1 delay. This T\+1 delay is an intentional design choice, closing the window where someone could deposit/redeem to take advantage of a mark that is about to move.
 
-Once submitted, a request becomes executable after the T\+1 waiting period. Once this delay elapses, anyone can execute it in a separate transaction; the depositor can attach an optional executor bonus to incentivize autonomous execution.
+Once submitted, a request becomes executable after its set market delay. Once this delay elapses, anyone can execute it in a separate transaction; the depositor can attach an optional executor bonus to incentivize autonomous execution.
 
 #### **Your price is fixed at request time**
 
-A deposit is pinned to the tranche shares it would have minted at request time. If the share price falls during the delay, the extra shares your assets would now buy are forfeited to the protocol. A redemption is pinned to the value its shares were worth at request time. If that value rises or yield accrues during the delay, the increase is forfeited to the protocol.
+- A deposit is pinned to the tranche shares it would have minted at request time. If the share price falls during the delay, the extra shares your assets would now buy are forfeited to the protocol. 
+- A redemption is pinned to the value its shares were worth at request time. If that value rises or yield accrues during the delay, the increase is forfeited to the protocol.
+
+#### **Oracle Gate**
+
+- Deployers can optionally enable the oracle gate; executing a deposit request only after the collateral asset's oracle posts a new price update. This prevents someone from submitting a deposit just before a scheduled NAV update to capture yield from a period they did not hold through.
 
 #### Expiry and cancellation
 
-Every request has an execution window. Once it elapses, the request can no longer be executed and may only be cancelled. You can cancel a pending request at any time and reclaim your escrowed assets or shares. Requests can also be filled partially. If a market can only serve part of your request right now, the rest stays queued at its original request-time price and can be filled as capacity frees up.
+- Every request has an execution window. Once it elapses, the request can no longer be executed and may only be cancelled. 
+- You can cancel a pending request at any time and reclaim your escrowed assets or shares. 
+- Requests can also be filled partially. If a market can only serve part of your request right now, the rest stays queued at its original request-time price and can be filled as capacity frees up.
 
 Depositors should always interact with Royco products via the official app at royco.org, which routes transactions through the EntryPoint. Direct vault deposits bypass access controls and are not supported.
 

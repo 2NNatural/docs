@@ -33,7 +33,7 @@ Liquidity is measured against ST: \$2M SLP / \$8M ST = 25% liquidity. This sizes
 **Loss Scenarios**
 
 <Frame>
-  ![Image](/images/image-2.png "Image")
+  ![Liquidity Tranche Seniority Slp](/images/liquidity_tranche_seniority_slp.png "Liquidity Tranche Seniority Slp")
 </Frame>
 
 JT absorbs any losses. ST and SLP are only exposed once JT's entire balance is consumed. Because the SLP's assets are partially composed of ST shares, its loss exposure mirrors that of the Senior tranche.
@@ -98,7 +98,7 @@ These three points adapt to market conditions over time. When a tranche's utiliz
 
 The result is a self-balancing system. If JT or SLP capital leaves, utilization rises for that tranche and the premium increases. If ST capital leaves, the opposite happens, allowing the market to find its own equilibrium.
 
-<video src="/videos/chapter-05-yield-curves.mp4" controls />
+<video src="/videos/2026-08-11-—-Chapter-05-The-Yield-Curves.mp4" controls />
 
 **What Depositors See**
 
@@ -118,7 +118,9 @@ The protocol then observes a defined time window per market. If the strategy rec
 
 **The Observation Period window is set per market.** Some markets may define a 7-day window; others 30 days; some markets may define a window of 0 days, in which case losses are finalized immediately upon detection with no observation period. The specific window for each market is displayed on its market page in the protocol interface.
 
-<video src="/videos/chapter-07-observation-periods.mp4" controls />
+If a deployer chooses, they can configure an Observation Grace Period; a period after deployment where an Observation Period is blocked from triggering. This period exists in order to allow creators and liquidity providers to smoothly bootstrap liquidity, rather than being subject to market fluctuations causing a freeze.
+
+<video src="/videos/2026-08-11-—-Chapter-07-The-Observation-Period.mp4" controls />
 
 #### Protected Exit
 
