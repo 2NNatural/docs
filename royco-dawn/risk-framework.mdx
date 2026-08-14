@@ -3,6 +3,10 @@ title: "6. Risk Framework"
 description: "This section describes the primary risk categories, organized by where they apply: risks inherent to Dawn markets (affecting both Senior and Junior tranche depositors directly), risks specific to vaults that aggregate across markets, and operational risks that span the protocol."
 ---
 
+<Warning>
+  **Dawn is a legacy deployment.** Contracts remain operational, but Dawn is no longer under active development and has known accounting limitations. In certain cases, Junior Tranche value may not fully recover to its pre-observation level even when the protocol records recovery as complete. [Learn more →](/royco-dawn/legacy-deployment)
+</Warning>
+
 #### Market-Level Risks (Senior and Junior Tranches)
 
 **Smart Contract Risk**
@@ -23,7 +27,13 @@ Junior absorbs all losses from the first dollar. Because both tranches are co-in
 
 Junior withdrawals are constrained by the coverage requirement. If Junior's capital is fully committed to backing Senior, withdrawals are restricted until utilization decreases. Junior deposits into illiquid underlying sources (e.g., RWA positions with 30-day redemption windows) inherit that illiquidity.
 
-#### Vault-Level Risks (srRoyUSDC, roywstETH)
+**Junior-Specific: Recovery Accounting**
+
+During an Observation Period, Dawn separately tracks Junior impermanent loss arising from coverage provided to Senior. Subsequent appreciation may repay this tracked amount and cause the protocol to treat the recovery condition as satisfied.
+
+Repayment of tracked JT IL should not be interpreted as a guarantee that Junior share value has returned to its pre-observation-period level. The Junior tranche may have experienced other changes in NAV during the same period, and the deployed Dawnaccounting system does not use restoration of the pre-observation Junior share value as the condition for determining that JT IL has been recovered.
+
+**Vault-Level Risks (srRoyUSDC, roywstETH)**
 
 Dialectic, the Vault's curator, has published more about the risks of each Vault at: [https://www.notion.so/dialectic/Royco-Vault-Risk-Overview-31feeae9e9298090add8c1dea433517d](https://www.notion.so/dialectic/Royco-Vault-Risk-Overview-31feeae9e9298090add8c1dea433517d)
 

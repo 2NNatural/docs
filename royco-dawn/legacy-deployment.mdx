@@ -1,0 +1,18 @@
+---
+title: "Legacy Deployment"
+description: "Status and known accounting limitations of the Royco Dawn deployment."
+---
+
+<Warning>
+  **Dawn is a legacy deployment.** Its contracts remain operational, but Dawn is no longer under active development. Users should understand the accounting behavior below before interacting with a Dawn market.
+</Warning>
+
+## Junior Tranche recovery shortfall
+
+When a Senior Tranche drawdown is absorbed by Junior Tranche capital, Dawn records the amount as Junior Tranche impermanent loss. While the market remains in its fixed-term recovery state, subsequent gains are first applied toward restoring Junior Tranche value before normal yield distribution resumes.
+
+In certain cases, Dawn can record the recovery as complete and clear the remaining impermanent-loss balance before Junior Tranche value has fully returned to its pre-observation level. This can leave Junior Tranche holders with a shortfall relative to the value they held before the Observation Period.
+
+The limitation concerns incomplete recovery rather than the loss of the entire recovery amount. As a result, an underlying asset returning to its pre-drawdown value does not necessarily return Junior Tranche value to exactly its pre-observation level.
+
+Users should evaluate Dawn positions based on the deployed contracts and current onchain state, and should not assume that behavior described for Royco Day also applies to Dawn.

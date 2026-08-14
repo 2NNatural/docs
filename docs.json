@@ -77,7 +77,8 @@
                       "royco-dawn/security-and-audits",
                       "royco-dawn/roycoentrypoint",
                       "royco-dawn/faq",
-                      "royco-dawn/key-addresses"
+                      "royco-dawn/key-addresses",
+                      "royco-dawn/legacy-deployment"
                     ]
                   }
           ]
