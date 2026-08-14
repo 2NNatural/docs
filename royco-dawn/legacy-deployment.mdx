@@ -7,16 +7,12 @@ description: "Status and known accounting limitations of the Royco Dawn deployme
   **Dawn is a legacy deployment.** Its contracts remain operational, but Dawn is no longer under active development. Users should understand the accounting behavior below before interacting with a Dawn market.
 </Warning>
 
-## Junior Tranche recovery limitation
+## Junior Tranche recovery shortfall
 
-When a Senior Tranche drawdown is absorbed by Junior Tranche capital, Dawn records the amount as Junior Tranche impermanent loss. This record gives Junior a claim on a future recovery in the Senior position while the market remains in its fixed-term recovery state.
+When a Senior Tranche drawdown is absorbed by Junior Tranche capital, Dawn records the amount as Junior Tranche impermanent loss. While the market remains in its fixed-term recovery state, subsequent gains are first applied toward restoring Junior Tranche value before normal yield distribution resumes.
 
-That recovery claim is not permanent. Dawn resets the recorded Junior Tranche impermanent loss and returns the market to its perpetual state when any of the following occurs:
+In certain cases, Dawn can record the recovery as complete and clear the remaining impermanent-loss balance before Junior Tranche value has fully returned to its pre-observation level. This can leave Junior Tranche holders with a shortfall relative to the value they held before the Observation Period.
 
-- The fixed-term recovery window expires before the loss is fully recovered.
-- The market breaches its liquidation-utilization threshold.
-- The Junior buffer is exhausted and the Senior Tranche has an uncovered impermanent loss.
-
-After the record is reset, Junior has forfeited that recovery claim. A later recovery in the underlying position does not first restore the erased claim; subsequent gains follow the market's normal accounting and yield-distribution rules. As a result, an underlying asset returning to its pre-drawdown value does not necessarily make Junior Tranche holders whole.
+The limitation concerns incomplete recovery rather than the loss of the entire recovery amount. As a result, an underlying asset returning to its pre-drawdown value does not necessarily return Junior Tranche value to exactly its pre-observation level.
 
 Users should evaluate Dawn positions based on the deployed contracts and current onchain state, and should not assume that behavior described for Royco Day also applies to Dawn.
