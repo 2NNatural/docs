@@ -69,6 +69,7 @@
                     "group": "Royco Dawn",
                     "pages": [
                       "royco-dawn/overview",
+                      "royco-dawn/legacy-deployment",
                       "royco-dawn/how-dawn-works",
                       "royco-dawn/vault-products",
                       "royco-dawn/governance-and-fees",

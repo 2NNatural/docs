@@ -2,6 +2,10 @@
 title: "8. EntryPoint"
 ---
 
+import DawnLegacy from '/snippets/dawn-legacy.mdx';
+
+<DawnLegacy />
+
 **RoycoEntryPoint** is the protocol's tranche deposit gateway contract. All deposits into Royco Dawn markets are routed through the RoycoEntryPoint rather than depositing directly into tranche contracts. This design enables several protocol-level guarantees:
 
 1. **Queued execution:** Deposits are batched and executed in processing cycles, preventing front-running and ensuring fair ordering.
