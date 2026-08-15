@@ -1,29 +1,59 @@
 ---
 title: "Key Addresses"
-description: "Deployed contract addresses for Royco markets, tranches, vaults, and core infrastructure across supported networks."
+description: "Deployed Royco Day contract addresses for the protocol scaffolding, chain-wide implementations, and yield distribution models."
 ---
 
-**Senior Royco USDC**
+The following addresses are from the Royco Day deployment outputs provided by the team. The screenshots correspond to Ethereum, Arbitrum, and Base, respectively.
 
-| Contract | Address |
+**Protocol Scaffolding**
+
+| Contract | Address | Active on |
+| --- | --- | --- |
+| AccessManager | `0x82EecE4a736db0767370d2DfFdE9BDF6e38AaeB8` | Ethereum, Arbitrum, Base |
+| CREATE3 deployer | `0xC2B93a22871805Da73DbA4dd87B8a2e2012D2155` | Ethereum, Arbitrum, Base |
+| Gatekeeper | `0x716fFB13728Aec2F376883d00689679A418537f6` | Ethereum, Arbitrum, Base |
+| Factory (impl) | `0x3E051925bdeFBAC937119BB064510ed4C863E532` | Ethereum, Arbitrum, Base |
+| Factory (proxy) | `0xaAAaaAAAaE46cA12Bf3810DF8C13c5E8A4400812` | Ethereum, Arbitrum, Base |
+| EntryPoint (impl) | `0xf30adF306d453e638785a2319dcE43E110F8E720` | Ethereum, Arbitrum, Base |
+| EntryPoint (proxy) | `0xaf55a0c251690d9322b5F94b7e50EE895750262c` | Ethereum, Arbitrum, Base |
+| MarketSyncer (impl) | `0x11A436FF812862F842A63ab522198fEEEC24f9eD` | Ethereum, Arbitrum, Base |
+| MarketSyncer (proxy) | `0x387e025306cb1C41fe7AB752D9C04607E03Bb8CE` | Ethereum, Arbitrum, Base |
+
+**Chain-wide Implementations, Beacons, and Yield Distribution Models**
+
+| Contract | Address | Active on |
+| --- | --- | --- |
+| SeniorTranche (impl) | `0x029b8117Fd9BE010E32B19D7d9E35dCa9e44AE6e` | Ethereum, Arbitrum, Base |
+| SeniorTranche (beacon) | `0xB6862ADA846003E66e2BC2dE1E1ACc4687F2Ccb3` | Ethereum, Arbitrum, Base |
+| JuniorTranche (impl) | `0xaE2ce905230B0cd11Dd0d6eb09be5881F4bE2237` | Ethereum, Arbitrum, Base |
+| JuniorTranche (beacon) | `0x19C3aF06eC541FAB8Fdf0c6a526715Bb5679c266` | Ethereum, Arbitrum, Base |
+| LPTranche (impl) | `0x8CC25B62251D96CBFEe61af89a97d61E0E84FCC8` | Ethereum, Arbitrum, Base |
+| LPTranche (beacon) | `0x97503cA6EC760866852E299DAE7Ce2a98cf05E7B` | Ethereum, Arbitrum, Base |
+| Accountant (impl) | `0xB872a1E6F37c66CcE3eB704cC756ea681C0e5B5a` | Ethereum, Arbitrum, Base |
+| Accountant (beacon) | `0x1be88d8B5696A69378973729523f3a135921854b` | Ethereum, Arbitrum, Base |
+| Kernel (impl) | `0x20745842191bEF60f9ED0DebdfD166F04f8AbD4d` | Ethereum, Arbitrum, Base |
+| Kernel (beacon) | `0x2bf9FA23f038057249E975213Cf2b31BF8c512D8` | Ethereum, Arbitrum, Base |
+| ConstantPriceFeed | `0x646D8590DAff48d27a88596eB3Edc1100043C31E` | Ethereum, Arbitrum, Base |
+
+**Reused Yield Distribution Models**
+
+| Model | Address | Active on |
+| --- | --- | --- |
+| JT model 0 | `0x8ab738e264B9737BC835D4543F3CC07e18543527` | Ethereum, Arbitrum, Base |
+| LPT model 0 | `0x662206BAEf133078dd139705F8E08DAAa4F92181` | Ethereum, Arbitrum, Base |
+| JT model 1 | `0x8e31615a90C78Ab0D68EA64F91438BbBfe706044` | Ethereum, Arbitrum, Base |
+| LPT model 1 | `0xbe1355FeAced109206fEf2a832b52EBF00610D4a` | Ethereum, Arbitrum, Base |
+| JT model 2 | `0x7D17C89A7777b25bA9dabb9730014E2Fc7f15B96` | Ethereum, Arbitrum, Base |
+| LPT model 2 | `0xBe18C1fC7a09567AA2cDa6bF7c5398A68491530d` | Ethereum, Arbitrum, Base |
+| JT model 3 | `0x2DeCecd7bbA7D7c4Ac13af8ED0685561B3FA9C03` | Ethereum, Arbitrum, Base |
+| LPT model 3 | Address is cropped in the supplied screenshot; full value unavailable. | Ethereum, Arbitrum, Base |
+
+**Chain-specific Template Addresses**
+
+| Chain | Address |
 | --- | --- |
-| Senior Royco USDC (srRoyUSDC) | `0xcD9f5907F92818bC06c9Ad70217f089E190d2a32` |
-| Multisig Safe | `0x170ff06326eBb64BF609a848Fc143143994AF6c8` |
-| Multisig Strategy | `0xd3F8Edff57570c4F9B11CC95eA65117e2D7A6C2D` |
-
-**Royco Markets**
-
-| Contract | Ethereum | Avalanche |
-| --- | --- | --- |
-| Factory | `0xD567cCbb336Eb71eC2537057E2bCF6DB840bB71d` | `0xD567cCbb336Eb71eC2537057E2bCF6DB840bB71d` |
-| Yield Distribution Model | `0x071B0FA065774b403B8dae0aE93A09Df5DE3DFAc` | `0x071B0FA065774b403B8dae0aE93A09Df5DE3DFAc` |
-
-**RoycoEntryPoint**
-
-| Contract | Ethereum | Avalanche |
-| --- | --- | --- |
-| RoycoEntryPoint | `0x63da1229be88fb4d20210147954a1a3e05f2581b` | `0x63da1229be88fb4d20210147954a1a3e05f2581b` |
-
----
+| Ethereum | `0xDA3fd0EFF34f201436F21806A0F2A0B55A5b97f1` |
+| Arbitrum | Address is cropped in the supplied screenshot; full value unavailable. |
+| Base | `0x51b1000A0eF7199d2D37Ee1Bb70bB9118D65F3DB` |
 
 _This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
