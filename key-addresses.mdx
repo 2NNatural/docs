@@ -1,6 +1,6 @@
 ---
 title: "Key Addresses"
-description: "Deployed Day contract addresses for the protocol scaffolding, chain-wide contracts, and yield distribution models."
+description: "Deployed Day contract addresses for the protocol scaffolding, chain-wide implementations, and yield distribution models."
 ---
 
 **Protocol Scaffolding**
@@ -10,23 +10,30 @@ description: "Deployed Day contract addresses for the protocol scaffolding, chai
 | AccessManager | `0x82EecE4a736db0767370d2DfFdE9BDF6e38AaeB8` | Same on Ethereum, Arbitrum, Base, and Avalanche (CREATE2) |
 | CREATE3 deployer | `0xC2B93a22871805Da73DbA4dd87B8a2e2012D2155` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | Gatekeeper | `0x716fFB13728Aec2F376883d00689679A418537f6` | Same on Ethereum, Arbitrum, Base, and Avalanche |
+| Factory (impl) | `0x3E051925bdeFBAC937119BB064510ed4C863E532` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | Factory | `0xaAAaaAAAaE46cA12Bf3810DF8C13c5E8A4400812` | Same on Ethereum, Arbitrum, Base, and Avalanche (CREATE3) |
 
 **Royco Periphery**
 
 | Name | Address | Notes |
 | --- | --- | --- |
+| EntryPoint (impl) | `0xf30adF306d453e638785a2319dcE43E110F8E720` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | EntryPoint | `0xaf55a0c251690d9322b5F94b7e50EE895750262c` | Same on Ethereum, Arbitrum, Base, and Avalanche |
+| MarketSyncer (impl) | `0x11A436FF812862F842A63ab522198fEEEC24f9eD` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | MarketSyncer | `0x387e025306cb1C41fe7AB752D9C04607E03Bb8CE` | Same on Ethereum, Arbitrum, Base, and Avalanche (CREATE2) |
 
-**Chain-wide Beacons and Yield Distribution Models**
+**Chain-wide Implementations, Beacons, and Yield Distribution Models**
 
 | Name | Address | Notes |
 | --- | --- | --- |
+| SeniorTranche (impl) | `0x029b8117Fd9BE010E32B19D7d9E35dCa9e44AE6e` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | SeniorTranche (beacon) | `0xB6862ADA846003E66e2BC2dE1E1ACc4687F2Ccb3` | Same on Ethereum, Arbitrum, Base, and Avalanche |
+| JuniorTranche (impl) | `0xaE2ce905230B0cd11Dd0d6eb09be5881F4bE2237` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | JuniorTranche (beacon) | `0x19C3aF06eC541FAB8Fdf0c6a526715Bb5679c266` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | LPTranche (beacon) | `0x97503cA6EC760866852E299DAE7Ce2a98cf05E7B` | Same on Ethereum, Arbitrum, Base, and Avalanche |
+| Accountant (impl) | `0xB872a1E6F37c66CcE3eB704cC756ea681C0e5B5a` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | Accountant (beacon) | `0x1be88d8B5696A69378973729523f3a135921854b` | Same on Ethereum, Arbitrum, Base, and Avalanche |
+| Kernel (impl) | `0x20745842191bEF60f9ED0DebdfD166F04f8AbD4d` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | Kernel (beacon) | `0x2bf9FA23f038057249E975213Cf2b31BF8c512D8` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 | ConstantPriceFeed | `0x646D8590DAff48d27a88596eB3Edc1100043C31E` | Same on Ethereum, Arbitrum, Base, and Avalanche |
 
@@ -46,6 +53,7 @@ description: "Deployed Day contract addresses for the protocol scaffolding, chai
 
 | Name | Ethereum, Arbitrum, Base | Avalanche |
 | --- | --- | --- |
+| LPTranche (impl) | `0x8CC25B62251D96CBFEe61af89a97d61E0E84FCC8` | `0x8CC25B62251D96CBFCe61aF89a97d61E0E84FCC8` |
 | JT — Static Curve | `0x8ab738e264B9737BC835D4543F3CC07e18543527` | `0x8ab738e264B9737BC853D454f3FCC07e18543527` |
 
 **Template Addresses**
