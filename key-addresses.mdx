@@ -7,54 +7,49 @@ description: "Deployed Day contract addresses for the protocol scaffolding, chai
 
 | Name | Address | Notes |
 | --- | --- | --- |
-| AccessManager | `0x82EecE4a736db0767370d2DfFdE9BDF6e38AaeB8` | Same on Ethereum, Arbitrum, Base, and Avalanche (CREATE2) |
-| CREATE3 deployer | `0xC2B93a22871805Da73DbA4dd87B8a2e2012D2155` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| Gatekeeper | `0x716fFB13728Aec2F376883d00689679A418537f6` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| Factory (impl) | `0x3E051925bdeFBAC937119BB064510ed4C863E532` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| Factory | `0xaAAaaAAAaE46cA12Bf3810DF8C13c5E8A4400812` | Same on Ethereum, Arbitrum, Base, and Avalanche (CREATE3) |
+| AccessManager | `0x82EecE4a736db0767370d2DfFdE9BDF6e38AaeB8` | Same on all three chains (CREATE2) |
+| CREATE3 deployer | `0xC2B93a22871805Da73DbA4dd87B8a2e2012D2155` | Same on all three chains |
+| Gatekeeper | `0x716fFB13728Aec2F376883d00689679A418537f6` | Same on all three chains |
+| Factory (impl) | `0x3E051925bdeFBAC937119BB064510ed4C863E532` | Same on all three chains |
+| Factory (proxy) | `0xaAAaaAAAaE46cA12Bf3810DF8C13c5E8A4400812` | Same on all three chains (CREATE3) |
 
 **Royco Periphery**
 
 | Name | Address | Notes |
 | --- | --- | --- |
-| EntryPoint (impl) | `0xf30adF306d453e638785a2319dcE43E110F8E720` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| EntryPoint | `0xaf55a0c251690d9322b5F94b7e50EE895750262c` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| MarketSyncer (impl) | `0x11A436FF812862F842A63ab522198fEEEC24f9eD` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| MarketSyncer | `0x387e025306cb1C41fe7AB752D9C04607E03Bb8CE` | Same on Ethereum, Arbitrum, Base, and Avalanche (CREATE2) |
+| EntryPoint (impl) | `0xf30adF306d453e638785a2319dcE43E110F8E720` | Same on all three chains |
+| EntryPoint (proxy) | `0xaf55a0c251690d9322b5F94b7e50EE895750262c` | Same on all three chains |
+| MarketSyncer (impl) | `0x11A436FF812862F842A63ab522198fEEEC24f9eD` | Same on all three chains |
+| MarketSyncer (proxy) | `0x387e025306cb1C41fe7AB752D9C04607E03Bb8CE` | Same on all three chains (CREATE2) |
 
 **Chain-wide Implementations, Beacons, and Yield Distribution Models**
 
 | Name | Address | Notes |
 | --- | --- | --- |
-| SeniorTranche (impl) | `0x029b8117Fd9BE010E32B19D7d9E35dCa9e44AE6e` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| SeniorTranche (beacon) | `0xB6862ADA846003E66e2BC2dE1E1ACc4687F2Ccb3` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| JuniorTranche (impl) | `0xaE2ce905230B0cd11Dd0d6eb09be5881F4bE2237` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| JuniorTranche (beacon) | `0x19C3aF06eC541FAB8Fdf0c6a526715Bb5679c266` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| LPTranche (beacon) | `0x97503cA6EC760866852E299DAE7Ce2a98cf05E7B` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| Accountant (impl) | `0xB872a1E6F37c66CcE3eB704cC756ea681C0e5B5a` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| Accountant (beacon) | `0x1be88d8B5696A69378973729523f3a135921854b` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| Kernel (impl) | `0x20745842191bEF60f9ED0DebdfD166F04f8AbD4d` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| Kernel (beacon) | `0x2bf9FA23f038057249E975213Cf2b31BF8c512D8` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| ConstantPriceFeed | `0x646D8590DAff48d27a88596eB3Edc1100043C31E` | Same on Ethereum, Arbitrum, Base, and Avalanche |
+| SeniorTranche (impl) | `0x029b8117Fd9BE010E32B19D7d9E35dCa9e44AE6e` | Same on all three chains |
+| SeniorTranche (beacon) | `0xB6862ADA846003E66e2BC2dE1E1ACc4687F2Ccb3` | Same on all three chains |
+| JuniorTranche (impl) | `0xaE2ce905230B0cd11Dd0d6eb09be5881F4bE2237` | Same on all three chains |
+| JuniorTranche (beacon) | `0x19C3aF06eC541FAB8Fdf0c6a526715Bb5679c266` | Same on all three chains |
+| LPTranche (impl) | `0x8CC25B62251D96CBFEe61af89a97d61E0E84FCC8` | Same on all three chains |
+| LPTranche (beacon) | `0x97503cA6EC760866852E299DAE7Ce2a98cf05E7B` | Same on all three chains |
+| Accountant (impl) | `0xB872a1E6F37c66CcE3eB704cC756ea681C0e5B5a` | Same on all three chains |
+| Accountant (beacon) | `0x1be88d8B5696A69378973729523f3a135921854b` | Same on all three chains |
+| Kernel (impl) | `0x20745842191bEF60f9ED0DebdfD166F04f8AbD4d` | Same on all three chains |
+| Kernel (beacon) | `0x2bf9FA23f038057249E975213Cf2b31BF8c512D8` | Same on all three chains |
+| ConstantPriceFeed | `0x646D8590DAff48d27a88596eB3Edc1100043C31E` | Same on all three chains |
 
-**Yield Distribution Models (Ethereum, Arbitrum, Base, Avalanche)**
+**Yield Distribution Models (Ethereum, Arbitrum, Base)**
 
 | Name | Address | Notes |
 | --- | --- | --- |
-| LPT — Static Curve | `0x662206BAEf133078dd139705F8E08DAAa4F92181` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| JT — Scaling Adaptive Curve | `0x8e31615a90C78Ab0D68EA64F91438BbBfe706044` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| LPT — Scaling Adaptive Curve | `0xbe1355FeAced109206fEf2a832b52EBF00610D4a` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| JT — Shifting Adaptive Curve | `0x7D17C89A7777b25bA9dabb9730014E2Fc7f15B96` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| LPT — Shifting Adaptive Curve | `0xBe18C1fC7a09567AA2cDa6bF7c5398A68491530d` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| JT — Fixed Yield Share | `0x2DeCecd7bbA7D7c4Ac13af8ED0685561B3FA9C03` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-| LPT — Fixed Yield Share | `0xB8cA2c85C2C6F14cB4A64F0dB5E160b15cf5B4D4` | Same on Ethereum, Arbitrum, Base, and Avalanche |
-
-**Avalanche-specific Deployments**
-
-| Name | Ethereum, Arbitrum, Base | Avalanche |
-| --- | --- | --- |
-| LPTranche (impl) | `0x8CC25B62251D96CBFEe61af89a97d61E0E84FCC8` | `0x8CC25B62251D96CBFCe61aF89a97d61E0E84FCC8` |
-| JT — Static Curve | `0x8ab738e264B9737BC835D4543F3CC07e18543527` | `0x8ab738e264B9737BC853D454f3FCC07e18543527` |
+| JT: Static Curve YDM | `0x8ab738e264B9737BC835D4543F3CC07e18543527` | Same on all three chains |
+| LPT: Static Curve YDM | `0x662206BAEf133078dd139705F8E08DAAa4F92181` | Same on all three chains |
+| JT: Adaptive Curve YDM V1 | `0x8e31615a90C78Ab0D68EA64F91438BbBfe706044` | Same on all three chains |
+| LPT: Adaptive Curve YDM V1 | `0xbe1355FeAced109206fEf2a832b52EBF00610D4a` | Same on all three chains |
+| JT: Adaptive Curve YDM V2 | `0x7D17C89A7777b25bA9dabb9730014E2Fc7f15B96` | Same on all three chains |
+| LPT: Adaptive Curve YDM V2 | `0xBe18C1fC7a09567AA2cDa6bF7c5398A68491530d` | Same on all three chains |
+| JT: Fixed YDM | `0x2DeCecd7bbA7D7c4Ac13af8ED0685561B3FA9C03` | Same on all three chains |
+| LPT: Fixed YDM | `0xB8cA2c85C2C6F14cB4A64F0dB5E160b15cf5B4D4` | Same on all three chains |
 
 **Template Addresses**
 
@@ -63,6 +58,5 @@ description: "Deployed Day contract addresses for the protocol scaffolding, chai
 | Ethereum | `0x8EA8E2E33D154A93285fAD796820ec621c77E91e` |
 | Arbitrum | `0x7034b2eA22D3897f971A90F1EBcEF0438ECcFAbb` |
 | Base | `0x2E30ec6857014E83d6DF05fde235aa3F0F0c1012` |
-| Avalanche | `0x6a5F3284E6b1882061D80339602A6c0eA36D0594` |
 
 _This document is provided for informational purposes only and does not constitute investment advice, a solicitation, or an offer to sell any securities or financial instruments. Participation in Royco products involves risk, including the potential loss of all capital deployed. Prospective participants should conduct their own independent due diligence and consult with qualified legal, financial, and tax advisors before making any investment decisions._
