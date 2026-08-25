@@ -1,6 +1,6 @@
 ---
 title: "Key Addresses"
-description: "Deployed Day contract addresses for the protocol scaffolding, chain-wide implementations, and yield distribution models."
+description: "Deployed Day contract addresses for the protocol scaffolding, core market contract implementations, and yield distribution models."
 ---
 
 Contract addresses are the same across ETH, ARB, Base, and AVAX. Template addresses are chain-specific.
@@ -9,51 +9,41 @@ Contract addresses are the same across ETH, ARB, Base, and AVAX. Template addres
 
 | Name | Address |
 | --- | --- |
-| AccessManager (CREATE2) | `0x82EecE4a736db0767370d2DfFdE9BDF6e38AaeB8` |
-| CREATE3 deployer | `0xC2B93a22871805Da73DbA4dd87B8a2e2012D2155` |
+| AccessManager | `0x82EecE4a736db0767370d2DfFdE9BDF6e38AaeB8` |
 | Gatekeeper | `0x716fFB13728Aec2F376883d00689679A418537f6` |
-| Factory (impl) | `0x3E051925bdeFBAC937119BB064510ed4C863E532` |
-| Factory (CREATE3) | `0xaAAaaAAAaE46cA12Bf3810DF8C13c5E8A4400812` |
+| Factory | `0xaAAaaAAAaE46cA12Bf3810DF8C13c5E8A4400812` |
 
 **Royco Periphery**
 
 | Name | Address |
 | --- | --- |
-| EntryPoint (impl) | `0xf30adF306d453e638785a2319dcE43E110F8E720` |
 | EntryPoint | `0xaf55a0c251690d9322b5F94b7e50EE895750262c` |
-| MarketSyncer (impl) | `0x11A436FF812862F842A63ab522198fEEEC24f9eD` |
-| MarketSyncer (CREATE2) | `0x387e025306cb1C41fe7AB752D9C04607E03Bb8CE` |
+| MarketSyncer | `0x387e025306cb1C41fe7AB752D9C04607E03Bb8CE` |
 
-**Chain-wide Implementations, Beacons, and Yield Distribution Models**
+**Core Market Contract Implementations**
 
 | Name | Address |
 | --- | --- |
-| SeniorTranche (impl) | `0x029b8117Fd9BE010E32B19D7d9E35dCa9e44AE6e` |
-| SeniorTranche (beacon) | `0xB6862ADA846003E66e2BC2dE1E1ACc4687F2Ccb3` |
-| JuniorTranche (impl) | `0xaE2ce905230B0cd11Dd0d6eb09be5881F4bE2237` |
-| JuniorTranche (beacon) | `0x19C3aF06eC541FAB8Fdf0c6a526715Bb5679c266` |
-| LPTranche (impl) | `0x8CC25B62251D96CBFCe61aF89a97d61E0E84FCC8` |
-| LPTranche (beacon) | `0x97503cA6EC760866852E299DAE7Ce2a98cf05E7B` |
-| Accountant (impl) | `0xB872a1E6F37c66CcE3eB704cC756ea681C0e5B5a` |
-| Accountant (beacon) | `0x1be88d8B5696A69378973729523f3a135921854b` |
-| Kernel (impl) | `0x20745842191bEF60f9ED0DebdfD166F04f8AbD4d` |
-| Kernel (beacon) | `0x2bf9FA23f038057249E975213Cf2b31BF8c512D8` |
-| ConstantPriceFeed | `0x646D8590DAff48d27a88596eB3Edc1100043C31E` |
+| SeniorTranche | `0x029b8117Fd9BE010E32B19D7d9E35dCa9e44AE6e` |
+| JuniorTranche | `0xaE2ce905230B0cd11Dd0d6eb09be5881F4bE2237` |
+| LPTranche | `0x8CC25B62251D96CBFCe61aF89a97d61E0E84FCC8` |
+| Accountant | `0xB872a1E6F37c66CcE3eB704cC756ea681C0e5B5a` |
+| Kernel | `0x20745842191bEF60f9ED0DebdfD166F04f8AbD4d` |
 
 **Yield Distribution Models**
 
 | Name | Address |
 | --- | --- |
-| JT — Static Curve | `0x8ab738e264B9737BC853D454f3FCC07e18543527` |
-| LPT — Static Curve | `0x662206BAEf133078dd139705F8E08DAAa4F92181` |
-| JT — Scaling Adaptive Curve | `0x8e31615a90C78Ab0D68EA64F91438BbBfe706044` |
-| LPT — Scaling Adaptive Curve | `0xbe1355FeAced109206fEf2a832b52EBF00610D4a` |
-| JT — Shifting Adaptive Curve | `0x7D17C89A7777b25bA9dabb9730014E2Fc7f15B96` |
-| LPT — Shifting Adaptive Curve | `0xBe18C1fC7a09567AA2cDa6bF7c5398A68491530d` |
-| JT — Fixed Yield Share | `0x2DeCecd7bbA7D7c4Ac13af8ED0685561B3FA9C03` |
-| LPT — Fixed Yield Share | `0xB8cA2c85C2C6F14cB4A64F0dB5E160b15cf5B4D4` |
+| JT: Static Curve | `0x8ab738e264B9737BC853D454f3FCC07e18543527` |
+| LPT: Static Curve | `0x662206BAEf133078dd139705F8E08DAAa4F92181` |
+| JT: Scaling Adaptive Curve | `0x8e31615a90C78Ab0D68EA64F91438BbBfe706044` |
+| LPT: Scaling Adaptive Curve | `0xbe1355FeAced109206fEf2a832b52EBF00610D4a` |
+| JT: Shifting Adaptive Curve | `0x7D17C89A7777b25bA9dabb9730014E2Fc7f15B96` |
+| LPT: Shifting Adaptive Curve | `0xBe18C1fC7a09567AA2cDa6bF7c5398A68491530d` |
+| JT: Fixed Yield Share | `0x2DeCecd7bbA7D7c4Ac13af8ED0685561B3FA9C03` |
+| LPT: Fixed Yield Share | `0xB8cA2c85C2C6F14cB4A64F0dB5E160b15cf5B4D4` |
 
-**Template Addresses**
+**Royco Day Balancer V3 Market Templates**
 
 | Chain | Address |
 | --- | --- |
