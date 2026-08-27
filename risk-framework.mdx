@@ -6,6 +6,10 @@ This section describes the primary risk categories, organized by where they appl
 
 #### Market-Level Risks
 
+**ERC-4626 Inflation Attack**
+
+ERC4626 vaults are susceptible to share inflation attacks, where an attacker manipulates the share price to cause rounding losses for subsequent depositors. Before interacting with a market, verify that a dead deposit has been made. Deployers should ensure that they have deposited 1e12 shares worth of ST and JT tokens into the dead deposit address to protect depositors. 
+
 **Smart Contract Risk**
 
 All protocol functionality is executed by smart contracts. A bug or exploit could result in partial or total loss of deposited capital.
