@@ -15,6 +15,7 @@ description: "Learn how to deploy a Royco market"
 3. Deploy a Market
    1. Once approved, use the Royco Deployer to configure and launch your markets, including its yield source, pricing, coverage, liquidity parameters, and other applicable terms.
    2. **Important: Royco markets are IMMUTABLE. If you would like to change parameters, you must deploy a new pool.**
+   3. **Inflation Attack Protection:** ERC4626 vaults are susceptible to share inflation attacks, where an attacker manipulates the share price to cause rounding losses for subsequent depositors. In order to protect depositors, deployers should ensure that they have deposited 1e12 shares worth of ST and JT tokens into the dead deposit address (0x000000000000000000000000000000000000dEaD).
 
 # **Creator Rewards Program**
 
@@ -37,7 +38,3 @@ Participation is subject to the Royco Foundation’s review and approval. U.S. p
 - Concrete
 - Tulipa
 - Dialectic
-
-# **Inflation Attack Risk**
-
-ERC4626 vaults are susceptible to share inflation attacks, where an attacker manipulates the share price to cause rounding losses for subsequent depositors. In order to protect depositors, deployers should ensure that they have deposited 1e12 shares worth of ST and JT tokens into the dead deposit address (0x000000000000000000000000000000000000dEaD).
