@@ -1,7 +1,9 @@
 ---
-title: "Creator Rewards"
-description: "Learn about Royco's creator program and incentives"
+title: "Market Deployment"
+description: "Learn how to deploy a Royco market"
 ---
+
+# **Creator Rewards Program**
 
 **Overview**
 
@@ -35,3 +37,7 @@ Participation is subject to the Royco Foundation’s review and approval. U.S. p
 - Concrete
 - Tulipa
 - Dialectic
+
+# **Inflation Attack Risk**
+
+ERC4626 vaults are susceptible to share inflation attacks, where an attacker manipulates the share price to cause rounding losses for subsequent depositors. In order to protect depositors, deployers should ensure that they have deposited 1e12 shares worth of ST and JT tokens into the dead deposit address (0x000000000000000000000000000000000000dEaD).
