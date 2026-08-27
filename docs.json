@@ -57,11 +57,11 @@
                                                       "pages": [
                                                                       "security-and-audits",
                                                                       "roycoentrypoint",
-                                                                      "key-addresses",
+                                                                      "market-deployment",
                                                                       "faq",
                                                                       "glossary",
-                                                                      "api-reference",
-                                                                      "creator-rewards"
+                                                                      "key-addresses",
+                                                                      "api-reference"
                                                                     ]
                                         }
                             ]
